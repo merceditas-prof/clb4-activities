@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>CLB 4 — Communicating with Your Landlord</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-l:#EFF6FF;--blue-m:#BFDBFE;
+  --teal:#0D9488;--teal-l:#F0FDFA;--teal-m:#5EEAD4;
+  --purple:#7C3AED;--purple-l:#F5F3FF;--purple-m:#DDD6FE;
+  --amber:#D97706;--amber-l:#FFFBEB;--amber-m:#FDE68A;
+  --rose:#E11D48;--rose-l:#FFF1F2;--rose-m:#FECDD3;
+  --green:#16A34A;--green-l:#F0FDF4;--green-m:#BBF7D0;
+  --gray:#64748B;--gray-l:#F8FAFC;--gray-m:#E2E8F0;--gray-d:#334155;
+  --dark:#1E293B;--white:#fff;
+  --r:12px;--r-lg:18px;
+}
+body{font-family:'Nunito',sans-serif;background:#F1F5F9;color:var(--dark);min-height:100vh;font-size:15px}
+/* NAV */
+.top-bar{background:var(--blue);padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.top-bar h1{color:white;font-size:16px;font-weight:800;margin-bottom:10px;text-align:center}
+.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 14px;border-radius:10px 10px 0 0;font-size:12px;font-weight:700;cursor:pointer;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.1);border:none;transition:all 0.15s;white-space:nowrap}
+.tab.active{background:white;color:var(--blue)}
+/* SECTIONS */
+.section{display:none;padding:16px;max-width:700px;margin:0 auto}
+.section.active{display:block}
+/* CARDS */
+.card{background:white;border-radius:var(--r-lg);border:1px solid var(--gray-m);padding:18px;margin-bottom:14px}
+.card-title{font-size:15px;font-weight:800;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+/* VOCAB */
+.word-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.word-chip{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;user-select:none;border:2px solid transparent}
+.word-chip.adj{background:#EFF6FF;color:var(--blue);border-color:var(--blue-m)}
+.word-chip.verb{background:#F0FDF4;color:var(--green);border-color:var(--green-m)}
+.word-chip.noun{background:#FFF7ED;color:#C2410C;border-color:#FED7AA}
+.word-chip.unsorted{background:var(--gray-l);color:var(--gray);border-color:var(--gray-m)}
+.word-chip.correct{box-shadow:0 0 0 2px var(--green)}
+.word-chip.wrong{box-shadow:0 0 0 2px var(--rose);animation:shake 0.3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.drop-zone{min-height:64px;border:2px dashed var(--gray-m);border-radius:var(--r);padding:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start;margin-top:6px;transition:border-color 0.15s}
+.drop-zone.highlight{border-color:var(--blue);background:var(--blue-l)}
+.cat-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+/* THERE IS/ARE */
+.exercise-item{padding:12px;border-radius:var(--r);background:var(--gray-l);margin-bottom:8px}
+.exercise-item select{border:1.5px solid var(--gray-m);border-radius:8px;padding:4px 10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;color:var(--dark);background:white;outline:none;cursor:pointer}
+.exercise-item select.correct{border-color:var(--green);background:var(--green-l);color:var(--green)}
+.exercise-item select.wrong{border-color:var(--rose);background:var(--rose-l);color:var(--rose)}
+/* EMAIL GUIDE */
+.email-block{border-radius:var(--r);padding:14px;margin-bottom:10px;border-left:4px solid}
+.email-block.subject{background:#FFFBEB;border-color:var(--amber)}
+.email-block.greeting{background:#F0FDF4;border-color:var(--green)}
+.email-block.reason{background:#EFF6FF;border-color:var(--blue)}
+.email-block.urgency{background:#FFF1F2;border-color:var(--rose)}
+.email-block.request{background:#F5F3FF;border-color:var(--purple)}
+.email-block.followup{background:#FFFBEB;border-color:var(--amber)}
+.email-block.closing{background:#F0FDF4;border-color:var(--green)}
+.email-block h3{font-size:13px;font-weight:800;margin-bottom:6px}
+.email-block .sample{font-style:italic;color:var(--gray);font-size:13px;margin-bottom:8px;padding:8px;background:white;border-radius:8px}
+.phrase-list{display:flex;flex-wrap:wrap;gap:6px}
+.phrase{background:white;border:1.5px solid var(--gray-m);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--gray-d);cursor:pointer;transition:all 0.15s}
+.phrase:hover,.phrase.copied{background:var(--blue);color:white;border-color:var(--blue)}
+/* SPEAKING PREP */
+.step-row{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:var(--r);background:var(--gray-l);margin-bottom:8px}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;color:white}
+.step-content h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.step-content p{font-size:13px;color:var(--gray);line-height:1.5}
+.starter-box{background:white;border:1.5px solid var(--gray-m);border-radius:8px;padding:8px 12px;margin-top:6px}
+.starter-box p{font-size:12px;font-style:italic;color:var(--blue);margin-bottom:2px}
+/* ROLE PLAY */
+.scenario-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.sc-tab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;background:var(--gray-l);color:var(--gray);border:1.5px solid var(--gray-m);transition:all 0.15s}
+.sc-tab.active{background:var(--blue);color:white;border-color:var(--blue)}
+.scenario-content{display:none}
+.scenario-content.active{display:block}
+.role-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.role-cards{grid-template-columns:1fr}}
+.role-card{border-radius:var(--r-lg);padding:16px;border:2px solid}
+.role-card.tenant{background:#EFF6FF;border-color:var(--blue-m)}
+.role-card.landlord{background:#F0FDF4;border-color:var(--green-m)}
+.role-card h3{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.role-card p{font-size:13px;line-height:1.6;color:var(--gray-d);margin-bottom:8px}
+.role-card ul{padding-left:16px;font-size:13px;color:var(--gray-d);line-height:1.8}
+.vocab-tag{display:inline-block;background:white;border:1.5px solid var(--blue-m);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;color:var(--blue);margin:2px}
+/* WRITE IT */
+.template-field{width:100%;border:1.5px solid var(--gray-m);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--dark);outline:none;resize:vertical;min-height:60px;transition:border-color 0.15s;background:white}
+.template-field:focus{border-color:var(--blue)}
+.template-field::placeholder{color:#94A3B8;font-style:italic}
+.field-label{font-size:12px;font-weight:700;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em}
+.field-row{margin-bottom:14px}
+.hint{font-size:12px;color:var(--blue);margin-bottom:6px;font-style:italic}
+.starter-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.starter-chip{background:var(--blue-l);border:1.5px solid var(--blue-m);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--blue);cursor:pointer;font-weight:600}
+.starter-chip:hover{background:var(--blue);color:white}
+/* ASSESSMENT */
+.at-card{background:white;border-radius:var(--r-lg);border:2px solid var(--gray-m);overflow:hidden;margin-bottom:14px}
+.at-header{padding:14px 18px;font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px;color:white}
+.at-body{padding:18px}
+.scenario-box{background:var(--gray-l);border-radius:var(--r);padding:14px;margin-bottom:14px;font-size:14px;line-height:1.7}
+/* RECORDER */
+.recorder{background:var(--gray-l);border-radius:var(--r);padding:16px;text-align:center}
+.rec-btn{width:64px;height:64px;border-radius:50%;border:none;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;transition:all 0.15s}
+.rec-btn.idle{background:var(--rose);box-shadow:0 4px 12px rgba(225,29,72,0.3)}
+.rec-btn.recording{background:var(--rose);animation:pulse 1s infinite;box-shadow:0 0 0 0 rgba(225,29,72,0.4)}
+.rec-btn.done{background:var(--green)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(225,29,72,0.4)}100%{box-shadow:0 0 0 16px rgba(225,29,72,0)}}
+.rec-status{font-size:13px;color:var(--gray);margin-bottom:10px;min-height:20px}
+.rec-timer{font-size:22px;font-weight:800;color:var(--rose);margin-bottom:10px;font-variant-numeric:tabular-nums}
+audio{width:100%;border-radius:8px;margin-bottom:10px}
+/* RUBRIC */
+.rubric-table{width:100%;border-collapse:collapse;font-size:12px}
+.rubric-table th{background:var(--blue);color:white;padding:8px;text-align:left;font-weight:700}
+.rubric-table td{padding:8px;border:1px solid var(--gray-m);vertical-align:top;line-height:1.5}
+.rubric-table tr:nth-child(even) td{background:var(--gray-l)}
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:10px;border:none;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{opacity:0.9;transform:scale(1.02)}
+.btn-blue{background:var(--blue);color:white}
+.btn-green{background:var(--green);color:white}
+.btn-gray{background:var(--gray-m);color:var(--gray)}
+.btn-sm{padding:7px 14px;font-size:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+/* UTILS */
+.mb8{margin-bottom:8px}.mb14{margin-bottom:14px}.mb20{margin-bottom:20px}
+.section-title{font-size:20px;font-weight:900;color:var(--dark);margin-bottom:4px}
+.section-sub{font-size:13px;color:var(--gray);margin-bottom:18px;line-height:1.5}
+.tag{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}
+.divider{border:none;border-top:1.5px dashed var(--gray-m);margin:18px 0}
+.feedback-bar{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;margin-top:10px;display:none}
+.feedback-bar.show{display:block}
+.ok{background:var(--green-l);color:var(--green)}
+.err{background:var(--rose-l);color:var(--rose)}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>CLB 4 — Communicating with Your Landlord</h1>
+  <div class="tabs" id="mainTabs">
+    <button class="tab active" onclick="showSection('vocab',this)">📚 Vocabulary</button>
+    <button class="tab" onclick="showSection('email-guide',this)">✉️ Email Guide</button>
+    <button class="tab" onclick="showSection('speaking',this)">🎤 Speaking Prep</button>
+    <button class="tab" onclick="showSection('roleplay',this)">🃏 Role Play</button>
+    <button class="tab" onclick="showSection('write',this)">📝 Write It</button>
+    <button class="tab" onclick="showSection('su-tasks',this)">🎯 SU Tasks</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 1: VOCABULARY
+══════════════════════════════════════════════════════════ -->
+<div class="section active" id="vocab">
+  <p class="section-title">Vocabulary Warm-Up</p>
+  <p class="section-sub">Tap a word to sort it into the correct category. Then practise using the words with <em>there is</em> and <em>there are</em>.</p>
+
+  <div class="card">
+    <div class="card-title">📦 Sort the Words</div>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Tap each word. Then tap the correct category below.</p>
+    <div class="word-grid" id="wordPool">
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">broken</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">leaking</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">cockroaches</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">torn</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">dripping</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">mice</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">stained</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">clogged</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">bedbugs</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">stuck</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">blocked</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">rats</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">slippery</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">blinking</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">ants</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">loud</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">plugged</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">a leak</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="adj">ripped</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="verb">not working</span>
+      <span class="word-chip unsorted" onclick="selectWord(this)" data-cat="noun">noise</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px">
+      <div>
+        <div class="cat-label" style="color:var(--blue)">🔵 Adjectives</div>
+        <div class="drop-zone" id="zone-adj" onclick="dropWord('adj',this)">
+        </div>
+      </div>
+      <div>
+        <div class="cat-label" style="color:var(--green)">🟢 Verbs / Verb phrases</div>
+        <div class="drop-zone" id="zone-verb" onclick="dropWord('verb',this)">
+        </div>
+      </div>
+      <div>
+        <div class="cat-label" style="color:#C2410C">🟠 Nouns</div>
+        <div class="drop-zone" id="zone-noun" onclick="dropWord('noun',this)">
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-blue btn-sm" onclick="checkSort()">Check ✓</button>
+      <button class="btn btn-gray btn-sm" onclick="resetSort()">Reset</button>
+    </div>
+    <div class="feedback-bar" id="sortFb"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 There is / There are</div>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:14px;">Choose <strong>there is</strong> or <strong>there are</strong> to complete each sentence.</p>
+
+    <div id="thereExercises">
+      <div class="exercise-item mb8" data-answer="there are">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">cockroaches in my kitchen.</span>
+      </div>
+      <div class="exercise-item mb8" data-answer="there is">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">a leak under the kitchen sink.</span>
+      </div>
+      <div class="exercise-item mb8" data-answer="there are">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">mice near the stove.</span>
+      </div>
+      <div class="exercise-item mb8" data-answer="there is">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">a broken window in the bedroom.</span>
+      </div>
+      <div class="exercise-item mb8" data-answer="there are">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">ants on the kitchen counter.</span>
+      </div>
+      <div class="exercise-item mb8" data-answer="there is">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">a loud noise coming from the pipes.</span>
+      </div>
+      <div class="exercise-item mb8" data-answer="there are">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">bedbugs in my mattress.</span>
+      </div>
+      <div class="exercise-item" data-answer="there is">
+        <select onchange="checkThere(this)"><option value="">Choose...</option><option>there is</option><option>there are</option></select>
+        <span style="font-size:14px;margin-left:8px">a clogged drain in my bathroom.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 2: EMAIL GUIDE
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="email-guide">
+  <p class="section-title">Email Guide</p>
+  <p class="section-sub">Study the structure of a good email to your landlord. Tap any phrase to copy it.</p>
+
+  <div class="email-block subject">
+    <h3>📌 Subject Line — Clear and specific</h3>
+    <div class="sample">"Urgent: Leaking Faucet in Unit 2 — Immediate Attention Required"</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">Urgent: [Problem] in [Location]</span>
+      <span class="phrase" onclick="copyPhrase(this)">Follow-Up: [Problem] — No Response</span>
+      <span class="phrase" onclick="copyPhrase(this)">Request for Repair: [Problem]</span>
+      <span class="phrase" onclick="copyPhrase(this)">Safety Issue: [Problem] — Needs Immediate Attention</span>
+    </div>
+  </div>
+
+  <div class="email-block greeting">
+    <h3>👋 Greeting</h3>
+    <div class="sample">"Dear Mr./Ms. [Last Name],"</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">Dear Mr. [Name],</span>
+      <span class="phrase" onclick="copyPhrase(this)">Dear Ms. [Name],</span>
+      <span class="phrase" onclick="copyPhrase(this)">Hello Mr./Ms. [Name],</span>
+    </div>
+  </div>
+
+  <div class="email-block reason">
+    <h3>✉️ Reason for Writing — Explain the problem</h3>
+    <div class="sample">"I am writing to inform you that there is a leaking faucet in my kitchen. The faucet has been dripping for three days."</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">I am writing to inform you that...</span>
+      <span class="phrase" onclick="copyPhrase(this)">I am contacting you regarding a problem in my apartment.</span>
+      <span class="phrase" onclick="copyPhrase(this)">I would like to bring to your attention that...</span>
+      <span class="phrase" onclick="copyPhrase(this)">I am a tenant at [address] and I am writing about...</span>
+      <span class="phrase" onclick="copyPhrase(this)">There is [a / an] ___ in my apartment.</span>
+      <span class="phrase" onclick="copyPhrase(this)">There are ___ in my apartment.</span>
+      <span class="phrase" onclick="copyPhrase(this)">The ___ has been [broken/leaking/not working] for [time].</span>
+    </div>
+  </div>
+
+  <div class="email-block urgency">
+    <h3>⚠️ Urgency — Explain why it is important</h3>
+    <div class="sample">"This is a safety concern, as water is damaging the floor. I am worried this could get worse."</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">This is a safety concern because...</span>
+      <span class="phrase" onclick="copyPhrase(this)">I am worried that this could cause further damage.</span>
+      <span class="phrase" onclick="copyPhrase(this)">This is affecting my daily life because...</span>
+      <span class="phrase" onclick="copyPhrase(this)">The situation is becoming worse.</span>
+      <span class="phrase" onclick="copyPhrase(this)">This is an urgent matter that requires immediate attention.</span>
+      <span class="phrase" onclick="copyPhrase(this)">I have a small child / elderly family member and this is a serious concern.</span>
+    </div>
+  </div>
+
+  <div class="email-block request">
+    <h3>🙏 Request — Ask politely but clearly</h3>
+    <div class="sample">"Could you please arrange for a plumber to come and fix the faucet as soon as possible?"</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">Could you please arrange for someone to fix this as soon as possible?</span>
+      <span class="phrase" onclick="copyPhrase(this)">I would appreciate it if you could address this issue promptly.</span>
+      <span class="phrase" onclick="copyPhrase(this)">Please let me know when someone will come to repair this.</span>
+      <span class="phrase" onclick="copyPhrase(this)">I kindly request that this be repaired at your earliest convenience.</span>
+      <span class="phrase" onclick="copyPhrase(this)">Could you please send someone to inspect the problem?</span>
+    </div>
+  </div>
+
+  <div class="email-block followup">
+    <h3>🔔 Follow-Up — When there has been no response</h3>
+    <div class="sample">"I contacted you about this issue on [date] but have not yet received a response. I am following up to ask for an update."</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">I contacted you about this on [date] but have not received a response.</span>
+      <span class="phrase" onclick="copyPhrase(this)">I am following up on my previous message regarding...</span>
+      <span class="phrase" onclick="copyPhrase(this)">As I have not heard back from you, I am writing again to...</span>
+      <span class="phrase" onclick="copyPhrase(this)">I left a voicemail message on [date] about this issue.</span>
+      <span class="phrase" onclick="copyPhrase(this)">I would appreciate a response as soon as possible.</span>
+    </div>
+  </div>
+
+  <div class="email-block closing">
+    <h3>✅ Closing</h3>
+    <div class="sample">"Thank you for your attention to this matter. I look forward to hearing from you soon.<br>Sincerely,<br>[Your Name]<br>Unit [#] — [Address]"</div>
+    <div class="phrase-list">
+      <span class="phrase" onclick="copyPhrase(this)">Thank you for your attention to this matter.</span>
+      <span class="phrase" onclick="copyPhrase(this)">I look forward to hearing from you soon.</span>
+      <span class="phrase" onclick="copyPhrase(this)">Thank you for your time.</span>
+      <span class="phrase" onclick="copyPhrase(this)">Sincerely, [Name]</span>
+      <span class="phrase" onclick="copyPhrase(this)">Best regards, [Name]</span>
+      <span class="phrase" onclick="copyPhrase(this)">Unit [#] — [Address] — [Phone]</span>
+    </div>
+  </div>
+  <div id="copyMsg" style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--dark);color:white;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;z-index:999">Copied!</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 3: SPEAKING PREP
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="speaking">
+  <p class="section-title">Speaking Prep</p>
+  <p class="section-sub">Use this guide to plan your voicemail message to your landlord. Follow the 5 steps below.</p>
+
+  <div class="card mb14">
+    <div class="card-title">📞 Voicemail Structure — 5 Steps</div>
+    <div class="step-row">
+      <div class="step-num" style="background:var(--blue)">1</div>
+      <div class="step-content">
+        <h4>Greet and identify yourself</h4>
+        <p>Say hello and say who you are and where you live.</p>
+        <div class="starter-box">
+          <p>"Hi, this is [your name]. I live in unit [#] at [address]."</p>
+          <p>"Hello, my name is ___ and I am a tenant at ___."</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:var(--teal)">2</div>
+      <div class="step-content">
+        <h4>State the problem</h4>
+        <p>Describe what is wrong. Use your vocabulary.</p>
+        <div class="starter-box">
+          <p>"I am calling because there is a problem in my apartment."</p>
+          <p>"I wanted to let you know that there is/there are ___."</p>
+          <p>"The ___ is broken / leaking / not working."</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:var(--amber)">3</div>
+      <div class="step-content">
+        <h4>Explain the urgency</h4>
+        <p>Say why it is important or how it affects you.</p>
+        <div class="starter-box">
+          <p>"This is a safety issue because ___."</p>
+          <p>"I am concerned because ___."</p>
+          <p>"This has been happening for ___ days / weeks."</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:var(--purple)">4</div>
+      <div class="step-content">
+        <h4>Make your request</h4>
+        <p>Ask politely for action.</p>
+        <div class="starter-box">
+          <p>"Could you please call me back to arrange a repair?"</p>
+          <p>"I would appreciate it if someone could come and fix this soon."</p>
+          <p>"Please call or text me at ___ when you get this message."</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:var(--green)">5</div>
+      <div class="step-content">
+        <h4>Leave your contact information and close</h4>
+        <p>Give your phone number and say goodbye politely.</p>
+        <div class="starter-box">
+          <p>"My phone number is ___ . Thank you and I look forward to hearing from you."</p>
+          <p>"You can reach me at ___. Have a good day."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🗣️ Useful Phrases for Speaking</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:6px">DESCRIBING THE PROBLEM</p>
+        <ul style="font-size:13px;line-height:2;padding-left:16px;color:var(--gray-d)">
+          <li>It is broken / not working</li>
+          <li>It has been leaking / dripping</li>
+          <li>The drain is clogged / blocked</li>
+          <li>The window is stuck</li>
+          <li>There is a loud noise</li>
+          <li>There are cockroaches / mice</li>
+          <li>It is very slippery / dangerous</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:6px">MAKING A REQUEST</p>
+        <ul style="font-size:13px;line-height:2;padding-left:16px;color:var(--gray-d)">
+          <li>Could you please fix...?</li>
+          <li>I would appreciate it if...</li>
+          <li>Is it possible to send someone?</li>
+          <li>Please call me back at...</li>
+          <li>I would like to know when...</li>
+          <li>Could someone come and look at...?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 4: ROLE PLAY
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="roleplay">
+  <p class="section-title">Role Play Cards</p>
+  <p class="section-sub">Work in pairs. One person is the <strong>Tenant</strong>, one is the <strong>Landlord / Superintendent</strong>. Read your card only. Then switch roles!</p>
+
+  <div class="scenario-tabs">
+    <button class="sc-tab active" onclick="showScenario(1,this)">🚰 Leaking Faucet</button>
+    <button class="sc-tab" onclick="showScenario(2,this)">🪲 Cockroaches</button>
+    <button class="sc-tab" onclick="showScenario(3,this)">❄️ No Heat</button>
+    <button class="sc-tab" onclick="showScenario(4,this)">🚿 Clogged Drain</button>
+    <button class="sc-tab" onclick="showScenario(5,this)">🔊 Loud Pipes</button>
+  </div>
+
+  <div class="scenario-content active" id="sc-1">
+    <div class="card mb8" style="background:#FFF7ED;border-color:#FED7AA">
+      <p style="font-size:11px;font-weight:800;color:#C2410C;margin-bottom:6px">📍 SITUATION</p>
+      <p style="font-size:13px;line-height:1.7;color:var(--gray-d)">The kitchen faucet in the tenant's apartment has been <strong>dripping</strong> for five days. There is now a small water leak under the sink. The tenant called the landlord three days ago but got no response.</p>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+        <span class="vocab-tag">leaking</span><span class="vocab-tag">dripping</span><span class="vocab-tag">a leak</span><span class="vocab-tag">not working</span>
+      </div>
+    </div>
+    <div class="role-cards">
+      <div class="role-card tenant">
+        <h3>🏠 You are the Tenant</h3>
+        <p><strong>Your goal:</strong> Call the landlord / superintendent. Explain the problem and ask for urgent repair.</p>
+        <ul>
+          <li>Introduce yourself and your unit</li>
+          <li>Describe the faucet problem</li>
+          <li>Mention the leak under the sink</li>
+          <li>Say you called before — no answer</li>
+          <li>Ask when someone can come to fix it</li>
+        </ul>
+      </div>
+      <div class="role-card landlord">
+        <h3>🔑 You are the Landlord</h3>
+        <p><strong>Your goal:</strong> Listen to the tenant and respond professionally.</p>
+        <ul>
+          <li>Ask which unit they are in</li>
+          <li>Ask when the problem started</li>
+          <li>Ask: is it dripping or a big leak?</li>
+          <li>Apologize for the late response</li>
+          <li>Tell them you will send a plumber this week</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-2">
+    <div class="card mb8" style="background:#FFF7ED;border-color:#FED7AA">
+      <p style="font-size:11px;font-weight:800;color:#C2410C;margin-bottom:6px">📍 SITUATION</p>
+      <p style="font-size:13px;line-height:1.7;color:var(--gray-d)">The tenant has seen <strong>cockroaches</strong> in the kitchen, near the stove and under the sink, for two weeks. The tenant is very concerned about hygiene and has a young child.</p>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+        <span class="vocab-tag">cockroaches</span><span class="vocab-tag">there are</span><span class="vocab-tag">not working</span>
+      </div>
+    </div>
+    <div class="role-cards">
+      <div class="role-card tenant">
+        <h3>🏠 You are the Tenant</h3>
+        <p><strong>Your goal:</strong> Report the cockroach problem and ask for an exterminator.</p>
+        <ul>
+          <li>Introduce yourself</li>
+          <li>Say there are cockroaches in the kitchen</li>
+          <li>Describe where you see them</li>
+          <li>Explain you have a young child — this is urgent</li>
+          <li>Ask the landlord to send an exterminator</li>
+        </ul>
+      </div>
+      <div class="role-card landlord">
+        <h3>🔑 You are the Landlord</h3>
+        <p><strong>Your goal:</strong> Take the complaint seriously and make a plan.</p>
+        <ul>
+          <li>Thank them for letting you know</li>
+          <li>Ask: how many? Exactly where?</li>
+          <li>Ask: have other neighbours had this problem?</li>
+          <li>Say you will contact an exterminator this week</li>
+          <li>Ask them not to leave food out</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-3">
+    <div class="card mb8" style="background:#FFF7ED;border-color:#FED7AA">
+      <p style="font-size:11px;font-weight:800;color:#C2410C;margin-bottom:6px">📍 SITUATION</p>
+      <p style="font-size:13px;line-height:1.7;color:var(--gray-d)">It is winter. The heater in the tenant's bedroom is <strong>not working</strong>. The temperature at night is very low. The tenant has been sleeping with extra blankets for one week and has emailed the landlord twice with no response.</p>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+        <span class="vocab-tag">broken</span><span class="vocab-tag">not working</span><span class="vocab-tag">blinking</span>
+      </div>
+    </div>
+    <div class="role-cards">
+      <div class="role-card tenant">
+        <h3>🏠 You are the Tenant</h3>
+        <p><strong>Your goal:</strong> Demand urgent action — no heat in winter is a legal issue.</p>
+        <ul>
+          <li>Introduce yourself and your unit</li>
+          <li>Say the heater is not working</li>
+          <li>Say you emailed twice — no response</li>
+          <li>Explain the urgency: it is cold at night</li>
+          <li>Ask for immediate repair or a temporary heater</li>
+        </ul>
+      </div>
+      <div class="role-card landlord">
+        <h3>🔑 You are the Landlord</h3>
+        <p><strong>Your goal:</strong> Respond urgently and professionally.</p>
+        <ul>
+          <li>Apologize sincerely for not responding</li>
+          <li>Ask: Is it completely off or just not very warm?</li>
+          <li>Ask: Is the thermostat set correctly?</li>
+          <li>Say you will come today to check the furnace</li>
+          <li>Offer a temporary heater if needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-4">
+    <div class="card mb8" style="background:#FFF7ED;border-color:#FED7AA">
+      <p style="font-size:11px;font-weight:800;color:#C2410C;margin-bottom:6px">📍 SITUATION</p>
+      <p style="font-size:13px;line-height:1.7;color:var(--gray-d)">The bathroom drain has been <strong>completely clogged</strong> for three days. Water is not going down and is pooling on the floor. The tenant cannot use the shower properly.</p>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+        <span class="vocab-tag">clogged</span><span class="vocab-tag">blocked</span><span class="vocab-tag">plugged</span><span class="vocab-tag">a leak</span>
+      </div>
+    </div>
+    <div class="role-cards">
+      <div class="role-card tenant">
+        <h3>🏠 You are the Tenant</h3>
+        <p><strong>Your goal:</strong> Report the clogged drain and request a plumber.</p>
+        <ul>
+          <li>Introduce yourself</li>
+          <li>Say the bathroom drain is clogged</li>
+          <li>Explain water is pooling — you can't shower</li>
+          <li>Say it has been 3 days</li>
+          <li>Ask the landlord to send a plumber urgently</li>
+        </ul>
+      </div>
+      <div class="role-card landlord">
+        <h3>🔑 You are the Landlord</h3>
+        <p><strong>Your goal:</strong> Assess the situation and make a plan.</p>
+        <ul>
+          <li>Ask: Is it slow or completely blocked?</li>
+          <li>Ask: Did you try a plunger?</li>
+          <li>Ask: Have you put any food or grease down the drain?</li>
+          <li>Say you will send a plumber tomorrow</li>
+          <li>Give a time window (morning/afternoon)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-5">
+    <div class="card mb8" style="background:#FFF7ED;border-color:#FED7AA">
+      <p style="font-size:11px;font-weight:800;color:#C2410C;margin-bottom:6px">📍 SITUATION</p>
+      <p style="font-size:13px;line-height:1.7;color:var(--gray-d)">Every night between 11pm and 2am there is a very <strong>loud banging noise</strong> coming from the pipes inside the bedroom wall. The tenant cannot sleep and has been tired for two weeks.</p>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+        <span class="vocab-tag">loud</span><span class="vocab-tag">making a noise</span><span class="vocab-tag">not working</span>
+      </div>
+    </div>
+    <div class="role-cards">
+      <div class="role-card tenant">
+        <h3>🏠 You are the Tenant</h3>
+        <p><strong>Your goal:</strong> Report the noise problem and ask for investigation.</p>
+        <ul>
+          <li>Introduce yourself</li>
+          <li>Describe the noise: loud, from the pipes, every night</li>
+          <li>Say what time it happens</li>
+          <li>Explain it is affecting your sleep and daily life</li>
+          <li>Ask the landlord to investigate and fix the problem</li>
+        </ul>
+      </div>
+      <div class="role-card landlord">
+        <h3>🔑 You are the Landlord</h3>
+        <p><strong>Your goal:</strong> Take the complaint seriously and investigate.</p>
+        <ul>
+          <li>Ask: What time does it happen?</li>
+          <li>Ask: Is it banging, hissing, or a different sound?</li>
+          <li>Ask: Has it gotten louder recently?</li>
+          <li>Say you will send a plumber to inspect the pipes</li>
+          <li>Thank them for letting you know</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--blue-l);border-color:var(--blue-m);margin-top:14px">
+    <div class="card-title" style="color:var(--blue)">💡 How to do this activity</div>
+    <ol style="font-size:13px;line-height:2;padding-left:18px;color:var(--gray-d)">
+      <li>Choose a scenario card above</li>
+      <li>Student A = Tenant &nbsp;|&nbsp; Student B = Landlord</li>
+      <li>Read your card only — do not show your partner</li>
+      <li>Have the conversation (phone call or face to face)</li>
+      <li><strong>Switch roles</strong> and do it again</li>
+      <li>After: together, decide — what was the best solution?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 5: WRITE IT
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="write">
+  <p class="section-title">Write It — Guided Email</p>
+  <p class="section-sub">Use this template to write your email. Tap a starter phrase to add it to the field. Then complete the sentence in your own words.</p>
+
+  <div class="card" style="background:#FFFBEB;border-color:var(--amber-m);margin-bottom:14px">
+    <div class="card-title">📋 Your Scenario</div>
+    <p style="font-size:14px;line-height:1.7;color:var(--gray-d)">Your upstairs neighbour's bathtub is <strong>leaking</strong>. There is a water stain on your bedroom ceiling and it is getting bigger. It has been one week. You called the superintendent but got no answer. Write an email to your landlord, Mr. Hassan.</p>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Subject Line</div>
+    <div class="hint">Be specific — what is the problem and where?</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('subject','Urgent: Water Leak in Bedroom Ceiling — Unit ')">Urgent: Water Leak...</span>
+      <span class="starter-chip" onclick="addStarter('subject','Follow-Up: Water Damage — No Response')">Follow-Up...</span>
+    </div>
+    <input class="template-field" id="subject" style="min-height:44px;resize:none" placeholder="Write your subject line here..." type="text"/>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Greeting</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('greeting','Dear Mr. Hassan,')">Dear Mr. Hassan,</span>
+    </div>
+    <textarea class="template-field" id="greeting" style="min-height:44px" placeholder="Greeting..."></textarea>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Reason for Writing — Explain the problem</div>
+    <div class="hint">What is the problem? Use there is / there are + your vocabulary.</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('reason','I am writing to inform you that ')">I am writing to inform you...</span>
+      <span class="starter-chip" onclick="addStarter('reason','I am contacting you regarding a problem in my apartment. ')">I am contacting you...</span>
+      <span class="starter-chip" onclick="addStarter('reason','There is ')">There is...</span>
+      <span class="starter-chip" onclick="addStarter('reason','There are ')">There are...</span>
+    </div>
+    <textarea class="template-field" id="reason" placeholder="Explain the problem here..."></textarea>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Urgency — Why is this important?</div>
+    <div class="hint">How does this affect you? Is it getting worse?</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('urgency','This is a serious concern because ')">This is a concern...</span>
+      <span class="starter-chip" onclick="addStarter('urgency','The situation is getting worse. ')">Getting worse...</span>
+      <span class="starter-chip" onclick="addStarter('urgency','I am worried that ')">I am worried...</span>
+    </div>
+    <textarea class="template-field" id="urgency" placeholder="Explain why this is urgent..."></textarea>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Follow-Up — No response yet</div>
+    <div class="hint">Mention that you already tried to contact someone.</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('followup','I called the superintendent on [date] but did not receive a response. ')">I called before...</span>
+      <span class="starter-chip" onclick="addStarter('followup','I am following up as I have not heard back. ')">Following up...</span>
+    </div>
+    <textarea class="template-field" id="followup" placeholder="Mention your previous contact..."></textarea>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Request — What do you need?</div>
+    <div class="hint">Ask politely but clearly.</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('request','Could you please arrange for someone to ')">Could you please...</span>
+      <span class="starter-chip" onclick="addStarter('request','I would appreciate it if you could ')">I would appreciate...</span>
+      <span class="starter-chip" onclick="addStarter('request','Please let me know when ')">Please let me know...</span>
+    </div>
+    <textarea class="template-field" id="request" placeholder="Write your request here..."></textarea>
+  </div>
+
+  <div class="field-row">
+    <div class="field-label">Closing</div>
+    <div class="starter-chips">
+      <span class="starter-chip" onclick="addStarter('closing','Thank you for your attention to this matter.\n\nSincerely,\n[Your Name]\nUnit [#] — [Address]\n[Phone Number]')">Thank you...</span>
+    </div>
+    <textarea class="template-field" id="closing" placeholder="Closing and your name..."></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-blue" onclick="previewEmail()">Preview Email 👁️</button>
+    <button class="btn btn-gray" onclick="clearEmail()">Clear All</button>
+  </div>
+
+  <div id="emailPreview" style="display:none;margin-top:16px">
+    <div class="card" style="border:2px solid var(--blue-m)">
+      <div class="card-title" style="color:var(--blue)">📧 Your Email Preview</div>
+      <div id="previewContent" style="font-size:14px;line-height:1.9;white-space:pre-wrap;color:var(--gray-d)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 6: SU TASKS
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="su-tasks">
+  <p class="section-title">Skill Using Tasks</p>
+  <p class="section-sub">These are practice tasks before the real assessment. Complete both tasks. Your partner will assess your speaking using the Peer Assessment Form.</p>
+
+  <!-- SPEAKING SU -->
+  <div class="at-card">
+    <div class="at-header" style="background:var(--teal)">🎤 Speaking SU — Role Play Conversation</div>
+    <div class="at-body">
+
+      <div class="scenario-box">
+        <strong>Scenario:</strong> You rent an apartment. It is winter and the heater in your bedroom has not been working for four days. You called the building superintendent three days ago and left a message, but nobody has called back. You are very cold at night and you are worried about your health.<br><br>
+        <strong>Student A:</strong> You are the <strong>tenant</strong>. Call the landlord / property manager to report the problem.<br>
+        <strong>Student B:</strong> You are the <strong>landlord / property manager</strong>. Answer the call and respond professionally.<br><br>
+        Then <strong>switch roles</strong> and do it again.
+      </div>
+
+      <div style="background:var(--teal-l);border-radius:var(--r);padding:14px;margin-bottom:14px">
+        <p style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:8px">In your conversation, make sure to:</p>
+        <ul style="font-size:13px;line-height:2;padding-left:18px;color:var(--gray-d)">
+          <li>Introduce yourself clearly (name + unit number / role)</li>
+          <li>Give <strong>2–3 sentences</strong> explaining the reason for calling</li>
+          <li>Describe the problem using lesson vocabulary</li>
+          <li>Explain why the situation is urgent</li>
+          <li>Mention you already called and got no response</li>
+          <li>Make a polite and clear request</li>
+        </ul>
+      </div>
+
+      <div style="background:#F0FDFA;border:1.5px solid var(--teal-m);border-radius:var(--r);padding:14px;margin-bottom:14px">
+        <p style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px">📱 After the role play:</p>
+        <p style="font-size:13px;color:var(--gray-d);line-height:1.7">Your partner fills in the <strong>Peer Assessment Form</strong> (link from your teacher). You will receive a printed copy of the checklist to keep in your binder.</p>
+      </div>
+
+      <div style="background:var(--amber-l);border:1.5px solid var(--amber-m);border-radius:var(--r);padding:14px">
+        <p style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px">💬 Key vocabulary to use:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="vocab-tag">not working</span>
+          <span class="vocab-tag">broken</span>
+          <span class="vocab-tag">there is a problem</span>
+          <span class="vocab-tag">I am calling because...</span>
+          <span class="vocab-tag">I am worried that...</span>
+          <span class="vocab-tag">Could you please...?</span>
+          <span class="vocab-tag">urgent</span>
+          <span class="vocab-tag">I left a message</span>
+          <span class="vocab-tag">no response</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WRITING SU -->
+  <div class="at-card">
+    <div class="at-header" style="background:var(--blue)">✉️ Writing SU — Follow-Up Email</div>
+    <div class="at-body">
+
+      <div class="scenario-box">
+        <strong>Scenario:</strong> You rent an apartment. Two weeks ago, you noticed water dripping from your bedroom ceiling. There is now a large, dark water stain on the ceiling and it is getting bigger every day. You called your landlord, Mr. Hassan, eight days ago and left a voicemail message, but there has been no response. You are worried the ceiling could be damaged further.
+      </div>
+
+      <div style="background:var(--blue-l);border-radius:var(--r);padding:14px;margin-bottom:14px">
+        <p style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px">In your email, make sure to:</p>
+        <ul style="font-size:13px;line-height:2;padding-left:18px;color:var(--gray-d)">
+          <li>Follow proper email structure (subject, greeting, body, closing)</li>
+          <li>Write <strong>2–3 sentences</strong> explaining the reason for writing</li>
+          <li>Describe the problem and explain why it is urgent</li>
+          <li>Mention that you called 8 days ago and received no response</li>
+          <li>Make a polite, clear request</li>
+          <li>Use correct spelling, capitalization and punctuation</li>
+        </ul>
+      </div>
+
+      <div style="background:#EFF6FF;border:1.5px solid var(--blue-m);border-radius:var(--r);padding:14px;margin-bottom:14px">
+        <p style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px">📝 Submit your email:</p>
+        <p style="font-size:13px;color:var(--gray-d);line-height:1.7">Write your email in the <strong>Writing SU Form</strong> (link from your teacher). The form will guide you through each section. Complete the self-assessment checklist at the end before submitting.</p>
+      </div>
+
+      <div style="background:var(--amber-l);border:1.5px solid var(--amber-m);border-radius:var(--r);padding:14px">
+        <p style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px">💬 Key vocabulary and phrases to use:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="vocab-tag">there is a leak</span>
+          <span class="vocab-tag">leaking / dripping</span>
+          <span class="vocab-tag">water damage</span>
+          <span class="vocab-tag">water stain</span>
+          <span class="vocab-tag">getting worse</span>
+          <span class="vocab-tag">I am writing to inform you...</span>
+          <span class="vocab-tag">I left a voicemail on...</span>
+          <span class="vocab-tag">no response</span>
+          <span class="vocab-tag">I am concerned that...</span>
+          <span class="vocab-tag">Could you please arrange...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEER ASSESSMENT INFO -->
+  <div class="card" style="background:var(--purple-l);border-color:var(--purple-m)">
+    <div class="card-title" style="color:var(--purple)">📋 Peer Assessment — What to Expect</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;color:var(--gray-d);line-height:1.8">
+      <div>
+        <p style="font-weight:700;color:var(--purple);margin-bottom:4px">While you listen to your partner:</p>
+        <ul style="padding-left:16px">
+          <li>Did they introduce themselves?</li>
+          <li>Did they give 2–3 sentences explaining why they called?</li>
+          <li>Did they describe the problem clearly?</li>
+          <li>Did they explain the urgency?</li>
+          <li>Did they make a polite request?</li>
+          <li>Did they use lesson vocabulary?</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700;color:var(--purple);margin-bottom:4px">You will also write:</p>
+        <ul style="padding-left:16px">
+          <li>One thing your partner did well</li>
+          <li>One thing they could improve</li>
+          <li>An overall rating (1–4)</li>
+          <li>A quick self-reflection</li>
+        </ul>
+        <p style="margin-top:8px;font-style:italic">A printed copy goes in your binder.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+// ── NAVIGATION ──────────────────────────────────────────
+function showSection(id,tab){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  tab.classList.add('active');
+}
+
+// ── VOCAB SORT ──────────────────────────────────────────
+let selectedWord=null;
+function selectWord(el){
+  document.querySelectorAll('.word-chip.unsorted').forEach(w=>w.style.outline='');
+  selectedWord=el;
+  el.style.outline='2px solid '+getComputedStyle(document.documentElement).getPropertyValue('--blue');
+}
+function dropWord(cat,zone){
+  if(!selectedWord) return;
+  selectedWord.style.outline='';
+  zone.appendChild(selectedWord);
+  selectedWord=null;
+  document.querySelectorAll('.drop-zone').forEach(z=>{
+    z.style.borderColor='';z.style.background='';
+  });
+}
+function checkSort(){
+  let correct=0,total=0;
+  document.querySelectorAll('[data-cat]').forEach(chip=>{
+    const parent=chip.parentElement;
+    if(!parent.classList.contains('word-grid')){
+      total++;
+      const expected=chip.dataset.cat;
+      const inZone=parent.id==='zone-'+expected;
+      chip.classList.remove('correct','wrong');
+      chip.classList.add(inZone?'correct':'wrong');
+      if(inZone)correct++;
+    }
+  });
+  const fb=document.getElementById('sortFb');
+  if(total===0){fb.className='feedback-bar show err';fb.textContent='Sort some words first!';return;}
+  if(correct===total){fb.className='feedback-bar show ok';fb.textContent='✓ Perfect! All words sorted correctly!';}
+  else{fb.className='feedback-bar show err';fb.textContent=correct+'/'+total+' correct. Check the red ones.';}
+}
+function resetSort(){
+  const pool=document.getElementById('wordPool');
+  document.querySelectorAll('[data-cat]').forEach(chip=>{
+    chip.classList.remove('correct','wrong');
+    chip.style.outline='';
+    pool.appendChild(chip);
+  });
+  document.getElementById('sortFb').className='feedback-bar';
+  selectedWord=null;
+}
+
+// ── THERE IS/ARE ─────────────────────────────────────────
+function checkThere(sel){
+  const correct=sel.closest('[data-answer]').dataset.answer;
+  sel.classList.remove('correct','wrong');
+  if(sel.value===correct)sel.classList.add('correct');
+  else if(sel.value)sel.classList.add('wrong');
+}
+
+// ── COPY PHRASE ──────────────────────────────────────────
+function copyPhrase(el){
+  navigator.clipboard.writeText(el.textContent).then(()=>{
+    el.classList.add('copied');
+    const msg=document.getElementById('copyMsg');
+    msg.style.display='block';
+    setTimeout(()=>{el.classList.remove('copied');msg.style.display='none';},1200);
+  }).catch(()=>{});
+}
+
+// ── ROLE PLAY SCENARIOS ──────────────────────────────────
+function showScenario(n,tab){
+  document.querySelectorAll('.scenario-content').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sc-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sc-'+n).classList.add('active');
+  tab.classList.add('active');
+}
+
+// ── GUIDED EMAIL ─────────────────────────────────────────
+function addStarter(fieldId,text){
+  const field=document.getElementById(fieldId);
+  field.value=text;
+  field.focus();
+}
+function previewEmail(){
+  const fields=['subject','greeting','reason','urgency','followup','request','closing'];
+  const labels=['SUBJECT','','','','','',''];
+  let html='';
+  const subj=document.getElementById('subject').value;
+  if(subj)html+='Subject: '+subj+'\n\n';
+  ['greeting','reason','urgency','followup','request','closing'].forEach(id=>{
+    const v=document.getElementById(id).value.trim();
+    if(v)html+=v+'\n\n';
+  });
+  if(!html.trim()){alert('Write something first!');return;}
+  document.getElementById('previewContent').textContent=html.trim();
+  document.getElementById('emailPreview').style.display='block';
+  document.getElementById('emailPreview').scrollIntoView({behavior:'smooth'});
+}
+function clearEmail(){
+  ['subject','greeting','reason','urgency','followup','request','closing'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('emailPreview').style.display='none';
+}
+
+// ── VOICE RECORDER ───────────────────────────────────────
+let mediaRec=null,chunks=[],timerInt=null,secs=0,recBlob=null;
+async function toggleRecording(){
+  const btn=document.getElementById('recBtn');
+  if(mediaRec&&mediaRec.state==='recording'){
+    mediaRec.stop();clearInterval(timerInt);
+    btn.className='rec-btn done';btn.textContent='✅';
+    document.getElementById('recStatus').textContent='Recording saved!';
+    document.getElementById('recTimer').style.display='none';
+  } else {
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRec=new MediaRecorder(stream);chunks=[];secs=0;
+      mediaRec.ondataavailable=e=>chunks.push(e.data);
+      mediaRec.onstop=()=>{
+        recBlob=new Blob(chunks,{type:'audio/webm'});
+        const url=URL.createObjectURL(recBlob);
+        const audio=document.getElementById('recAudio');
+        audio.src=url;audio.style.display='block';
+        document.getElementById('recActions').style.display='flex';
+        document.getElementById('recActions').style.gap='8px';
+        document.getElementById('recActions').style.justifyContent='center';
+        document.getElementById('recActions').style.flexWrap='wrap';
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      mediaRec.start();
+      btn.className='rec-btn recording';btn.textContent='⏹️';
+      document.getElementById('recTimer').style.display='block';
+      document.getElementById('recStatus').textContent='Recording... speak clearly';
+      timerInt=setInterval(()=>{
+        secs++;
+        const m=Math.floor(secs/60),s=secs%60;
+        document.getElementById('recTimer').textContent=m+':'+(s<10?'0':'')+s;
+      },1000);
+    } catch(e){
+      document.getElementById('recStatus').textContent='Microphone not available. Please allow access.';
+    }
+  }
+}
+function downloadRec(){
+  if(!recBlob)return;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(recBlob);
+  a.download='voicemail-assessment.webm';
+  a.click();
+}
+function resetRec(){
+  mediaRec=null;chunks=[];clearInterval(timerInt);secs=0;recBlob=null;
+  document.getElementById('recBtn').className='rec-btn idle';
+  document.getElementById('recBtn').textContent='🎙️';
+  document.getElementById('recTimer').style.display='none';
+  document.getElementById('recStatus').textContent='Tap to start recording';
+  document.getElementById('recAudio').style.display='none';
+  document.getElementById('recAudio').src='';
+  document.getElementById('recActions').style.display='none';
+}
+</script>
+</body>
+</html>
