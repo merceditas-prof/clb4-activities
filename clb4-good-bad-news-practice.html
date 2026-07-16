@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CLB4 - Responding to Good and Bad News</title>
+<style>
+  :root {
+    --blue: #2c5f8a;
+    --blue-light: #eaf2f8;
+    --green: #2e7d4f;
+    --green-light: #e7f6ec;
+    --red: #a83232;
+    --red-light: #fbeaea;
+    --gray: #555;
+    --border: #ccc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    color: #222;
+  }
+  header {
+    background: var(--blue);
+    color: white;
+    padding: 18px 24px;
+  }
+  header h1 { margin: 0 0 4px 0; font-size: 24px; }
+  header p { margin: 0; font-size: 15px; opacity: 0.95; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  nav.steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 20px 0;
+  }
+  nav.steps button {
+    flex: 1 1 auto;
+    min-width: 110px;
+    padding: 10px 8px;
+    font-size: 13px;
+    border: 2px solid var(--blue);
+    background: white;
+    color: var(--blue);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  nav.steps button.active {
+    background: var(--blue);
+    color: white;
+  }
+
+  section.step { display: none; background: white; border-radius: 8px; padding: 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+  section.step.active { display: block; }
+  section.step h2 { color: var(--blue); margin-top: 0; }
+
+  .box {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 12px 0;
+  }
+  .box.bad { background: var(--red-light); border-color: #e0b3b3; }
+  .box.good { background: var(--green-light); border-color: #b3d9c1; }
+  .box h3 { margin-top: 0; }
+
+  ul.phrase-list { margin: 6px 0; padding-left: 20px; }
+  ul.phrase-list li { margin-bottom: 4px; }
+
+  .pattern-box { background: var(--blue-light); border: 1px solid #b7cfe0; border-radius: 6px; padding: 12px 16px; margin: 10px 0; }
+  .pattern-box code { background: white; padding: 1px 6px; border-radius: 4px; border: 1px solid #ccc; }
+
+  .sort-item {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: #fafafa;
+  }
+  .sort-item .phrase { font-size: 16px; font-weight: bold; flex: 1 1 260px; }
+  .sort-item .choices button {
+    padding: 8px 12px;
+    margin-left: 6px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: white;
+  }
+  .sort-item.correct { border-color: var(--green); background: var(--green-light); }
+  .sort-item.incorrect { border-color: var(--red); background: var(--red-light); }
+  .sort-item .feedback { font-size: 13px; font-weight: bold; margin-left: 8px; }
+
+  .dialogue { background: #fafafa; border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 16px; }
+  .dialogue p { margin: 6px 0; line-height: 1.5; }
+  .dialogue .speaker { font-weight: bold; color: var(--blue); }
+  .dialogue .target { background: #fff3c4; padding: 1px 4px; border-radius: 3px; }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background: #fafafa;
+  }
+  .card .role { font-weight: bold; color: var(--blue); margin-bottom: 6px; display: block; }
+  .card .news { font-size: 16px; margin-bottom: 10px; }
+  .card button.reveal {
+    padding: 7px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--blue);
+    background: white;
+    color: var(--blue);
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .card .sample {
+    display: none;
+    margin-top: 10px;
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    padding: 10px 12px;
+    border-radius: 4px;
+  }
+  .card .sample.shown { display: block; }
+
+  .progress { display: flex; gap: 6px; margin: 20px 0 4px 0; }
+  .progress span { height: 6px; flex: 1; background: #ddd; border-radius: 3px; }
+  .progress span.done { background: var(--blue); }
+
+  .navbtns { display: flex; justify-content: space-between; margin-top: 22px; }
+  .navbtns button {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    background: var(--blue);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .navbtns button:disabled { background: #aaa; cursor: default; }
+
+  .checklist label { display: block; margin-bottom: 8px; font-size: 15px; }
+  .checklist input { margin-right: 8px; transform: scale(1.2); }
+
+  .free-card textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+  }
+
+  .note { font-size: 13px; color: var(--gray); font-style: italic; }
+
+  details.teacher { margin: 14px 0; background: #fffbe6; border: 1px solid #e5d68a; border-radius: 6px; padding: 10px 14px; }
+  details.teacher summary { font-weight: bold; cursor: pointer; color: #7a6a00; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Responding to Good and Bad News</h1>
+  <p>CLB 4 - Revision and Pair Practice - approx. 45 minutes - work in pairs</p>
+</header>
+
+<div class="container">
+
+<details class="teacher">
+  <summary>Teacher notes (click to open)</summary>
+  <p><strong>Timing:</strong> Warm-up 5-7 min | Language focus 3-5 min | Model conversations 5-7 min | Pair work 20-25 min | Free practice 5 min | Wrap-up 2-3 min.</p>
+  <p><strong>Pair work:</strong> Partner A reads the "Student A" card aloud as if it happened to them. Partner B responds using a target phrase plus a follow-up question. Then switch roles for the next card. Circulate and listen for correct use of "That sounds..." vs "That's...". Students can click "Show a sample response" if they get stuck, but encourage them to try first.</p>
+  <p><strong>Free practice:</strong> Students write or say their own real (or invented) good/bad news and their partner must respond with a phrase not yet used in the lesson.</p>
+</details>
+
+<nav class="steps" id="stepNav"></nav>
+
+<!-- STEP 1: WARM-UP -->
+<section class="step" id="step1">
+  <h2>1. Warm-Up: Good News or Bad News?</h2>
+  <p>Read each phrase. Decide: does it respond to <strong>good news</strong> or <strong>bad news</strong>?</p>
+  <div id="sortList"></div>
+  <p class="note" id="sortScore"></p>
+</section>
+
+<!-- STEP 2: LANGUAGE FOCUS -->
+<section class="step" id="step2">
+  <h2>2. Language Focus: Full Phrase Bank</h2>
+
+  <div class="box bad">
+    <h3>Responding to Bad News</h3>
+    <ul class="phrase-list">
+      <li>That sounds really difficult.</li>
+      <li>That sounds really frustrating.</li>
+      <li>That sounds really upsetting.</li>
+      <li>I understand how you feel.</li>
+      <li>Oh no! That's too bad.</li>
+      <li>Oh no! I'm so sorry to hear that.</li>
+      <li>That's a shame.</li>
+      <li>I'm sorry to hear that.</li>
+      <li>That must be hard.</li>
+      <li>That's tough.</li>
+    </ul>
+  </div>
+
+  <div class="box good">
+    <h3>Responding to Good News</h3>
+    <ul class="phrase-list">
+      <li>Oh good.</li>
+      <li>Good for you.</li>
+      <li>That's great. Congratulations.</li>
+      <li>That's great. I'm so excited for you.</li>
+      <li>That's wonderful!</li>
+      <li>I'm happy for you.</li>
+      <li>That's fantastic news!</li>
+      <li>Nice one!</li>
+    </ul>
+  </div>
+
+  <div class="pattern-box">
+    <strong>Patterns to notice:</strong>
+    <p><code>That sounds + adjective</code> -&gt; difficult / frustrating / upsetting (used right after hearing the news)</p>
+    <p><code>That's + adjective</code> -&gt; great / too bad / wonderful / tough (a short, direct reaction)</p>
+    <p><code>Oh no...</code> and <code>Oh good...</code> are informal openers - add them before a fuller response.</p>
+    <p>After your reaction, ask a follow-up question: <em>"What happened?" / "How do you feel now?" / "What are you going to do?"</em></p>
+  </div>
+</section>
+
+<!-- STEP 3: MODEL CONVERSATIONS -->
+<section class="step" id="step3">
+  <h2>3. Model Conversations</h2>
+  <p>Read these conversations with your partner. Notice the target phrases (highlighted).</p>
+
+  <div class="dialogue">
+    <p><span class="speaker">A:</span> I had my job interview yesterday.</p>
+    <p><span class="speaker">B:</span> How did it go?</p>
+    <p><span class="speaker">A:</span> Not well. They said they need someone with more Canadian experience.</p>
+    <p><span class="speaker">B:</span> <span class="target">Oh no! That's too bad. That sounds really frustrating.</span> What are you going to do now?</p>
+    <p><span class="speaker">A:</span> I'm not sure. Maybe I need to take a course first.</p>
+    <p><span class="speaker">B:</span> <span class="target">I understand how you feel.</span> Something will come up soon.</p>
+  </div>
+
+  <div class="dialogue">
+    <p><span class="speaker">A:</span> I took my G2 road test this morning.</p>
+    <p><span class="speaker">B:</span> How did it go?</p>
+    <p><span class="speaker">A:</span> I failed. I made a mistake at the four-way stop.</p>
+    <p><span class="speaker">B:</span> <span class="target">Oh no! I'm so sorry to hear that. That sounds really upsetting.</span></p>
+    <p><span class="speaker">A:</span> I know. I studied so hard for it.</p>
+    <p><span class="speaker">B:</span> Don't worry, you can book another test. You will get it next time.</p>
+  </div>
+
+  <div class="dialogue">
+    <p><span class="speaker">A:</span> Guess what? I passed my citizenship test!</p>
+    <p><span class="speaker">B:</span> <span class="target">Oh good! That's great. Congratulations!</span> When is the ceremony?</p>
+    <p><span class="speaker">A:</span> Next month. I studied for three months for this.</p>
+    <p><span class="speaker">B:</span> <span class="target">That's wonderful. I'm so excited for you.</span></p>
+  </div>
+</section>
+
+<!-- STEP 4: PAIR WORK -->
+<section class="step" id="step4">
+  <h2>4. Pair Work: Newcomer Life Scenarios</h2>
+  <p>Partner A reads the news aloud. Partner B responds with a target phrase and asks a follow-up question. Then swap roles for the next card. Try first, then click "Show a sample response" if you need help.</p>
+  <div id="cardList"></div>
+</section>
+
+<!-- STEP 5: FREE PRACTICE -->
+<section class="step" id="step5">
+  <h2>5. Free Practice: Your Own News</h2>
+  <p>Think of your own real or invented news. Tell your partner. Your partner must respond using a phrase you have <em>not</em> used yet today.</p>
+
+  <div class="card free-card">
+    <span class="role">Share a piece of BAD news:</span>
+    <textarea placeholder="Write a sentence or two, or just speak to your partner..."></textarea>
+  </div>
+
+  <div class="card free-card">
+    <span class="role">Share a piece of GOOD news:</span>
+    <textarea placeholder="Write a sentence or two, or just speak to your partner..."></textarea>
+  </div>
+
+  <p class="note">Partner's job: respond, then ask one follow-up question.</p>
+</section>
+
+<!-- STEP 6: WRAP-UP -->
+<section class="step" id="step6">
+  <h2>6. Wrap-Up: Self-Check</h2>
+  <p>Tick every phrase you used today, either in pair work or free practice.</p>
+  <div class="checklist" id="checklist"></div>
+  <p class="note" id="checkCount"></p>
+</section>
+
+<div class="progress" id="progressBar"></div>
+<div class="navbtns">
+  <button id="prevBtn">Back</button>
+  <button id="nextBtn">Next</button>
+</div>
+
+</div>
+
+<script>
+  var stepCount = 6;
+  var current = 1;
+  var stepNav = document.getElementById('stepNav');
+  var labels = ['Warm-Up', 'Language Focus', 'Model Talks', 'Pair Work', 'Free Practice', 'Wrap-Up'];
+  for (var i = 1; i <= stepCount; i++) {
+    var b = document.createElement('button');
+    b.textContent = i + '. ' + labels[i-1];
+    b.setAttribute('data-step', i);
+    b.onclick = (function(n){ return function(){ goTo(n); }; })(i);
+    stepNav.appendChild(b);
+  }
+  var progressBar = document.getElementById('progressBar');
+  for (var i = 1; i <= stepCount; i++) {
+    var s = document.createElement('span');
+    s.setAttribute('data-step', i);
+    progressBar.appendChild(s);
+  }
+
+  function goTo(n) {
+    if (n < 1) n = 1;
+    if (n > stepCount) n = stepCount;
+    current = n;
+    for (var i = 1; i <= stepCount; i++) {
+      document.getElementById('step' + i).classList.toggle('active', i === current);
+    }
+    var navBtns = stepNav.querySelectorAll('button');
+    navBtns.forEach(function(btn){
+      btn.classList.toggle('active', parseInt(btn.getAttribute('data-step')) === current);
+    });
+    var dots = progressBar.querySelectorAll('span');
+    dots.forEach(function(d){
+      d.classList.toggle('done', parseInt(d.getAttribute('data-step')) <= current);
+    });
+    document.getElementById('prevBtn').disabled = (current === 1);
+    document.getElementById('nextBtn').textContent = (current === stepCount) ? 'Done' : 'Next';
+  }
+  document.getElementById('prevBtn').onclick = function(){ goTo(current - 1); };
+  document.getElementById('nextBtn').onclick = function(){ if (current < stepCount) goTo(current + 1); };
+
+  // ---------- STEP 1: SORT ACTIVITY ----------
+  var sortItems = [
+    { text: "That sounds really difficult.", type: "bad" },
+    { text: "That's great. Congratulations.", type: "good" },
+    { text: "Oh no! I'm so sorry to hear that.", type: "bad" },
+    { text: "Good for you.", type: "good" },
+    { text: "That's a shame.", type: "bad" },
+    { text: "That's wonderful!", type: "good" },
+    { text: "I understand how you feel.", type: "bad" },
+    { text: "Nice one!", type: "good" },
+    { text: "That must be hard.", type: "bad" },
+    { text: "I'm happy for you.", type: "good" },
+    { text: "That sounds really upsetting.", type: "bad" },
+    { text: "Oh good.", type: "good" }
+  ];
+  var sortListEl = document.getElementById('sortList');
+  var sortCorrectCount = 0;
+  var sortAnswered = 0;
+  sortItems.forEach(function(item, idx) {
+    var row = document.createElement('div');
+    row.className = 'sort-item';
+    row.id = 'sort-' + idx;
+    row.innerHTML =
+      '<div class="phrase">' + item.text + '</div>' +
+      '<div class="choices">' +
+        '<button data-choice="good">Good News</button>' +
+        '<button data-choice="bad">Bad News</button>' +
+      '</div>' +
+      '<span class="feedback"></span>';
+    sortListEl.appendChild(row);
+
+    var btns = row.querySelectorAll('button');
+    btns.forEach(function(btn){
+      btn.onclick = function(){
+        if (row.classList.contains('correct') || row.classList.contains('incorrect')) { return; }
+        var choice = btn.getAttribute('data-choice');
+        var fb = row.querySelector('.feedback');
+        sortAnswered++;
+        if (choice === item.type) {
+          row.classList.add('correct');
+          fb.textContent = 'Correct!';
+          sortCorrectCount++;
+        } else {
+          row.classList.add('incorrect');
+          fb.textContent = 'Not quite - this responds to ' + (item.type === 'good' ? 'GOOD' : 'BAD') + ' news.';
+        }
+        document.getElementById('sortScore').textContent =
+          'Score: ' + sortCorrectCount + ' / ' + sortAnswered + ' answered so far.';
+      };
+    });
+  });
+
+  // ---------- STEP 4: PAIR WORK CARDS ----------
+  var scenarios = [
+    { news: "Your landlord says the rent is increasing by $200 next month.", type: "bad",
+      sample: "Oh no! That's too bad. That sounds really frustrating. What are you going to do about it?" },
+    { news: "You got your driver's licence (G) after three tries!", type: "good",
+      sample: "That's great! Congratulations! How do you feel now that you can drive on your own?" },
+    { news: "You missed the bus and were late for your ESL class today.", type: "bad",
+      sample: "Oh no, that's too bad. That sounds frustrating. Did the teacher mind?" },
+    { news: "Your children made new friends at their new school.", type: "good",
+      sample: "Oh good! That's wonderful. How are they liking the new school so far?" },
+    { news: "Winter tires are expensive and your car also needs an oil change.", type: "bad",
+      sample: "That's tough. That sounds really difficult. Are you able to get it done in instalments?" },
+    { news: "You got your first paycheque from your new job.", type: "good",
+      sample: "That's fantastic news! Good for you. What are you planning to do with it?" },
+    { news: "Your family back home cannot get a visa to visit you this year.", type: "bad",
+      sample: "Oh no, I'm so sorry to hear that. That sounds really upsetting. Will you try again next year?" },
+    { news: "You passed your CLB4 assessment and are moving up to CLB5.", type: "good",
+      sample: "That's wonderful! I'm so excited for you. When do you start the new class?" },
+    { news: "You slipped on ice and hurt your ankle walking to the bus stop.", type: "bad",
+      sample: "Oh no! I'm sorry to hear that. That sounds really painful. Did you see a doctor?" },
+    { news: "You finally got your health card in the mail.", type: "good",
+      sample: "Oh good, that's great! That must be a big relief. Do you have any appointments booked now?" },
+    { news: "Your work hours were cut this week.", type: "bad",
+      sample: "That's a shame. That sounds really difficult. Are you looking for extra hours somewhere else?" },
+    { news: "You found a nice apartment closer to your children's school.", type: "good",
+      sample: "That's great news! Good for you. When are you planning to move?" }
+  ];
+  var cardListEl = document.getElementById('cardList');
+  scenarios.forEach(function(sc, idx){
+    var card = document.createElement('div');
+    card.className = 'card';
+    var roleTag = (idx % 2 === 0) ? 'Student A shares this news / Student B responds' : 'Student B shares this news / Student A responds';
+    card.innerHTML =
+      '<span class="role">Card ' + (idx+1) + ' - ' + roleTag + '</span>' +
+      '<div class="news">"' + sc.news + '"</div>' +
+      '<button class="reveal">Show a sample response</button>' +
+      '<div class="sample">' + sc.sample + '</div>';
+    var btn = card.querySelector('.reveal');
+    var sample = card.querySelector('.sample');
+    btn.onclick = function(){
+      sample.classList.toggle('shown');
+      btn.textContent = sample.classList.contains('shown') ? 'Hide sample response' : 'Show a sample response';
+    };
+    cardListEl.appendChild(card);
+  });
+
+  // ---------- STEP 6: WRAP-UP CHECKLIST ----------
+  var allPhrases = [
+    "That sounds really difficult.", "That sounds really frustrating.", "That sounds really upsetting.",
+    "I understand how you feel.", "Oh no! That's too bad.", "Oh no! I'm so sorry to hear that.",
+    "That's a shame.", "I'm sorry to hear that.", "That must be hard.", "That's tough.",
+    "Oh good.", "Good for you.", "That's great. Congratulations.", "That's great. I'm so excited for you.",
+    "That's wonderful!", "I'm happy for you.", "That's fantastic news!", "Nice one!"
+  ];
+  var checklistEl = document.getElementById('checklist');
+  allPhrases.forEach(function(p, idx){
+    var label = document.createElement('label');
+    label.innerHTML = '<input type="checkbox" data-idx="' + idx + '"> ' + p;
+    checklistEl.appendChild(label);
+  });
+  var checkboxes = checklistEl.querySelectorAll('input');
+  checkboxes.forEach(function(cb){
+    cb.onchange = function(){
+      var count = 0;
+      checkboxes.forEach(function(c){ if (c.checked) count++; });
+      document.getElementById('checkCount').textContent = 'Phrases used: ' + count + ' / ' + allPhrases.length;
+    };
+  });
+
+  goTo(1);
+</script>
+
+</body>
+</html>
