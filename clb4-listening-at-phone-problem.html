@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLB 4 Listening AT - A Problem with the Phone</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#D52B1E; --red2:#f9e9e8; --navy:#1A2744; --navy2:#2E3F6A;
+  --off:#F5F7FA; --border:#DDE2ED; --muted:#6B7A99;
+  --correct:#1a7a4a; --correct2:#eaf7f0; --gold2:#fff8e6; --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--off);font-family:'Lato',Arial,sans-serif;color:var(--navy)}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.header{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  color:#fff;border-radius:var(--radius);padding:22px 26px}
+.header .leaf{position:absolute;right:18px;top:-10px;font-size:110px;opacity:.06;font-family:'Nunito'}
+.eyebrow{color:#ff9a92;font-family:'Nunito';font-weight:800;font-size:12px;letter-spacing:1.6px;text-transform:uppercase}
+.header h1{font-family:'Nunito';font-weight:900;margin:6px 0 4px;font-size:27px}
+.header .sub{font-size:14px;opacity:.9}
+.badges{margin-top:12px}
+.badge{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+  border-radius:20px;padding:4px 13px;font-family:'Nunito';font-weight:800;font-size:12px;margin-right:7px}
+.tabs{display:flex;gap:8px;margin:16px 0 0}
+.tab{flex:1;text-align:center;cursor:pointer;background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius) var(--radius) 0 0;padding:12px;font-family:'Nunito';font-weight:800;
+  font-size:14px;color:var(--muted);border-bottom:3px solid transparent}
+.tab.active{color:var(--navy);border-bottom:3px solid var(--red);background:#fff}
+.panel{display:none;background:#fff;border:1px solid var(--border);border-top:none;
+  border-radius:0 0 var(--radius) var(--radius);padding:18px}
+.panel.active{display:block}
+.controls{background:var(--navy2);color:#fff;border-radius:var(--radius);padding:14px 16px;margin-bottom:14px}
+.controls-row{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:9px}
+.controls-row:last-child{margin-bottom:0}
+.controls-label{font-family:'Nunito';font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.85}
+.voice-badge{font-family:'Nunito';font-weight:800;font-size:11px;padding:3px 9px;border-radius:12px;color:#fff}
+.voice-badge.woman{background:#7b3fa0}
+.voice-badge.man{background:#0f66b5}
+select{font-family:'Lato';font-size:12px;padding:5px 7px;border-radius:7px;border:none;max-width:230px}
+.spd{font-family:'Nunito';font-weight:800;font-size:12px;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.35);
+  background:transparent;color:#fff;cursor:pointer}
+.spd.on{background:#fff;color:var(--navy)}
+input[type=range]{width:150px}
+.spdval{font-family:'Nunito';font-weight:800;font-size:12px;min-width:38px}
+.visbar{display:flex;align-items:center;gap:11px;background:var(--red2);border:1px solid #f0cfcc;
+  border-radius:var(--radius);padding:10px 14px;margin-bottom:14px}
+.visbar .lbl{font-family:'Nunito';font-weight:800;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--navy)}
+.switch{position:relative;width:46px;height:25px;background:#c9ceda;border-radius:14px;cursor:pointer;transition:background .2s}
+.switch.on{background:var(--correct)}
+.switch .knob{position:absolute;top:3px;left:3px;width:19px;height:19px;background:#fff;border-radius:50%;transition:left .2s}
+.switch.on .knob{left:24px}
+.visstate{font-family:'Nunito';font-weight:800;font-size:13px;color:var(--muted)}
+.sec-head{background:var(--navy);color:#fff;border-radius:var(--radius) var(--radius) 0 0;
+  padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.sec-head .nm{font-family:'Nunito';font-weight:800;font-size:15px}
+.sec-head .ct{background:rgba(255,255,255,.16);border-radius:12px;padding:3px 11px;font-family:'Nunito';font-weight:800;font-size:11px}
+.play-panel{background:var(--navy2);padding:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.playbtn{width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;transition:transform .15s;flex:none}
+.playbtn:hover{transform:scale(1.07)}
+.playbtn .inner{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:17px;font-family:'Nunito';font-weight:900}
+.playbtn.playing .inner{background:#e08a1e}
+.pp-text{color:#fff}
+.pp-text .t1{font-family:'Nunito';font-weight:800;font-size:15px}
+.pp-text .t2{font-size:12.5px;opacity:.85;margin-top:2px}
+.status{font-family:'Nunito';font-weight:800;font-size:13px;color:#ffd9a0;margin-left:auto}
+.status.on{color:#8ff0b8}
+.mini{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'Nunito';font-weight:800;
+  font-size:12px;border-radius:16px;padding:6px 13px;cursor:pointer}
+.mini:hover{background:rgba(255,255,255,.14)}
+.q-list{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius)}
+.q-row{display:flex;gap:12px;padding:11px 15px;border-bottom:1px solid var(--border);align-items:flex-start}
+.q-row:last-child{border-bottom:none}
+.q-row.highlight{background:#eaf2ff}
+.q-num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--off);border:1px solid var(--border);
+  font-family:'Nunito';font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.q-body{flex:1}
+.q-speaker{font-family:'Nunito';font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:1px}
+.q-speaker.man{color:#0f66b5}
+.q-speaker.woman{color:#7b3fa0}
+.q-script{font-size:14.5px;line-height:1.5}
+.text-hidden .q-script{filter:blur(6px);user-select:none}
+.text-hidden .q-speaker{filter:blur(6px);user-select:none}
+.replay-btn{flex:none;background:var(--off);border:1px solid var(--border);border-radius:9px;
+  font-family:'Nunito';font-weight:800;font-size:11px;padding:6px 10px;cursor:pointer;color:var(--navy2)}
+.replay-btn:hover{background:#e7ecf5}
+.clipcard{border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-top:16px;background:var(--off)}
+.clipcard h3{font-family:'Nunito';font-weight:900;margin:0 0 4px;font-size:15px}
+.clipcard p{margin:0 0 12px;font-size:13px;color:var(--muted)}
+.clipbtn{background:var(--navy2);color:#fff;border:none;border-radius:9px;font-family:'Nunito';font-weight:800;
+  font-size:13px;padding:10px 15px;cursor:pointer;margin:0 8px 8px 0}
+.clipbtn:hover{background:var(--navy)}
+.note{background:var(--gold2);border:1px solid #f0dfae;border-radius:var(--radius);padding:12px 15px;
+  font-size:13px;line-height:1.55;margin-top:14px}
+.qz{border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:11px}
+.qz .qh{font-family:'Nunito';font-weight:800;font-size:14.5px;margin-bottom:7px}
+.qz .pts{float:right;font-family:'Nunito';font-weight:800;font-size:11px;color:var(--muted)}
+.qz ul{margin:0;padding-left:19px}
+.qz li{font-size:14px;line-height:1.75}
+.intro{background:var(--off);border-left:4px solid var(--red);border-radius:8px;padding:12px 15px;
+  font-size:14px;line-height:1.55;margin-bottom:16px}
+.keycard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
+.keycard .kh{background:var(--navy);color:#fff;font-family:'Nunito';font-weight:800;font-size:14px;padding:10px 15px}
+.keycard .kb{padding:12px 15px}
+.keyrow{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px}
+.keyrow:last-child{border-bottom:none}
+.keyrow .kn{flex:none;width:38px;font-family:'Nunito';font-weight:800;color:var(--muted)}
+.keyrow .ka{color:var(--correct);font-weight:700}
+.keyrow .kp{margin-left:auto;font-family:'Nunito';font-weight:800;font-size:11px;color:var(--muted)}
+.goldhead{background:var(--gold2);border:1px solid #f0dfae;border-radius:var(--radius);padding:14px 16px;margin-bottom:14px}
+.goldhead h2{font-family:'Nunito';font-weight:900;margin:0 0 4px;font-size:17px}
+.goldhead p{margin:0;font-size:13px;color:#7a6520}
+.foot{text-align:center;font-size:12px;color:var(--muted);padding:16px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="header">
+  <div class="leaf">CLB4</div>
+  <div class="eyebrow">YMCA LINC &middot; Listening Assessment Task</div>
+  <h1>A Problem with the Phone</h1>
+  <div class="sub">Two co-workers talk about a problem with a child. Competency: Comprehending Information.</div>
+  <div class="badges">
+    <span class="badge">CLB 4</span>
+    <span class="badge">11 questions</span>
+    <span class="badge">13 points</span>
+    <span class="badge">Teacher: Mercedes Acuna</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" id="tab1" onclick="showTab(1)">Listening Player</div>
+  <div class="tab" id="tab2" onclick="showTab(2)">Questions</div>
+  <div class="tab" id="tab3" onclick="showTab(3)">Answer Key</div>
+</div>
+
+<div class="panel active" id="panel1">
+  <div class="controls">
+    <div class="controls-row">
+      <span class="voice-badge woman">Sofia</span>
+      <select id="voiceWoman" onchange="voiceChanged('woman',this)"></select>
+      <span class="voice-badge man">Kevin</span>
+      <select id="voiceMan" onchange="voiceChanged('man',this)"></select>
+    </div>
+    <div class="controls-row">
+      <span class="controls-label">Speed</span>
+      <button class="spd" id="spdSlow" onclick="setSpeed(0.6)">Slow</button>
+      <button class="spd on" id="spdNorm" onclick="setSpeed(1.0)">Normal</button>
+      <button class="spd" id="spdFast" onclick="setSpeed(1.5)">Fast</button>
+      <input type="range" id="spdRange" min="0.5" max="2" step="0.1" value="1" oninput="setSpeed(parseFloat(this.value))">
+      <span class="spdval" id="spdVal">1.0x</span>
+    </div>
+  </div>
+
+  <div class="visbar">
+    <span class="lbl">Tapescript text</span>
+    <div class="switch" id="visSwitch" onclick="toggleVis()"><div class="knob"></div></div>
+    <span class="visstate" id="visState">Hidden</span>
+    <span style="font-size:12.5px;color:var(--muted)">Keep hidden while the class listens. Reveal only for review.</span>
+  </div>
+
+  <div class="sec-head">
+    <span class="nm">The Conversation</span>
+    <span class="ct">18 turns</span>
+  </div>
+  <div class="play-panel">
+    <button class="playbtn" id="playBtn" onclick="playAll()"><span class="inner" id="playIcon">&#9654;</span></button>
+    <div class="pp-text">
+      <div class="t1">Play the whole conversation</div>
+      <div class="t2">Play it twice. Students listen the first time, then answer.</div>
+    </div>
+    <button class="mini" onclick="stopAll()">Stop</button>
+    <span class="status" id="status">Ready.</span>
+  </div>
+  <div class="q-list text-hidden" id="qList"></div>
+
+  <div class="clipcard">
+    <h3>Replay clips</h3>
+    <p>Play these short parts again for Questions 7, 8 and 10.</p>
+    <button class="clipbtn" onclick="playClip(0)">Clip 1 &middot; for Question 7</button>
+    <button class="clipbtn" onclick="playClip(1)">Clip 2 &middot; for Question 8</button>
+    <button class="clipbtn" onclick="playClip(2)">Clip 3 &middot; for Question 10</button>
+  </div>
+
+  <div class="note"><strong>How to run this AT.</strong> 1) Hand out the printed answer sheet. 2) Read the
+  instructions together. 3) Play the whole conversation once - students only listen. 4) Play it a second
+  time - students answer. 5) Play Clip 1, Clip 2 and Clip 3 once each. 6) Play the whole conversation one
+  last time so students can check. Keep the tapescript hidden the whole time.</div>
+</div>
+
+<div class="panel" id="panel2">
+  <div class="intro"><strong>Instructions for students.</strong> Listen to two co-workers. They are talking
+  about a problem with a child. Answer the questions. You will hear the conversation three times.
+  Total: 13 points.</div>
+  <div id="qzList"></div>
+</div>
+
+<div class="panel" id="panel3">
+  <div class="goldhead">
+    <h2>Answer Key - Teacher Copy</h2>
+    <p>13 points total. Do not show this tab when the screen is shared with the class.</p>
+  </div>
+  <div id="keyList"></div>
+  <div class="note"><strong>Marking Question 11 (2 points).</strong> 1 point for the correct structure
+  (<em>could</em> + base verb, or <em>could try</em> + verb-ing). 1 point for advice that is specific and
+  fits the problem. Accept any sensible answer, for example: <em>Sofia could try turning off the wifi at
+  ten o'clock.</em> / <em>Sofia could buy an alarm clock so Ali does not need the phone in his room.</em> /
+  <em>Sofia could talk to Ali about a bedtime.</em> Do not take marks off for spelling.</div>
+  <div class="note"><strong>Notes on tricky items.</strong> Q2 is False - Ali takes the phone to bed.
+  Q5 has two correct answers; "That's a shame" and "Oh no! That's too bad" are not said in this
+  conversation. Q7 "give in" means she stops saying no. Q8 "acts up" means he behaves badly.</div>
+</div>
+
+<div class="foot">CLB 4 Listening AT &middot; A Problem with the Phone &middot; Mercedes Acuna</div>
+</div>
+<script>
+var convo = [
+ {v:"man",   t:"Hi Sofia. How was your weekend?"},
+ {v:"woman", t:"Hi Kevin. It was okay. But I'm really tired."},
+ {v:"man",   t:"You look tired. What happened?"},
+ {v:"woman", t:"It's my son, Ali. He won't get off his phone."},
+ {v:"man",   t:"How old is he now?"},
+ {v:"woman", t:"He's thirteen. He takes the phone to bed. He uses it until two in the morning."},
+ {v:"man",   t:"Two in the morning? That must be hard."},
+ {v:"woman", t:"It is. Every night I say, ten more minutes. Then I give in. In the morning he can't wake up for school."},
+ {v:"man",   t:"I understand how you feel. My daughter was the same last year."},
+ {v:"woman", t:"I feel frustrated. And I feel exhausted."},
+ {v:"man",   t:"Does he get angry when you ask for the phone?"},
+ {v:"woman", t:"Yes. He acts up. He shouts and slams his door."},
+ {v:"man",   t:"You could make a phone rule. One rule for every night."},
+ {v:"woman", t:"Maybe. What else could I do?"},
+ {v:"man",   t:"You could try charging his phone in the kitchen at night. Then it's not in his room. You could also talk to Ali's father. You two could agree on the same rule."},
+ {v:"woman", t:"Yes. We say different things. That's a problem."},
+ {v:"woman", t:"Okay. I'll try the kitchen tonight. Thank you, Kevin."},
+ {v:"man",   t:"Good luck, Sofia."}
+];
+
+var clips = [
+ [{v:"woman", t:"Every night I say, ten more minutes. Then I give in."}],
+ [{v:"woman", t:"He acts up. He shouts and slams his door."}],
+ [{v:"woman", t:"Okay. I'll try the kitchen tonight. Thank you, Kevin."}]
+];
+
+var questions = [
+ {n:1,  p:1, q:"Ali is Sofia's ______ .", o:["nephew","student","brother","son"], a:[3]},
+ {n:2,  p:1, q:"True or False: Ali goes to bed without his phone.", o:["True","False"], a:[1]},
+ {n:3,  p:1, q:"True or False: Kevin's daughter had the same problem.", o:["True","False"], a:[0]},
+ {n:4,  p:1, q:"Sofia says she feels ______ .", o:["frustrated and bored","frustrated and exhausted","worried and exhausted","mad and disappointed"], a:[1]},
+ {n:5,  p:1, q:"How does Kevin show he understands Sofia? Check ALL the correct answers.", o:["That must be hard.","That's a shame.","I understand how you feel.","Oh no! That's too bad."], a:[0,2]},
+ {n:6,  p:1, q:"Which word does Kevin use to give advice?", o:["should","must","might","could"], a:[3]},
+ {n:7,  p:1, q:"Listen to Clip 1 again. What does \"give in\" mean?", o:["She says no and takes the phone.","She goes into his room.","She stops saying no and lets him keep the phone.","She gives him a new phone."], a:[2]},
+ {n:8,  p:1, q:"Listen to Clip 2 again. What does \"acts up\" mean?", o:["He acts in a school play.","He behaves badly.","He gets up early.","He goes upstairs."], a:[1]},
+ {n:9,  p:2, q:"Kevin says Sofia could talk to Ali's ______ .", o:["teacher","doctor","father","coach","friend"], a:[2],
+   q2:"They could ______ .", o2:["buy him a new phone","agree on the same rule","take the phone away forever","call the school","drive him to school"], a2:[1]},
+ {n:10, p:1, q:"Listen to Clip 3 again. What will Sofia try tonight?", o:["Talk to Ali's teacher.","Take the phone away for a week.","Let Ali use the phone until two in the morning.","Charge the phone in the kitchen."], a:[3]},
+ {n:11, p:2, q:"What other advice could you give Sofia? Start your answer with \"Sofia could...\" Be specific.", o:[], a:[]}
+];
+
+var LET = ["A","B","C","D","E"];
+var allEngVoices = [];
+var voiceMan = null, voiceWoman = null;
+var currentSpeed = 1.0;
+var isSpeaking = false, stopRequested = false;
+
+function loadVoices(){
+  var v = speechSynthesis.getVoices();
+  if(!v || v.length === 0) return;
+  allEngVoices = v.filter(function(x){ return x.lang.indexOf("en") === 0; });
+  if(allEngVoices.length === 0) allEngVoices = v.slice();
+  ["voiceMan","voiceWoman"].forEach(function(id){
+    var sel = document.getElementById(id);
+    if(!sel) return;
+    sel.innerHTML = "";
+    allEngVoices.forEach(function(voice,i){
+      var opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = voice.name + " (" + voice.lang + ")";
+      sel.appendChild(opt);
+    });
+  });
+  var maleIdx = allEngVoices.findIndex(function(x){
+    var n = x.name.toLowerCase();
+    return n.indexOf("male") !== -1 && n.indexOf("female") === -1;
+  });
+  var femaleIdx = allEngVoices.findIndex(function(x){
+    return x.name.toLowerCase().indexOf("female") !== -1;
+  });
+  if(maleIdx === -1 && femaleIdx === -1){
+    maleIdx = 0; femaleIdx = allEngVoices.length > 1 ? 1 : 0;
+  } else if(maleIdx === -1){
+    maleIdx = (femaleIdx === 0) ? (allEngVoices.length > 1 ? 1 : 0) : 0;
+  } else if(femaleIdx === -1){
+    femaleIdx = (maleIdx === 0) ? (allEngVoices.length > 1 ? 1 : 0) : 0;
+  }
+  document.getElementById("voiceMan").value = maleIdx;
+  document.getElementById("voiceWoman").value = femaleIdx;
+  voiceMan = allEngVoices[maleIdx];
+  voiceWoman = allEngVoices[femaleIdx];
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+window.addEventListener("load", function(){ setTimeout(loadVoices, 300); });
+
+function voiceChanged(role, sel){
+  var v = allEngVoices[parseInt(sel.value,10)];
+  if(role === "man") voiceMan = v; else voiceWoman = v;
+}
+
+function setSpeed(s){
+  currentSpeed = s;
+  document.getElementById("spdRange").value = s;
+  document.getElementById("spdVal").textContent = s.toFixed(1) + "x";
+  ["spdSlow","spdNorm","spdFast"].forEach(function(id){
+    document.getElementById(id).classList.remove("on");
+  });
+  if(Math.abs(s-0.6) < 0.001) document.getElementById("spdSlow").classList.add("on");
+  else if(Math.abs(s-1.0) < 0.001) document.getElementById("spdNorm").classList.add("on");
+  else if(Math.abs(s-1.5) < 0.001) document.getElementById("spdFast").classList.add("on");
+}
+
+function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+function speakAsync(text, voice){
+  return new Promise(function(resolve){
+    if(stopRequested){ resolve(); return; }
+    var utt = new SpeechSynthesisUtterance(text);
+    utt.rate = currentSpeed;
+    if(voice) utt.voice = voice;
+    utt.onend = resolve;
+    utt.onerror = resolve;
+    speechSynthesis.speak(utt);
+  });
+}
+
+function setStatus(msg, on){
+  var el = document.getElementById("status");
+  el.textContent = msg;
+  if(on) el.classList.add("on"); else el.classList.remove("on");
+}
+
+function setPlayState(playing){
+  var b = document.getElementById("playBtn");
+  var i = document.getElementById("playIcon");
+  if(playing){ b.classList.add("playing"); i.innerHTML = "&#9632;"; }
+  else { b.classList.remove("playing"); i.innerHTML = "&#9654;"; }
+}
+
+function stopAll(){
+  stopRequested = true;
+  isSpeaking = false;
+  speechSynthesis.cancel();
+  setPlayState(false);
+  setStatus("Stopped.", false);
+  for(var i=0;i<convo.length;i++){
+    var r = document.getElementById("turn-"+i);
+    if(r) r.classList.remove("highlight");
+  }
+}
+
+async function playAll(){
+  if(isSpeaking){ stopAll(); return; }
+  speechSynthesis.cancel();
+  stopRequested = false;
+  isSpeaking = true;
+  setPlayState(true);
+  for(var i=0;i<convo.length;i++){
+    if(stopRequested) break;
+    var row = document.getElementById("turn-"+i);
+    if(row) row.classList.add("highlight");
+    setStatus("Reading turn " + (i+1) + " of " + convo.length + "...", true);
+    var voice = convo[i].v === "man" ? voiceMan : voiceWoman;
+    await speakAsync(convo[i].t, voice);
+    if(row) row.classList.remove("highlight");
+    if(!stopRequested) await sleep(450);
+  }
+  isSpeaking = false;
+  setPlayState(false);
+  setStatus(stopRequested ? "Stopped." : "Done.", false);
+}
+
+async function playTurn(i){
+  stopAll();
+  stopRequested = false;
+  await sleep(150);
+  var voice = convo[i].v === "man" ? voiceMan : voiceWoman;
+  setStatus("Replaying turn " + (i+1) + "...", true);
+  await speakAsync(convo[i].t, voice);
+  setStatus("Done.", false);
+}
+
+async function playClip(idx){
+  stopAll();
+  stopRequested = false;
+  await sleep(150);
+  setStatus("Playing Clip " + (idx+1) + "...", true);
+  var segs = clips[idx];
+  for(var j=0;j<segs.length;j++){
+    if(stopRequested) break;
+    var voice = segs[j].v === "man" ? voiceMan : voiceWoman;
+    await speakAsync(segs[j].t, voice);
+    if(!stopRequested && j < segs.length-1) await sleep(400);
+  }
+  setStatus(stopRequested ? "Stopped." : "Done.", false);
+}
+
+function toggleVis(){
+  var sw = document.getElementById("visSwitch");
+  var list = document.getElementById("qList");
+  var on = sw.classList.toggle("on");
+  if(on){ list.classList.remove("text-hidden"); document.getElementById("visState").textContent = "Visible"; }
+  else { list.classList.add("text-hidden"); document.getElementById("visState").textContent = "Hidden"; }
+}
+
+function showTab(n){
+  stopAll();
+  [1,2,3].forEach(function(i){
+    document.getElementById("tab"+i).classList.remove("active");
+    document.getElementById("panel"+i).classList.remove("active");
+  });
+  document.getElementById("tab"+n).classList.add("active");
+  document.getElementById("panel"+n).classList.add("active");
+}
+
+function renderConvo(){
+  var html = "";
+  for(var i=0;i<convo.length;i++){
+    var who = convo[i].v === "man" ? "Kevin" : "Sofia";
+    html += '<div class="q-row" id="turn-'+i+'">'
+         +  '<div class="q-num">'+(i+1)+'</div>'
+         +  '<div class="q-body">'
+         +  '<div class="q-speaker '+convo[i].v+'">'+who+'</div>'
+         +  '<div class="q-script">'+convo[i].t+'</div>'
+         +  '</div>'
+         +  '<button class="replay-btn" onclick="playTurn('+i+')">Replay</button>'
+         +  '</div>';
+  }
+  document.getElementById("qList").innerHTML = html;
+}
+
+function renderQuestions(){
+  var html = "";
+  for(var i=0;i<questions.length;i++){
+    var q = questions[i];
+    html += '<div class="qz"><div class="qh"><span class="pts">'+q.p+(q.p===1?" point":" points")+'</span>'
+         +  q.n+'. '+q.q+'</div>';
+    if(q.o.length){
+      html += "<ul>";
+      for(var j=0;j<q.o.length;j++){ html += "<li>"+LET[j]+". "+q.o[j]+"</li>"; }
+      html += "</ul>";
+    }
+    if(q.q2){
+      html += '<div class="qh" style="margin-top:10px">'+q.q2+"</div><ul>";
+      for(var k=0;k<q.o2.length;k++){ html += "<li>"+LET[k]+". "+q.o2[k]+"</li>"; }
+      html += "</ul>";
+    }
+    if(q.n === 11){ html += '<p style="color:var(--muted);font-size:13px;margin:6px 0 0">Write two or three lines.</p>'; }
+    html += "</div>";
+  }
+  document.getElementById("qzList").innerHTML = html;
+}
+
+function renderKey(){
+  var rows = "";
+  for(var i=0;i<questions.length;i++){
+    var q = questions[i];
+    var ans;
+    if(q.n === 11){
+      ans = "Open answer - see marking notes below";
+    } else if(q.n === 9){
+      ans = LET[q.a[0]]+". "+q.o[q.a[0]]+"  +  "+LET[q.a2[0]]+". "+q.o2[q.a2[0]];
+    } else {
+      var parts = [];
+      for(var j=0;j<q.a.length;j++){ parts.push(LET[q.a[j]]+". "+q.o[q.a[j]]); }
+      ans = parts.join("   AND   ");
+    }
+    rows += '<div class="keyrow"><span class="kn">Q'+q.n+'</span><span class="ka">'+ans+'</span>'
+         +  '<span class="kp">'+q.p+(q.p===1?" pt":" pts")+'</span></div>';
+  }
+  document.getElementById("keyList").innerHTML =
+    '<div class="keycard"><div class="kh">Answers - 13 points total</div><div class="kb">'+rows+'</div></div>';
+}
+
+renderConvo();
+renderQuestions();
+renderKey();
+setSpeed(1.0);
+</script>
+</body>
+</html>
