@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talking to Your Child's School (CLB 4-6)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%23%3C/text%3E%3C/svg%3E">
+<style>
+:root{--navy:#1f3252;--red:#b03a2e;--gold:#b7950b;--ink:#1a1a2e;--navybg:#e8ebf2;--goldbg:#f6eedd;--grey:#f2f3f4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fafbfb;line-height:1.5;}
+.wrap{max-width:960px;margin:0 auto;padding:14px;}
+header{background:var(--navy);color:#fff;padding:18px 16px;border-radius:0 0 14px 14px;}
+header h1{font-size:1.45rem;}
+header p{opacity:.92;font-size:.95rem;margin-top:4px;}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;}
+.tabs button{flex:1 1 auto;min-width:104px;padding:10px 8px;border:2px solid var(--navy);background:#fff;color:var(--navy);font-weight:bold;font-size:.92rem;border-radius:10px;cursor:pointer;}
+.tabs button.active{background:var(--navy);color:#fff;}
+.panel{display:none;background:#fff;border:1px solid #d6dbe4;border-radius:12px;padding:16px;}
+.panel.show{display:block;}
+h2{color:var(--navy);font-size:1.2rem;margin:14px 0 8px;}
+h2:first-child{margin-top:0;}
+.stage{border-left:5px solid var(--red);background:var(--grey);border-radius:0 10px 10px 0;padding:10px 12px;margin:10px 0;}
+.stage b{color:var(--navy);}
+.linkcard{display:block;border:1px solid #ccd3de;border-radius:10px;padding:10px 12px;margin:8px 0;background:#fff;text-decoration:none;color:var(--ink);}
+.linkcard:hover{background:var(--navybg);}
+.linkcard .t{font-weight:bold;color:var(--navy);}
+.linkcard .how{font-size:.9rem;color:#4a5560;margin-top:2px;}
+.badge{display:inline-block;background:var(--red);color:#fff;border-radius:6px;font-size:.75rem;padding:2px 7px;margin-right:6px;vertical-align:middle;}
+.badge.listen{background:#1e6bb8;}
+.badge.video{background:#b03a2e;}
+.badge.game{background:#1e7a46;}
+.badge.here{background:var(--gold);color:#fff;}
+.badge.acct{background:#5e3b76;}
+.scorebar{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap;}
+.scorebar .pill{background:var(--navybg);border-radius:999px;padding:6px 14px;font-weight:bold;color:var(--navy);}
+.qbox{background:var(--grey);border-radius:12px;padding:14px;margin:12px 0;text-align:center;}
+.qbox .qtext{font-size:1.1rem;font-weight:bold;margin-bottom:8px;}
+.imgopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px;}
+.imgopts button{padding:8px;border:2px solid var(--navy);border-radius:10px;background:#fff;cursor:pointer;}
+.imgopts img{width:100%;max-width:150px;display:block;margin:0 auto;}
+.imgopts .lbl{font-weight:bold;color:var(--navy);margin-top:4px;font-size:.9rem;}
+.imgopts button.right{background:#d9efe2;border-color:#1e7a46;}
+.imgopts button.wrong{background:#f5e3e0;border-color:#b03a2e;}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px;}
+.opts button{padding:12px;border:2px solid var(--navy);border-radius:10px;background:#fff;color:var(--ink);font-size:1.02rem;font-weight:bold;cursor:pointer;}
+.opts button:hover{background:var(--navybg);}
+.opts button.right{background:#d9efe2;border-color:#1e7a46;color:#1e7a46;}
+.opts button.wrong{background:#f5e3e0;border-color:#b03a2e;color:#b03a2e;}
+.feedback{min-height:28px;font-weight:bold;margin-top:8px;}
+.feedback.ok{color:#1e7a46;}
+.feedback.no{color:#b03a2e;}
+.bigbtn{padding:12px 22px;background:var(--red);border:none;border-radius:10px;color:#fff;font-size:1.02rem;font-weight:bold;cursor:pointer;margin:6px 4px;}
+.bigbtn.navy{background:var(--navy);}
+.dlgline{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:2px solid #ccd3de;border-radius:10px;background:#fff;font-size:1rem;cursor:pointer;}
+.dlgline:hover{background:var(--navybg);}
+.dlgline.err{background:#f5e3e0;border-color:#b03a2e;}
+.built{list-style:none;}
+.built li{padding:8px 12px;margin:5px 0;background:#d9efe2;border-radius:8px;font-weight:bold;}
+.note{background:var(--goldbg);border:1px solid var(--gold);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:.95rem;}
+footer{text-align:center;color:#7a8290;font-size:.85rem;padding:18px 0;}
+img.scene{width:100%;border-radius:12px;margin:8px 0;}
+audio{width:100%;margin-top:8px;}
+@media(max-width:560px){.imgopts img{max-width:110px;}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Talking to Your Child's School</h1>
+<p>CLB 4-6 | who can help, naming the problem, phoning the school, the meeting</p>
+</div></header>
+<div class="wrap">
+<div class="tabs">
+<button class="active" data-p="lesson">Lessons</button>
+<button data-p="who">Who Can Help?</button>
+<button data-p="polite">Polite or Strong?</button>
+<button data-p="msg">The Message</button>
+<button data-p="times">Times</button>
+<button data-p="audio">Audio</button>
+<button data-p="links">All Links</button>
+</div>
+
+<section id="p-lesson" class="panel show">
+<img class="scene" src="icons/school/sc_door.jpg" alt="A parent talking with a teacher at the classroom door">
+<h2>Day 1 - Who's Who at School and Naming the Problem</h2>
+<div class="stage"><b>1-2. Picture + people (35 min).</b> The unit doc's opener and people match. Then play <b>Who Can Help?</b> here together.</div>
+<div class="stage"><b>3-5. Problems, phrases, grammar (50 min).</b> In the unit doc.</div>
+<div class="stage"><b>6. Listening (12 min).</b> Play <b>Six Voicemails</b> on the Audio tab - students write the kind of problem.</div>
+<div class="stage"><b>7. Communicate (8 min)</b> + homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXqpsufxLsKI7NO463hNmKzHtf-gHhCht9MqwsW5X3nh52aQ/viewform" target="_blank" rel="noopener">Day 1 practice form</a>.</div>
+<h2>Day 2 - On the Phone</h2>
+<div class="stage"><b>2. Leaving a message (20 min).</b> Doc section 2, then the <b>Message</b> game here.</div>
+<div class="stage"><b>3-4. Polite requests + time questions (30 min).</b> Doc sections 3-4; play <b>Polite or Strong?</b> here.</div>
+<div class="stage"><b>5. Listening: What time? (12 min).</b> Audio tab <b>Times Dictation</b>, or the <b>Times</b> game for self-study.</div>
+<div class="stage"><b>6-7. The return call + practice (33 min).</b> Audio tab <b>The Return Call</b>, then pairs. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLSds_p847m8ySEWlqJd3Ck-h_V0qQNzStunJkzCIUEezeLpkuw/viewform" target="_blank" rel="noopener">Day 2 practice form</a>.</div>
+<h2>Day 3 - The Meeting (speaking day)</h2>
+<div class="stage"><b>2-3. Meeting language + listening (35 min).</b> Doc sections 2-3; play <b>The Meeting</b> on the Audio tab.</div>
+<div class="stage"><b>5. Role-play rounds (40 min).</b> Cards in the unit doc. Tables in person, breakout rooms online.</div>
+<div class="note"><b>Watch in class:</b> the video links on the All Links tab fit Day 2 (interpreter) and Day 3 (questions to ask).</div>
+</section>
+
+<section id="p-who" class="panel">
+<h2>Who can help?</h2>
+<p>Read the situation. Click the right person.</p>
+<div class="scorebar"><span class="pill">Score: <span id="w-score">0</span></span><span class="pill">Streak: <span id="w-streak">0</span></span><span class="pill">Round: <span id="w-round">1</span>/8</span></div>
+<div class="qbox"><div class="qtext" id="w-q"></div><div class="imgopts" id="w-opts"></div><div class="feedback" id="w-fb"></div></div>
+<button class="bigbtn" id="w-again">Play Again</button>
+</section>
+
+<section id="p-polite" class="panel">
+<h2>Polite or too strong?</h2>
+<p>Click POLITE or TOO STRONG for each sentence.</p>
+<div class="scorebar"><span class="pill">Score: <span id="q-score">0</span></span><span class="pill">Item: <span id="q-round">1</span>/10</span></div>
+<div class="qbox"><div class="qtext" id="q-q"></div><div class="opts" id="q-opts"></div><div class="feedback" id="q-fb"></div></div>
+<button class="bigbtn" id="q-again">Play Again</button>
+</section>
+
+<section id="p-msg" class="panel">
+<h2>Build the voicemail</h2>
+<p>Click the lines in the correct order to build a good message.</p>
+<div class="scorebar"><span class="pill">Mistakes: <span id="d-miss">0</span></span></div>
+<ul class="built" id="d-built"></ul>
+<div id="d-pool"></div>
+<div class="feedback" id="d-fb"></div>
+<button class="bigbtn" id="d-again">Play Again</button>
+</section>
+
+<section id="p-times" class="panel">
+<h2>What time do you hear?</h2>
+<p>Click <b>Say it</b>. The page speaks a meeting time. Click the correct clock.</p>
+<div class="scorebar"><span class="pill">Score: <span id="t-score">0</span></span><span class="pill">Streak: <span id="t-streak">0</span></span>
+<button class="bigbtn navy" id="t-say">Say it</button></div>
+<div class="qbox"><div class="imgopts" id="t-opts"></div><div class="feedback" id="t-fb"></div></div>
+<div class="note" id="t-nosound" style="display:none">This browser cannot speak. Use the Times Dictation on the Audio tab instead.</div>
+</section>
+
+<section id="p-audio" class="panel">
+<h2>Class audio</h2>
+<div class="stage"><b>Six Voicemails (Day 1, section 6).</b> Students write the kind of problem (S / A / M) and the problem they hear. Answers in your key.<br>
+<audio controls preload="none" src="audio/school/six-voicemails.m4a"></audio></div>
+<div class="stage"><b>Times Dictation (Day 2, section 5).</b> Eight meeting times - students write each time and match the clock.<br>
+<audio controls preload="none" src="audio/school/times-dictation.m4a"></audio></div>
+<div class="stage"><b>The Return Call (Day 2, section 6).</b> Two speakers. Play once with books closed: "What is the problem? When will they meet?" Play again while reading.<br>
+<audio controls preload="none" src="audio/school/the-return-call.m4a"></audio></div>
+<div class="stage"><b>The Meeting (Day 3, section 3).</b> Play twice; students do the 8 true/false items.<br>
+<audio controls preload="none" src="audio/school/the-meeting.m4a"></audio></div>
+<div class="note">These recordings match the unit documents word for word, so you can play them instead of reading the scripts.</div>
+</section>
+
+<section id="p-links" class="panel">
+<h2>External material (checked and working)</h2>
+<a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/help-your-child-succeed-in-school/parent-teacher-interviews/" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">Settlement.org - Parent-Teacher Interviews</span><div class="how">Plain-language guide for newcomer parents in Ontario - what interviews are, how to prepare.</div></a>
+<a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/help-your-child-succeed-in-school/parent-teacher-interviews-elementary-school-video/" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">Settlement.org - Going to a Parent-Teacher Interview (Meet the Changs)</span><div class="how">Short acted interview at an Ontario elementary school. Pause and ask: "What did the parent ask?"</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=HsxW1sj5n4M" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">Parent-Teacher Conference - English Conversation Practice</span><div class="how">Model conversation; students repeat lines. Fits Day 2-3.</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=Mtlqu8Ykbko" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">Top 5 Questions to Ask at Your Parent-Teacher Conference</span><div class="how">Before Day 3 scenario stories: collect question ideas.</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=bzP5XoGssz4" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">Using an Interpreter During a Parent-Teacher Meeting</span><div class="how">Matches the Day 2 interpreter capsule - watch and discuss.</div></a>
+<a class="linkcard" href="https://ellii.com/lessons/everyday-dialogues/1702-meeting-the-teacher" target="_blank" rel="noopener"><span class="badge acct">YOUR ELLII</span><span class="t">Ellii - Meeting the Teacher (Everyday Dialogues)</span><div class="how">The dialogue lesson you have used before - needs your Ellii login.</div></a>
+<a class="linkcard" href="https://avenue.ca/classroom/mod/resource/view.php?id=8948041" target="_blank" rel="noopener"><span class="badge acct">YOUR AVENUE</span><span class="t">Avenue - Having a Parent-Teacher Conference (eLearning unit)</span><div class="how">Your class's Avenue unit on this topic - assign as follow-up (login needed).</div></a>
+<h2>On this page</h2>
+<a class="linkcard" href="#" data-go="who"><span class="badge here">GAME</span><span class="t">Who Can Help?</span><div class="how">Picture quiz on the 8 people at school.</div></a>
+<a class="linkcard" href="#" data-go="polite"><span class="badge here">GAME</span><span class="t">Polite or Too Strong?</span><div class="how">I'd like to vs I want to - instant check.</div></a>
+<a class="linkcard" href="#" data-go="msg"><span class="badge here">GAME</span><span class="t">Build the Voicemail</span><div class="how">Put the message lines in order.</div></a>
+<a class="linkcard" href="#" data-go="times"><span class="badge here">GAME</span><span class="t">What Time Do You Hear?</span><div class="how">The page speaks a time; click the clock.</div></a>
+</section>
+
+<footer>Talking to Your Child's School | CLB 4-6 | merceditas-prof.github.io</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var tabs=document.querySelectorAll(".tabs button");
+function show(p){
+  tabs.forEach(function(b){b.classList.toggle("active",b.dataset.p===p);});
+  document.querySelectorAll(".panel").forEach(function(s){s.classList.remove("show");});
+  document.getElementById("p-"+p).classList.add("show");
+}
+tabs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.p);});});
+document.querySelectorAll("[data-go]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();show(a.dataset.go);});});
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+// ---- who can help ----
+var PEOPLE=[
+ {f:"p_teacher.png",n:"the teacher"},{f:"p_principal.png",n:"the principal"},
+ {f:"p_office.png",n:"the school office"},{f:"p_esl.png",n:"the ESL teacher"},
+ {f:"p_ea.png",n:"the EA"},{f:"p_counsellor.png",n:"the counsellor"},
+ {f:"p_social.png",n:"the social worker"}];
+var WQ=[
+ {q:"Your daughter is sick and needs to go home now.",a:"the school office"},
+ {q:"You want to talk about a problem in your child's class.",a:"the teacher"},
+ {q:"Your son needs extra help with English words.",a:"the ESL teacher"},
+ {q:"You talked to the teacher and you are still not happy.",a:"the principal"},
+ {q:"Your child needs someone beside him in class all day.",a:"the EA"},
+ {q:"Your daughter is worried about choosing her courses.",a:"the counsellor"},
+ {q:"Your family needs help finding food and housing.",a:"the social worker"},
+ {q:"Your child is late this morning. Who do you call?",a:"the school office"}];
+var w={score:0,streak:0,round:0,order:[],lock:false};
+function wNew(){w.score=0;w.streak=0;w.round=0;w.order=shuffle(WQ.slice());
+ document.getElementById("w-score").textContent="0";document.getElementById("w-streak").textContent="0";wNext();}
+function wNext(){
+ if(w.round>=w.order.length){document.getElementById("w-q").textContent="Finished! Score: "+w.score+"/"+w.order.length;
+  document.getElementById("w-opts").innerHTML="";document.getElementById("w-fb").textContent="";return;}
+ w.lock=false;
+ var item=w.order[w.round];
+ document.getElementById("w-round").textContent=String(w.round+1);
+ document.getElementById("w-q").textContent=item.q;
+ document.getElementById("w-fb").textContent="";document.getElementById("w-fb").className="feedback";
+ var pool=PEOPLE.filter(function(p){return p.n===item.a;});
+ var others=shuffle(PEOPLE.filter(function(p){return p.n!==item.a;})).slice(0,3);
+ var opts=shuffle(pool.concat(others));
+ var box=document.getElementById("w-opts");box.innerHTML="";
+ opts.forEach(function(p){
+   var b=document.createElement("button");
+   b.innerHTML='<img src="icons/school/'+p.f+'" alt=""><div class="lbl">'+p.n+'</div>';
+   b.addEventListener("click",function(){
+     if(w.lock){return;}w.lock=true;
+     var fb=document.getElementById("w-fb");
+     if(p.n===item.a){b.classList.add("right");w.score++;w.streak++;fb.textContent="Correct!";fb.className="feedback ok";}
+     else{b.classList.add("wrong");w.streak=0;fb.textContent="It is "+item.a;fb.className="feedback no";}
+     document.getElementById("w-score").textContent=String(w.score);
+     document.getElementById("w-streak").textContent=String(w.streak);
+     w.round++;setTimeout(wNext,1200);
+   });
+   box.appendChild(b);
+ });
+}
+document.getElementById("w-again").addEventListener("click",wNew);
+wNew();
+
+// ---- polite or strong ----
+var PQ=[
+ {s:"I'd like to have a meeting with you.",a:"POLITE"},
+ {s:"I want to have a meeting with you.",a:"TOO STRONG"},
+ {s:"Could you please call me back today?",a:"POLITE"},
+ {s:"Call me back today.",a:"TOO STRONG"},
+ {s:"I'd like to talk about my son.",a:"POLITE"},
+ {s:"I want to see you this week.",a:"TOO STRONG"},
+ {s:"Would you have time to meet this week?",a:"POLITE"},
+ {s:"Give me a meeting on Monday.",a:"TOO STRONG"},
+ {s:"Sorry, that doesn't work for me. Would 4:30 be possible?",a:"POLITE"},
+ {s:"I'd like to ask you a question.",a:"POLITE"}];
+var q={score:0,round:0,order:[],lock:false};
+function qNew(){q.score=0;q.round=0;q.order=shuffle(PQ.slice());
+ document.getElementById("q-score").textContent="0";qNext();}
+function qNext(){
+ if(q.round>=q.order.length){document.getElementById("q-q").textContent="Finished! Score: "+q.score+"/"+q.order.length;
+  document.getElementById("q-opts").innerHTML="";document.getElementById("q-fb").textContent="";return;}
+ q.lock=false;
+ var item=q.order[q.round];
+ document.getElementById("q-round").textContent=String(q.round+1);
+ document.getElementById("q-q").textContent='"'+item.s+'"';
+ document.getElementById("q-fb").textContent="";document.getElementById("q-fb").className="feedback";
+ var box=document.getElementById("q-opts");box.innerHTML="";
+ ["POLITE","TOO STRONG"].forEach(function(o){
+   var b=document.createElement("button");b.textContent=o;
+   b.addEventListener("click",function(){
+     if(q.lock){return;}q.lock=true;
+     var fb=document.getElementById("q-fb");
+     if(o===item.a){b.classList.add("right");q.score++;fb.textContent="Correct!";fb.className="feedback ok";}
+     else{b.classList.add("wrong");fb.textContent="It is "+item.a;fb.className="feedback no";}
+     document.getElementById("q-score").textContent=String(q.score);
+     q.round++;setTimeout(qNext,1000);
+   });
+   box.appendChild(b);
+ });
+}
+document.getElementById("q-again").addEventListener("click",qNew);
+qNew();
+
+// ---- message order ----
+var MSG=[
+ "Hello. My name is Rosa Vega.",
+ "I am Carla Vega's mother. Carla is in Mr. Chen's class, grade 6.",
+ "I'd like to talk to Mr. Chen about my daughter.",
+ "She is feeling very sad these days.",
+ "Please call me back at 416-555-7702.",
+ "Thank you."];
+var d={next:0,miss:0};
+function dNew(){
+ d.next=0;d.miss=0;
+ document.getElementById("d-miss").textContent="0";
+ document.getElementById("d-fb").textContent="";document.getElementById("d-fb").className="feedback";
+ document.getElementById("d-built").innerHTML="";
+ var pool=document.getElementById("d-pool");pool.innerHTML="";
+ shuffle(MSG.map(function(t,i){return{t:t,i:i};})).forEach(function(o){
+   var b=document.createElement("button");b.className="dlgline";b.textContent=o.t;
+   b.addEventListener("click",function(){
+     if(o.i===d.next){
+       b.remove();
+       var li=document.createElement("li");li.textContent=o.t;
+       document.getElementById("d-built").appendChild(li);
+       d.next++;
+       if(d.next===MSG.length){
+         var fb=document.getElementById("d-fb");
+         fb.textContent="Complete! Mistakes: "+d.miss+". Now record yourself saying it.";
+         fb.className="feedback ok";
+       }
+     }else{
+       d.miss++;document.getElementById("d-miss").textContent=String(d.miss);
+       b.classList.add("err");setTimeout(function(){b.classList.remove("err");},500);
+     }
+   });
+   pool.appendChild(b);
+ });
+}
+document.getElementById("d-again").addEventListener("click",dNew);
+dNew();
+
+// ---- times (speak + click the clock) ----
+var CLOCKS=[
+ {f:"clock_1.png",say:"three thirty",lab:"3:30"},
+ {f:"clock_2.png",say:"four o'clock",lab:"4:00"},
+ {f:"clock_3.png",say:"nine fifteen",lab:"9:15"},
+ {f:"clock_4.png",say:"a quarter to four",lab:"3:45"},
+ {f:"clock_5.png",say:"ten thirty",lab:"10:30"},
+ {f:"clock_6.png",say:"two fifteen",lab:"2:15"},
+ {f:"clock_7.png",say:"a quarter to five",lab:"4:45"},
+ {f:"clock_8.png",say:"eleven o'clock",lab:"11:00"}];
+var t={score:0,streak:0,answer:null,lock:true};
+var synth=window.speechSynthesis;
+if(!synth){document.getElementById("t-nosound").style.display="block";document.getElementById("t-say").disabled=true;}
+function speak(txt){try{var u=new SpeechSynthesisUtterance(txt);u.lang="en-US";u.rate=0.85;synth.cancel();synth.speak(u);}catch(e){}}
+function tNext(){
+ var pick=shuffle(CLOCKS.slice()).slice(0,4);
+ t.answer=pick[Math.floor(Math.random()*4)];
+ var box=document.getElementById("t-opts");box.innerHTML="";
+ document.getElementById("t-fb").textContent="";document.getElementById("t-fb").className="feedback";
+ pick.forEach(function(c){
+   var b=document.createElement("button");
+   b.innerHTML='<img src="icons/school/'+c.f+'" alt="clock">';
+   b.addEventListener("click",function(){
+     if(t.lock){return;}t.lock=true;
+     var fb=document.getElementById("t-fb");
+     if(c.f===t.answer.f){b.classList.add("right");t.score++;t.streak++;fb.textContent="Correct! "+t.answer.lab;fb.className="feedback ok";}
+     else{b.classList.add("wrong");t.streak=0;fb.textContent="It was "+t.answer.lab;fb.className="feedback no";}
+     document.getElementById("t-score").textContent=String(t.score);
+     document.getElementById("t-streak").textContent=String(t.streak);
+     setTimeout(tNext,1200);
+   });
+   box.appendChild(b);
+ });
+ t.lock=true;
+}
+document.getElementById("t-say").addEventListener("click",function(){
+ if(!t.answer){return;}
+ t.lock=false;
+ speak(t.answer.say);
+});
+tNext();
+})();
+</script>
+</body>
+</html>
