@@ -67,7 +67,7 @@ audio{width:100%;margin-top:8px;}
 <body>
 <header><div class="wrap">
 <h1>Talking to Your Child's School</h1>
-<p>CLB 4-6 | who can help, naming the problem, phoning the school, the meeting</p>
+<p>CLB 4 | who can help, phoning the school, and the whole parent-teacher meeting (Days 1-6)</p>
 </div></header>
 <div class="wrap">
 <div class="tabs">
@@ -76,6 +76,10 @@ audio{width:100%;margin-top:8px;}
 <button data-p="polite">Polite or Strong?</button>
 <button data-p="msg">The Message</button>
 <button data-p="times">Times</button>
+<button data-p="tone">Tone</button>
+<button data-p="feelings">Feelings</button>
+<button data-p="parts">5 Parts</button>
+<button data-p="solutions">Solutions</button>
 <button data-p="audio">Audio</button>
 <button data-p="links">All Links</button>
 </div>
@@ -96,6 +100,27 @@ audio{width:100%;margin-top:8px;}
 <div class="stage"><b>2-3. Meeting language + listening (35 min).</b> Doc sections 2-3; play <b>The Meeting</b> on the Audio tab.</div>
 <div class="stage"><b>5. Role-play rounds (40 min).</b> Cards in the unit doc. Tables in person, breakout rooms online.</div>
 <div class="note"><b>Watch in class:</b> the video links on the All Links tab fit Day 2 (interpreter) and Day 3 (questions to ask).</div>
+
+<h2>Day 4 - At the Meeting: Tone, the Four Parts, Greeting</h2>
+<div class="stage"><b>2. Tone and conduct (20 min).</b> Doc section 2, then play <b>Tone</b> here together - the pictures are the exercise.</div>
+<div class="stage"><b>3-4. The four parts + greeting the teacher (35 min).</b> Doc sections 3-4. Mr./Ms. or a first name: the teacher decides.</div>
+<div class="stage"><b>5. Listening: Four Greetings (15 min).</b> Audio tab <b>Four Greetings</b>. Play twice - they write the name, then decide title or first name.</div>
+<div class="stage"><b>6-7. Grammar + pairs (25 min).</b> "Well," + present continuous, then the four teacher cards. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_0IRt-XWnfwtfJI4G44fbEV7VUMzZaIDEHD2ApsT9mDWUrw/viewform" target="_blank" rel="noopener">Day 4 practice form</a>.</div>
+
+<h2>Day 5 - Describing the Problem: the Five Parts</h2>
+<div class="stage"><b>2. The five parts (15 min).</b> Rutaba's model in the doc, then play <b>5 Parts</b> here.</div>
+<div class="stage"><b>3. "When ..." sentences (15 min).</b> Simple present in BOTH halves - the one they get wrong.</div>
+<div class="stage"><b>4. Feelings (20 min).</b> Doc section 4, then play <b>Feelings</b> here. The agendaweb link on All Links is extra practice.</div>
+<div class="stage"><b>5-6. Behaviour at home + effect and reason (27 min).</b> Doc sections 5-6.</div>
+<div class="stage"><b>7-8. Listening + notes (18 min).</b> Audio tab <b>Two Descriptions</b>, then brainstorm notes in pairs. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8qaOWLVXk8ew2zZZpj-9rS8EXlGkEGZ3CafS46g1U_E8Emg/viewform" target="_blank" rel="noopener">Day 5 practice form</a>.</div>
+
+<h2>Day 6 - The Whole Meeting (speaking day)</h2>
+<div class="stage"><b>2-3. Follow-up questions + keywords (33 min).</b> Doc sections 2-3. Short answers, not full sentences.</div>
+<div class="stage"><b>4. Finding a solution (20 min).</b> Doc section 4, then play <b>Solutions</b> here.</div>
+<div class="stage"><b>5. Listening: The Whole Meeting (12 min).</b> Audio tab - all four parts in one conversation.</div>
+<div class="stage"><b>6. The rubric (10 min).</b> Play <b>Sample A</b> and <b>Sample B</b> on the Audio tab and score them together before the role plays.</div>
+<div class="stage"><b>7. Role plays (20 min).</b> Four rounds, cards in the doc. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLScdteZ9NIltV5WOkDqVlHwxoH-PuucZRPALLtg5sXfBvQB_aw/viewform" target="_blank" rel="noopener">Day 6 practice form</a>.</div>
+<div class="note"><b>The whole unit in one line:</b> Days 1-3 get you to the meeting; Days 4-6 are the meeting itself.</div>
 </section>
 
 <section id="p-who" class="panel">
@@ -133,6 +158,54 @@ audio{width:100%;margin-top:8px;}
 <div class="note" id="t-nosound" style="display:none">This browser cannot speak. Use the Times Dictation on the Audio tab instead.</div>
 </section>
 
+
+<section id="p-tone" class="panel">
+<h2>Tone and conduct at a meeting</h2>
+<div class="scorebar"><span class="pill" id="tn-score">Score 0 / 0</span><span class="pill" id="tn-streak">Streak 0</span><button class="bigbtn navy" id="tn-again">Play again</button></div>
+<div class="qbox">
+  <div class="qtext">Is this good tone and conduct at a parent-teacher meeting?</div>
+  <img id="tn-img" src="icons/school2/t_eyecontact.png" alt="tone and conduct" style="max-width:230px;width:100%;">
+  <div class="opts">
+    <button data-v="1">GOOD</button>
+    <button data-v="0">NOT GOOD</button>
+  </div>
+  <div class="feedback" id="tn-fb"></div>
+</div>
+</section>
+
+<section id="p-feelings" class="panel">
+<h2>How is the child feeling?</h2>
+<div class="scorebar"><span class="pill" id="fl-score">Score 0 / 0</span><span class="pill" id="fl-streak">Streak 0</span><button class="bigbtn navy" id="fl-again">Play again</button></div>
+<div class="qbox">
+  <div class="qtext">Choose the feeling word.</div>
+  <img id="fl-img" src="icons/school2/f_upset.png" alt="a feeling" style="max-width:230px;width:100%;">
+  <div class="opts" id="fl-opts"></div>
+  <div class="feedback" id="fl-fb"></div>
+</div>
+</section>
+
+<section id="p-parts" class="panel">
+<h2>Which part of the description?</h2>
+<div class="note">1 name the problem &nbsp;|&nbsp; 2 give an example &nbsp;|&nbsp; 3 say how the child feels &nbsp;|&nbsp; 4 the behaviour at home &nbsp;|&nbsp; 5 the effect and the reason</div>
+<div class="scorebar"><span class="pill" id="pt-score">Score 0 / 0</span><span class="pill" id="pt-streak">Streak 0</span><button class="bigbtn navy" id="pt-again">Play again</button></div>
+<div class="qbox">
+  <div class="qtext" id="pt-q">-</div>
+  <div class="opts" id="pt-opts"></div>
+  <div class="feedback" id="pt-fb"></div>
+</div>
+</section>
+
+<section id="p-solutions" class="panel">
+<h2>Suggestions and agreeing</h2>
+<div class="scorebar"><span class="pill" id="sl-score">Score 0 / 0</span><span class="pill" id="sl-streak">Streak 0</span><button class="bigbtn navy" id="sl-again">Play again</button></div>
+<div class="qbox">
+  <div class="qtext" id="sl-q">-</div>
+  <div class="opts" id="sl-opts"></div>
+  <div class="feedback" id="sl-fb"></div>
+</div>
+<div class="note"><b>Remember:</b> <i>How about</i> takes verb + <b>ing</b>. <i>Let's</i> and <i>Why don't we</i> take the plain verb. When you agree, use the teacher's own word back.</div>
+</section>
+
 <section id="p-audio" class="panel">
 <h2>Class audio</h2>
 <div class="stage"><b>Six Voicemails (Day 1, section 6).</b> Students write the kind of problem (S / A / M) and the problem they hear. Answers in your key.<br>
@@ -143,6 +216,17 @@ audio{width:100%;margin-top:8px;}
 <audio controls preload="none" src="audio/school/the-return-call.m4a"></audio></div>
 <div class="stage"><b>The Meeting (Day 3, section 3).</b> Play twice; students do the 8 true/false items.<br>
 <audio controls preload="none" src="audio/school/the-meeting.m4a"></audio></div>
+<h2>Days 4-6</h2>
+<div class="stage"><b>Four Greetings (Day 4, section 5).</b> Four teachers introduce themselves. Students write the name, then decide: title or first name?<br>
+<audio controls preload="none" src="audio/school2/four-greetings.m4a"></audio></div>
+<div class="stage"><b>Two Descriptions (Day 5, section 7).</b> Roger and Farida. Students tick the five parts they hear, then write the feeling words.<br>
+<audio controls preload="none" src="audio/school2/two-descriptions.m4a"></audio></div>
+<div class="stage"><b>The Whole Meeting (Day 6, section 5).</b> All four parts in one conversation - Mr. Gilmore and Stevie's parent. Eight true/false in the doc.<br>
+<audio controls preload="none" src="audio/school2/the-whole-meeting.m4a"></audio></div>
+<div class="stage"><b>Rubric Sample A (Day 6, section 6).</b> The strong answer. Score it together against the six criteria.<br>
+<audio controls preload="none" src="audio/school2/rubric-sample-a.m4a"></audio></div>
+<div class="stage"><b>Rubric Sample B (Day 6, section 6).</b> The weak answer - no "when" example, one feeling, no "because". Ask what is missing.<br>
+<audio controls preload="none" src="audio/school2/rubric-sample-b.m4a"></audio></div>
 <div class="note">These recordings match the unit documents word for word, so you can play them instead of reading the scripts.</div>
 </section>
 
@@ -155,14 +239,21 @@ audio{width:100%;margin-top:8px;}
 <a class="linkcard" href="https://www.youtube.com/watch?v=bzP5XoGssz4" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">Using an Interpreter During a Parent-Teacher Meeting</span><div class="how">Matches the Day 2 interpreter capsule - watch and discuss.</div></a>
 <a class="linkcard" href="https://ellii.com/lessons/everyday-dialogues/1702-meeting-the-teacher" target="_blank" rel="noopener"><span class="badge acct">YOUR ELLII</span><span class="t">Ellii - Meeting the Teacher (Everyday Dialogues)</span><div class="how">The dialogue lesson you have used before - needs your Ellii login.</div></a>
 <a class="linkcard" href="https://avenue.ca/classroom/mod/resource/view.php?id=8948041" target="_blank" rel="noopener"><span class="badge acct">YOUR AVENUE</span><span class="t">Avenue - Having a Parent-Teacher Conference (eLearning unit)</span><div class="how">Your class's Avenue unit on this topic - assign as follow-up (login needed).</div></a>
+<a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/help-your-child-succeed-in-school/solving-problems-at-school/" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">Settlement.org - Solving Problems at School</span><div class="how">The escalation ladder: child, then teacher or counsellor, then principal, then superintendent. Read before Day 4 section 2.</div></a>
+<a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/extra-care/what-counselling-services-can-students-get/" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">Settlement.org - What counselling services can students get?</span><div class="how">Backs up the Day 6 suggestion - what a school counsellor actually does. Good after the role plays.</div></a>
+<a class="linkcard" href="https://agendaweb.org/vocabulary/feelings-emotions-exercises.html" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="t">Agendaweb - Feelings and emotions exercises</span><div class="how">Thirteen interactive exercises. Set two or three as extra practice after Day 5 section 4.</div></a>
 <h2>On this page</h2>
 <a class="linkcard" href="#" data-go="who"><span class="badge here">GAME</span><span class="t">Who Can Help?</span><div class="how">Picture quiz on the 8 people at school.</div></a>
 <a class="linkcard" href="#" data-go="polite"><span class="badge here">GAME</span><span class="t">Polite or Too Strong?</span><div class="how">I'd like to vs I want to - instant check.</div></a>
 <a class="linkcard" href="#" data-go="msg"><span class="badge here">GAME</span><span class="t">Build the Voicemail</span><div class="how">Put the message lines in order.</div></a>
 <a class="linkcard" href="#" data-go="times"><span class="badge here">GAME</span><span class="t">What Time Do You Hear?</span><div class="how">The page speaks a time; click the clock.</div></a>
+<a class="linkcard" href="#" data-go="tone"><span class="badge here">GAME</span><span class="t">Tone and Conduct</span><div class="how">Day 4 - good or not good at a meeting.</div></a>
+<a class="linkcard" href="#" data-go="feelings"><span class="badge here">GAME</span><span class="t">How Is the Child Feeling?</span><div class="how">Day 5 - the seven feeling words with pictures.</div></a>
+<a class="linkcard" href="#" data-go="parts"><span class="badge here">GAME</span><span class="t">Which Part of the Description?</span><div class="how">Day 5 - label a sentence 1 to 5.</div></a>
+<a class="linkcard" href="#" data-go="solutions"><span class="badge here">GAME</span><span class="t">Suggestions and Agreeing</span><div class="how">Day 6 - Let's / How about / Why don't we, and echoing the teacher.</div></a>
 </section>
 
-<footer>Talking to Your Child's School | CLB 4-6 | merceditas-prof.github.io</footer>
+<footer>Talking to Your Child's School | CLB 4 | Days 1-6 | merceditas-prof.github.io</footer>
 </div>
 
 <script>
@@ -347,6 +438,162 @@ document.getElementById("t-say").addEventListener("click",function(){
 });
 tNext();
 })();
+
+/* ============ Days 4-6 games ============ */
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ---- Tone (Day 4) ---- */
+var TONE=[
+ {img:'t_eyecontact.png',ok:1},{img:'t_ontime.png',ok:1},
+ {img:'t_calm.png',ok:1},{img:'t_listening.png',ok:1},
+ {img:'t_late.png',ok:0},{img:'t_yelling.png',ok:0},
+ {img:'t_blaming.png',ok:0},{img:'t_phone.png',ok:0}];
+var tnQ=[],tnI=0,tnS=0,tnN=0,tnK=0;
+function tnStart(){tnQ=shuffle(TONE.slice());tnI=0;tnS=0;tnN=0;tnK=0;tnShow();}
+function tnShow(){
+  var fb=document.getElementById('tn-fb');
+  if(tnI>=tnQ.length){document.getElementById('tn-img').style.display='none';
+    fb.className='feedback ok';fb.textContent='Finished! Score '+tnS+' / '+tnN+'. Click Play again.';
+    tnBtns(false);tnBar();return;}
+  document.getElementById('tn-img').style.display='';
+  document.getElementById('tn-img').src='icons/school2/'+tnQ[tnI].img;
+  fb.textContent='';fb.className='feedback';tnBtns(true);tnBar();
+}
+function tnBtns(on){var b=document.querySelectorAll('#p-tone .opts button');
+  for(var i=0;i<b.length;i++){b[i].disabled=!on;b[i].className='';}}
+function tnBar(){document.getElementById('tn-score').textContent='Score '+tnS+' / '+tnN;
+  document.getElementById('tn-streak').textContent='Streak '+tnK;}
+document.querySelectorAll('#p-tone .opts button').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    if(tnI>=tnQ.length)return;
+    var v=parseInt(btn.getAttribute('data-v'),10),fb=document.getElementById('tn-fb');
+    tnN++;
+    if(v===tnQ[tnI].ok){tnS++;tnK++;btn.className='right';fb.className='feedback ok';fb.textContent='Yes!';}
+    else{tnK=0;btn.className='wrong';fb.className='feedback no';fb.textContent=tnQ[tnI].ok?'This one IS good tone and conduct.':'No - this is not good at a meeting.';}
+    tnBar();tnI++;setTimeout(tnShow,1100);
+  });
+});
+document.getElementById('tn-again').addEventListener('click',tnStart);
+
+/* ---- Feelings (Day 5) ---- */
+var FEEL=[
+ {img:'f_frustrated.png',w:'frustrated'},{img:'f_upset.png',w:'upset'},
+ {img:'f_scared.png',w:'scared'},{img:'f_lonely.png',w:'lonely'},
+ {img:'f_worried.png',w:'worried'},{img:'f_stressed.png',w:'overwhelmed'},
+ {img:'f_depressed.png',w:'depressed'},{img:'f_sad.png',w:'sad'}];
+var flQ=[],flI=0,flS=0,flN=0,flK=0;
+function flStart(){flQ=shuffle(FEEL.slice());flI=0;flS=0;flN=0;flK=0;flShow();}
+function flShow(){
+  var box=document.getElementById('fl-opts'),fb=document.getElementById('fl-fb');
+  box.innerHTML='';fb.textContent='';fb.className='feedback';
+  document.getElementById('fl-score').textContent='Score '+flS+' / '+flN;
+  document.getElementById('fl-streak').textContent='Streak '+flK;
+  if(flI>=flQ.length){document.getElementById('fl-img').style.display='none';
+    fb.className='feedback ok';fb.textContent='Finished! Score '+flS+' / '+flN+'. Click Play again.';return;}
+  document.getElementById('fl-img').style.display='';
+  document.getElementById('fl-img').src='icons/school2/'+flQ[flI].img;
+  var right=flQ[flI].w,pool=FEEL.map(function(x){return x.w;}).filter(function(x){return x!==right;});
+  var opts=shuffle(pool).slice(0,3);opts.push(right);shuffle(opts);
+  opts.forEach(function(o){
+    var b=document.createElement('button');b.textContent=o;
+    b.addEventListener('click',function(){
+      if(b.disabled)return;
+      var all=box.querySelectorAll('button');
+      for(var i=0;i<all.length;i++)all[i].disabled=true;
+      flN++;
+      if(o===right){flS++;flK++;b.className='right';fb.className='feedback ok';fb.textContent='Yes!';}
+      else{flK=0;b.className='wrong';fb.className='feedback no';fb.textContent='The word is "'+right+'".';
+        for(var j=0;j<all.length;j++)if(all[j].textContent===right)all[j].className='right';}
+      flI++;setTimeout(flShow,1200);
+    });
+    box.appendChild(b);
+  });
+}
+document.getElementById('fl-again').addEventListener('click',flStart);
+
+/* ---- 5 Parts (Day 5) ---- */
+var PARTS=[
+ {s:'Well, Sara is getting bullied.',p:1},
+ {s:'When she goes on social media, she sees mean messages.',p:2},
+ {s:"It's making her upset and scared.",p:3},
+ {s:'At home, she cries all the time.',p:4},
+ {s:"She doesn't want to go to school because of this.",p:5},
+ {s:'Well, Daniel is feeling stressed.',p:1},
+ {s:"When he does his homework, he can't focus.",p:2},
+ {s:"It's making him worried and overwhelmed.",p:3},
+ {s:'At home, he plays video games all the time.',p:4},
+ {s:"He doesn't want to try anymore because it's too hard.",p:5}];
+var PLAB=['1 - name the problem','2 - give an example','3 - how the child feels',
+          '4 - behaviour at home','5 - effect and reason'];
+var ptQ=[],ptI=0,ptS=0,ptN=0,ptK=0;
+function ptStart(){ptQ=shuffle(PARTS.slice());ptI=0;ptS=0;ptN=0;ptK=0;ptShow();}
+function ptShow(){
+  var box=document.getElementById('pt-opts'),fb=document.getElementById('pt-fb');
+  box.innerHTML='';fb.textContent='';fb.className='feedback';
+  document.getElementById('pt-score').textContent='Score '+ptS+' / '+ptN;
+  document.getElementById('pt-streak').textContent='Streak '+ptK;
+  if(ptI>=ptQ.length){document.getElementById('pt-q').textContent='Finished! Score '+ptS+' / '+ptN+'.';
+    fb.className='feedback ok';fb.textContent='Click Play again.';return;}
+  document.getElementById('pt-q').textContent='"'+ptQ[ptI].s+'"';
+  PLAB.forEach(function(lab,idx){
+    var b=document.createElement('button');b.textContent=lab;
+    b.addEventListener('click',function(){
+      if(b.disabled)return;
+      var all=box.querySelectorAll('button');
+      for(var i=0;i<all.length;i++)all[i].disabled=true;
+      ptN++;
+      if(idx+1===ptQ[ptI].p){ptS++;ptK++;b.className='right';fb.className='feedback ok';fb.textContent='Yes!';}
+      else{ptK=0;b.className='wrong';fb.className='feedback no';
+        fb.textContent='It is part '+ptQ[ptI].p+'.';all[ptQ[ptI].p-1].className='right';}
+      ptI++;setTimeout(ptShow,1300);
+    });
+    box.appendChild(b);
+  });
+}
+document.getElementById('pt-again').addEventListener('click',ptStart);
+
+/* ---- Solutions (Day 6) ---- */
+var SOL=[
+ {q:'I understand. ______ have Fern work with the education assistant.',o:["Let's",'How about',"Why don't we"],a:0},
+ {q:'Oh dear. ______ talking to Luke about the lunch club.',o:["Let's",'How about',"Why don't we"],a:1},
+ {q:'Right. ______ set up a meeting with the school counsellor.',o:["Let's",'How about',"Why don't we"],a:2},
+ {q:'I see. ______ giving Stevie a printed copy of the notes.',o:["Let's",'How about',"Why don't we"],a:1},
+ {q:'Okay. ______ getting Hazeem some extra help at lunchtime.',o:["Let's",'How about',"Why don't we"],a:1},
+ {q:'TEACHER: Does that sound good?',o:['Yes, that sounds good. Thanks very much!','Yes, it is. Thanks very much!','Yes, that works. Thanks very much!'],a:0},
+ {q:'TEACHER: Is that okay?',o:['Yes, that sounds good.','Yes, it is. I appreciate it.','Yes, that works.'],a:1},
+ {q:'TEACHER: Does that work?',o:['Yes, it is. Thank you.','Yes, that sounds good. Thank you.','Yes, that works. Thank you.'],a:2},
+ {q:'Which one is NOT a responder?',o:['I see.','Goodbye.','Oh dear.'],a:1},
+ {q:'You are not sure who is involved. What do you say?',o:['Emma.','Emma, I think.','I think.'],a:1}];
+var slQ=[],slI=0,slS=0,slN=0,slK=0;
+function slStart(){slQ=shuffle(SOL.slice());slI=0;slS=0;slN=0;slK=0;slShow();}
+function slShow(){
+  var box=document.getElementById('sl-opts'),fb=document.getElementById('sl-fb');
+  box.innerHTML='';fb.textContent='';fb.className='feedback';
+  document.getElementById('sl-score').textContent='Score '+slS+' / '+slN;
+  document.getElementById('sl-streak').textContent='Streak '+slK;
+  if(slI>=slQ.length){document.getElementById('sl-q').textContent='Finished! Score '+slS+' / '+slN+'.';
+    fb.className='feedback ok';fb.textContent='Click Play again.';return;}
+  var item=slQ[slI];
+  document.getElementById('sl-q').textContent=item.q;
+  item.o.forEach(function(o,idx){
+    var b=document.createElement('button');b.textContent=o;
+    b.addEventListener('click',function(){
+      if(b.disabled)return;
+      var all=box.querySelectorAll('button');
+      for(var i=0;i<all.length;i++)all[i].disabled=true;
+      slN++;
+      if(idx===item.a){slS++;slK++;b.className='right';fb.className='feedback ok';fb.textContent='Yes!';}
+      else{slK=0;b.className='wrong';fb.className='feedback no';
+        fb.textContent='The answer is: '+item.o[item.a];all[item.a].className='right';}
+      slI++;setTimeout(slShow,1400);
+    });
+    box.appendChild(b);
+  });
+}
+document.getElementById('sl-again').addEventListener('click',slStart);
+
+tnStart();flStart();ptStart();slStart();
+
 </script>
 </body>
 </html>
