@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Talking to Your Child's School (CLB 4-6)</title>
+<title>Talking to Your Child's School (CLB 4)</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%23%3C/text%3E%3C/svg%3E">
 <style>
 :root{--navy:#1f3252;--red:#b03a2e;--gold:#b7950b;--ink:#1a1a2e;--navybg:#e8ebf2;--goldbg:#f6eedd;--grey:#f2f3f4;}
@@ -62,12 +62,37 @@ footer{text-align:center;color:#7a8290;font-size:.85rem;padding:18px 0;}
 img.scene{width:100%;border-radius:12px;margin:8px 0;}
 audio{width:100%;margin-top:8px;}
 @media(max-width:560px){.imgopts img{max-width:110px;}}
+/* ---- Days 7-8 ---- */
+.dayblock>h2:first-child{margin-top:14px;}
+img.scene.sm{display:block;max-width:360px;margin:8px auto;}
+.scenerow{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:8px 0;}
+.scenerow figure{flex:1 1 150px;max-width:240px;text-align:center;font-size:.9rem;color:#4a5560;}
+.scenerow img{width:100%;height:170px;object-fit:contain;border:1px solid #d6dbe4;border-radius:12px;background:#fff;}
+.imgopts.cards img{height:120px;object-fit:contain;}
+.qhint{color:#4a5560;font-size:.95rem;font-weight:normal;margin-bottom:4px;}
+.qnote{color:#4a5560;font-style:italic;margin-bottom:6px;}
+.qtext .plain{font-weight:normal;}
+.qtext .plain b{font-weight:bold;background:var(--goldbg);border-radius:4px;padding:0 3px;}
+.saybar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:8px;}
+.saybar label{background:var(--navybg);border-radius:999px;padding:6px 14px;font-weight:bold;color:var(--navy);cursor:pointer;}
+.fbimg{display:block;max-width:100%;max-height:130px;margin:6px auto 0;border-radius:10px;}
+.stick{position:sticky;top:0;z-index:2;background:var(--grey);padding:4px 0;}
+.email{background:#fff;border:2px solid var(--navy);border-radius:12px;overflow:hidden;text-align:left;margin-top:10px;}
+.email .ehead{background:var(--navybg);padding:6px 8px;border-bottom:1px solid #ccd3de;}
+.email .edate{font-size:.85rem;color:#4a5560;text-align:right;padding:0 8px;}
+.email .ebody{padding:6px 8px;}
+.email p{margin:8px 6px;}
+.eblk{display:block;width:100%;text-align:left;font:inherit;line-height:1.45;color:var(--ink);background:transparent;border:2px dashed transparent;border-radius:8px;padding:6px 8px;margin:2px 0;cursor:pointer;}
+.eblk:hover{border-color:#9aa6b8;}
+.eblk.found{background:#d9efe2;border:2px solid #1e7a46;}
+.eblk.err{background:#f5e3e0;border:2px solid #b03a2e;}
+.lgroup{color:var(--navy);font-size:1rem;margin:14px 0 4px;}
 </style>
 </head>
 <body>
 <header><div class="wrap">
 <h1>Talking to Your Child's School</h1>
-<p>CLB 4 | who can help, phoning the school, and the whole parent-teacher meeting (Days 1-6)</p>
+<p>CLB 4 | who can help, phoning the school, the parent-teacher meeting and the follow-up email (Days 1-8)</p>
 </div></header>
 <div class="wrap">
 <div class="tabs">
@@ -80,6 +105,11 @@ audio{width:100%;margin-top:8px;}
 <button data-p="feelings">Feelings</button>
 <button data-p="parts">5 Parts</button>
 <button data-p="solutions">Solutions</button>
+<button data-p="ewords">Email Words</button>
+<button data-p="eparts">Email Parts</button>
+<button data-p="dnf">Done, Now, Future</button>
+<button data-p="signal">Signal Words</button>
+<button data-p="reply">Best Reply</button>
 <button data-p="audio">Audio</button>
 <button data-p="links">All Links</button>
 </div>
@@ -120,7 +150,49 @@ audio{width:100%;margin-top:8px;}
 <div class="stage"><b>5. Listening: The Whole Meeting (12 min).</b> Audio tab - all four parts in one conversation.</div>
 <div class="stage"><b>6. The rubric (10 min).</b> Play <b>Sample A</b> and <b>Sample B</b> on the Audio tab and score them together before the role plays.</div>
 <div class="stage"><b>7. Role plays (20 min).</b> Four rounds, cards in the doc. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLScdteZ9NIltV5WOkDqVlHwxoH-PuucZRPALLtg5sXfBvQB_aw/viewform" target="_blank" rel="noopener">Day 6 practice form</a>.</div>
-<div class="note"><b>The whole unit in one line:</b> Days 1-3 get you to the meeting; Days 4-6 are the meeting itself.</div>
+<div class="dayblock" id="day7">
+<h2>Day 7 - The Teacher Writes Back: Reading a Follow-up Email</h2>
+<img class="scene sm" src="icons/school3/p7_opener.png" alt="Day 7 opening picture" loading="lazy">
+<div class="stage"><b>1. Before You Start (8 min).</b> Show the picture above and ask the questions in the doc. Then pairs put the four meeting steps in order.</div>
+<div class="stage"><b>2. What Is a Follow-up Email? (12 min).</b> Go through the five reasons together, then pairs do the match and the true/false in the doc.</div>
+<div class="stage"><b>3. Words for Follow-up Emails (20 min).</b> Doc section 3, then play <b>Email Words</b> here together - students say the word before anyone clicks.</div>
+<div class="stage"><b>4. The Parts of an Email (15 min).</b> Play <b>Email from Mr. Taylor</b> on the Audio tab while students follow the email on their page. Then play <b>Email Parts</b> here.</div>
+<div class="stage"><b>5. Main Idea and Purpose (20 min).</b> Doc section 5: subject lines and purpose phrases, then the mini emails in pairs.</div>
+<div class="stage"><b>6. Reading SU (18 min).</b> Done on the page - there is nothing for it here.</div>
+<div class="stage"><b>7. Email Detectives (15 min).</b> Each group takes one email card from the doc and answers the eight questions. Tables in person, breakout rooms online.</div>
+<div class="stage"><b>8. Before You Go (5 min).</b> Students check the "I can" list in the doc. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLScOCEDalVqky2CphHZiqwX-5Lv8dLNb2J7h1hL9SAjQZ6Kbfw/viewform" target="_blank" rel="noopener">Practice form</a>.</div>
+<h3 class="lgroup">Links for Day 7</h3>
+<a class="linkcard" href="https://curriculum.novascotia.ca/sites/default/files/documents/resource-files/NewcomerFamilyGuide_How_To_Communicate_withTeacher_School_EN.pdf" target="_blank" rel="noopener"><span class="badge">INFO</span><span class="t">Newcomer Family Guide: How to Communicate with Your Child's Teacher and School (Nova Scotia Education)</span><div class="how">Show on screen (5 pages) and find the email tips together: check your email for school messages; when you write, give your full name and your child's full name.</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=BfZ5nxi57GE" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">English with Jennifer - Greetings &amp; Closings for Formal Email Messages in English (5:00)</span><div class="how">Play 0:00-1:48 (a model email to a child's teacher); pause and have students point to the greeting, closing and signature. The rest is optional.</div></a>
+<a class="linkcard" href="https://www.baamboozle.com/game/429730" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="t">Baamboozle - Parts of an email (20 questions)</span><div class="how">Team game after labelling Mr. Taylor's email: teams say Greeting, Body or Closing for each line (for example 'Dear Mr. Long,' or 'Best regards,').</div></a>
+<a class="linkcard" href="https://learnenglish.britishcouncil.org/free-resources/business/english-emails/unit-7-organising-your-writing" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">LearnEnglish (British Council) - English for emails, Unit 7: Organising your writing (A2-B1)</span><div class="how">Show the 'I am writing to + verb' box next to the purpose phrases and do Task 1 together; set Tasks 2-4 as homework. On Day 8, use the email order to plan the reply.</div></a>
+</div>
+<div class="dayblock" id="day8">
+<h2>Day 8 - What Is the School Doing? Details, Signal Words and Your Reply</h2>
+<div class="scenerow">
+<figure><img src="icons/school3/p8_done.png" alt="" loading="lazy"><figcaption>I have spoken to Kevin.</figcaption></figure>
+<figure><img src="icons/school3/p8_now.png" alt="" loading="lazy"><figcaption>A teacher is now watching the playground.</figcaption></figure>
+<figure><img src="icons/school3/p8_future.png" alt="" loading="lazy"><figcaption>Next week, he is going to meet our school counsellor.</figcaption></figure>
+</div>
+<div class="stage"><b>1. Before You Start (8 min).</b> Show the three pictures above. For each one, students decide: done, now or future? Then they say why.</div>
+<div class="stage"><b>2. Done, Now or Future? (22 min).</b> Doc section 2; for 2D play <b>Dictation: done, now or future?</b> on the Audio tab. Then play <b>Done, Now, Future</b> here - tick <b>Hide the sentence</b> to make it a dictation.</div>
+<div class="stage"><b>3. Signal Words (15 min).</b> Doc section 3, then play <b>Signal Words</b> here together.</div>
+<div class="stage"><b>4. The Request for Action (15 min).</b> Doc section 4, then play <b>Best Reply</b> here (Part 1).</div>
+<div class="stage"><b>5. Writing a Reply (20 min).</b> Read the model reply in the doc, then do <b>Put the reply in order</b> on the Best Reply tab (Part 2) together.</div>
+<div class="stage"><b>6. Writing SU (20 min).</b> Done on the page - there is nothing for it here.</div>
+<div class="stage"><b>7. Check and Share (15 min).</b> Partners check each other's reply with the checklist in the doc, then two or three students read theirs aloud.</div>
+<div class="stage"><b>8. Before You Go (5 min).</b> Students check the "I can" list in the doc. Homework: <a href="https://docs.google.com/forms/d/e/1FAIpQLSekNnlRusEkXykNk1pSx2OBtZgmI223kGM6Lfzxq0DU-YV5EA/viewform" target="_blank" rel="noopener">Practice form</a>.</div>
+<h3 class="lgroup">Links for Day 8</h3>
+<a class="linkcard" href="https://test-english.com/grammar-points/a2/present-perfect-or-past-simple/" target="_blank" rel="noopener"><span class="badge">GRAMMAR</span><span class="t">Test-English - Present perfect or past simple? (A2)</span><div class="how">Homework after the DONE sort: read the short explanation (a finished time like 'yesterday' vs no time given), then do Exercise 1.</div></a>
+<a class="linkcard" href="https://www.baamboozle.com/game/1635502" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="t">Baamboozle - A2 Present Perfect vs Past Simple</span><div class="how">Play in teams after the verb-forms task. For each answer, ask: is there a finished time word (yesterday, two weeks ago)?</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=IWAS5aszaGo" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">EasyTeaching - Will vs Going To: Understanding the Difference (4:23)</span><div class="how">Play once. Pause at 'prior plans' and connect it to 'Next week, he is going to meet our school counsellor.'</div></a>
+<a class="linkcard" href="https://agendaweb.org/verbs/future-simple-exercises.html" target="_blank" rel="noopener"><span class="badge">GRAMMAR</span><span class="t">Agendaweb - Future simple: will - be going to exercises</span><div class="how">Homework: assign 2-3 exercises from the list, starting with 'Will or be going to? - quiz' and 'exercise - 1'.</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=fIiRxx9v1jM" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">BBC Learning English - Also vs As well vs Too (English In A Minute, 0:59)</span><div class="how">Play twice before the signal-word table and answer the quiz question at the end. Then find 'also' and 'too' in Mr. Taylor's email.</div></a>
+<a class="linkcard" href="https://www.elllo.org/book/A2/A2-19-Expressing-Similarity.html" target="_blank" rel="noopener"><span class="badge listen">LISTENING</span><span class="t">ELLLO - Beginner English A2-19: Also / As well / Too</span><div class="how">Play one short conversation; students raise a hand when they hear 'also' or 'too'. Set the gap-fill quiz as homework.</div></a>
+<a class="linkcard" href="https://learnenglish.britishcouncil.org/free-resources/writing/a2/email-ask-colleague-do-something" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">LearnEnglish (British Council) - An email to ask a colleague to do something (A2 writing)</span><div class="how">Read the model email together and underline the request ('Do you think you could...?'). Compare it with 'Please let me know if Tuesday or Thursday works for you.', then do the matching task.</div></a>
+<a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/get-involved-in-the-school-community/can-i-talk-to-my-child-s-teacher/" target="_blank" rel="noopener"><span class="badge">INFO</span><span class="t">Settlement.org - Can I talk to my child's teacher?</span><div class="how">After the culture note, read the short page together: in Ontario it is normal to contact the teacher or ask for an appointment, and a SWIS worker can help with language.</div></a>
+</div>
+<div class="note"><b>The whole unit in one line:</b> Days 1-3 get you to the meeting; Days 4-6 are the meeting itself; Days 7-8 are the follow-up email.</div>
 </section>
 
 <section id="p-who" class="panel">
@@ -206,6 +278,73 @@ audio{width:100%;margin-top:8px;}
 <div class="note"><b>Remember:</b> <i>How about</i> takes verb + <b>ing</b>. <i>Let's</i> and <i>Why don't we</i> take the plain verb. When you agree, use the teacher's own word back.</div>
 </section>
 
+<section id="p-ewords" class="panel">
+<h2>Email words</h2>
+<p>Read the meaning. Click the right word.</p>
+<div class="scorebar"><span class="pill" id="ew-score">Score 0 / 0</span><span class="pill" id="ew-streak">Streak 0</span><span class="pill" id="ew-round">Round 1 / 10</span><button class="bigbtn navy" id="ew-again">Play again</button></div>
+<div class="qbox">
+  <div class="qtext" id="ew-q">-</div>
+  <div class="imgopts cards" id="ew-opts"></div>
+  <div class="feedback" id="ew-fb"></div>
+</div>
+</section>
+
+<section id="p-eparts" class="panel">
+<h2>The 9 parts of an email</h2>
+<p>Read the email. Click the part it asks for.</p>
+<div class="scorebar"><span class="pill" id="ep-score">Score 0 / 0</span><span class="pill" id="ep-streak">Streak 0</span><span class="pill" id="ep-round">Round 1 / 9</span><button class="bigbtn navy" id="ep-again">Play again</button></div>
+<div class="qbox">
+  <div class="stick"><div class="qtext" id="ep-q">-</div><div class="feedback" id="ep-fb"></div></div>
+  <div class="email" id="ep-mail"></div>
+</div>
+</section>
+
+<section id="p-dnf" class="panel">
+<h2>Done, now or future?</h2>
+<p>Read or listen. Is it DONE, happening NOW, or in the FUTURE?</p>
+<div class="scorebar"><span class="pill" id="dn-score">Score 0 / 0</span><span class="pill" id="dn-streak">Streak 0</span><span class="pill" id="dn-round">Round 1 / 10</span><button class="bigbtn navy" id="dn-again">Play again</button></div>
+<div class="qbox">
+  <div class="saybar"><button class="bigbtn navy" id="dn-say">Say it</button><label><input type="checkbox" id="dn-hide"> Hide the sentence</label></div>
+  <div class="qtext" id="dn-q">-</div>
+  <div class="opts" id="dn-opts"></div>
+  <div class="feedback" id="dn-fb"></div>
+  <img class="fbimg" id="dn-img" alt="" style="display:none">
+</div>
+<div class="note" id="dn-nosound" style="display:none">This browser cannot speak. Use <b>Dictation: done, now or future?</b> on the Audio tab instead.</div>
+</section>
+
+<section id="p-signal" class="panel">
+<h2>Signal words</h2>
+<p>Choose the best word, or say what the word in bold shows.</p>
+<div class="scorebar"><span class="pill" id="sg-score">Score 0 / 0</span><span class="pill" id="sg-streak">Streak 0</span><span class="pill" id="sg-round">Round 1 / 10</span><button class="bigbtn navy" id="sg-again">Play again</button></div>
+<div class="qbox">
+  <div class="qhint" id="sg-hint"></div>
+  <div class="qtext" id="sg-q">-</div>
+  <div class="opts" id="sg-opts"></div>
+  <div class="feedback" id="sg-fb"></div>
+</div>
+</section>
+
+<section id="p-reply" class="panel">
+<h2>Part 1 - The request for action</h2>
+<p>Read what the teacher asks. Choose the best response, or the kind of request.</p>
+<div class="scorebar"><span class="pill" id="br-score">Score 0 / 0</span><span class="pill" id="br-streak">Streak 0</span><span class="pill" id="br-round">Round 1 / 10</span><button class="bigbtn navy" id="br-again">Play again</button></div>
+<div class="qbox">
+  <div class="qhint" id="br-hint"></div>
+  <div class="qtext" id="br-q">-</div>
+  <div class="qnote" id="br-note"></div>
+  <div class="opts" id="br-opts"></div>
+  <div class="feedback" id="br-fb"></div>
+</div>
+<h2>Part 2 - Put the reply in order</h2>
+<p>Click the lines in the correct order to build the parent's reply.</p>
+<div class="scorebar"><span class="pill">Mistakes: <span id="ro-miss">0</span></span><button class="bigbtn navy" id="ro-again">Play again</button></div>
+<ul class="built" id="ro-built"></ul>
+<div id="ro-pool"></div>
+<div class="feedback" id="ro-fb"></div>
+<div class="email" id="ro-done" style="display:none"></div>
+</section>
+
 <section id="p-audio" class="panel">
 <h2>Class audio</h2>
 <div class="stage"><b>Six Voicemails (Day 1, section 6).</b> Students write the kind of problem (S / A / M) and the problem they hear. Answers in your key.<br>
@@ -227,6 +366,11 @@ audio{width:100%;margin-top:8px;}
 <audio controls preload="none" src="audio/school2/rubric-sample-a.m4a"></audio></div>
 <div class="stage"><b>Rubric Sample B (Day 6, section 6).</b> The weak answer - no "when" example, one feeling, no "because". Ask what is missing.<br>
 <audio controls preload="none" src="audio/school2/rubric-sample-b.m4a"></audio></div>
+<h2>Days 7-8</h2>
+<div class="stage"><b>Email from Mr. Taylor.</b> Day 7, section 4: follow the email on your page while you listen. Then say the 9 parts.<br>
+<audio controls preload="none" src="audio/school3/email-from-mr-taylor.m4a"></audio></div>
+<div class="stage"><b>Dictation: done, now or future?</b> Day 8, section 2D: write each sentence. Then write DONE, NOW or FUTURE.<br>
+<audio controls preload="none" src="audio/school3/done-now-future-dictation.m4a"></audio></div>
 <div class="note">These recordings match the unit documents word for word, so you can play them instead of reading the scripts.</div>
 </section>
 
@@ -242,6 +386,25 @@ audio{width:100%;margin-top:8px;}
 <a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/help-your-child-succeed-in-school/solving-problems-at-school/" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">Settlement.org - Solving Problems at School</span><div class="how">The escalation ladder: child, then teacher or counsellor, then principal, then superintendent. Read before Day 4 section 2.</div></a>
 <a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/extra-care/what-counselling-services-can-students-get/" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">Settlement.org - What counselling services can students get?</span><div class="how">Backs up the Day 6 suggestion - what a school counsellor actually does. Good after the role plays.</div></a>
 <a class="linkcard" href="https://agendaweb.org/vocabulary/feelings-emotions-exercises.html" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="t">Agendaweb - Feelings and emotions exercises</span><div class="how">Thirteen interactive exercises. Set two or three as extra practice after Day 5 section 4.</div></a>
+<h2>Days 7-8</h2>
+<h3 class="lgroup">Videos</h3>
+<a class="linkcard" href="https://www.youtube.com/watch?v=BfZ5nxi57GE" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">English with Jennifer - Greetings &amp; Closings for Formal Email Messages in English (5:00)</span><div class="how">Play 0:00-1:48 (a model email to a child's teacher); pause and have students point to the greeting, closing and signature. The rest is optional.</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=IWAS5aszaGo" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">EasyTeaching - Will vs Going To: Understanding the Difference (4:23)</span><div class="how">Play once. Pause at 'prior plans' and connect it to 'Next week, he is going to meet our school counsellor.'</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=fIiRxx9v1jM" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="t">BBC Learning English - Also vs As well vs Too (English In A Minute, 0:59)</span><div class="how">Play twice before the signal-word table and answer the quiz question at the end. Then find 'also' and 'too' in Mr. Taylor's email.</div></a>
+<h3 class="lgroup">Games</h3>
+<a class="linkcard" href="https://www.baamboozle.com/game/429730" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="t">Baamboozle - Parts of an email (20 questions)</span><div class="how">Team game after labelling Mr. Taylor's email: teams say Greeting, Body or Closing for each line (for example 'Dear Mr. Long,' or 'Best regards,').</div></a>
+<a class="linkcard" href="https://www.baamboozle.com/game/1635502" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="t">Baamboozle - A2 Present Perfect vs Past Simple</span><div class="how">Play in teams after the verb-forms task. For each answer, ask: is there a finished time word (yesterday, two weeks ago)?</div></a>
+<h3 class="lgroup">Listening</h3>
+<a class="linkcard" href="https://www.elllo.org/book/A2/A2-19-Expressing-Similarity.html" target="_blank" rel="noopener"><span class="badge listen">LISTENING</span><span class="t">ELLLO - Beginner English A2-19: Also / As well / Too</span><div class="how">Play one short conversation; students raise a hand when they hear 'also' or 'too'. Set the gap-fill quiz as homework.</div></a>
+<h3 class="lgroup">Reading</h3>
+<a class="linkcard" href="https://learnenglish.britishcouncil.org/free-resources/business/english-emails/unit-7-organising-your-writing" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">LearnEnglish (British Council) - English for emails, Unit 7: Organising your writing (A2-B1)</span><div class="how">Show the 'I am writing to + verb' box next to the purpose phrases and do Task 1 together; set Tasks 2-4 as homework. On Day 8, use the email order to plan the reply.</div></a>
+<a class="linkcard" href="https://learnenglish.britishcouncil.org/free-resources/writing/a2/email-ask-colleague-do-something" target="_blank" rel="noopener"><span class="badge">READING</span><span class="t">LearnEnglish (British Council) - An email to ask a colleague to do something (A2 writing)</span><div class="how">Read the model email together and underline the request ('Do you think you could...?'). Compare it with 'Please let me know if Tuesday or Thursday works for you.', then do the matching task.</div></a>
+<h3 class="lgroup">Grammar</h3>
+<a class="linkcard" href="https://test-english.com/grammar-points/a2/present-perfect-or-past-simple/" target="_blank" rel="noopener"><span class="badge">GRAMMAR</span><span class="t">Test-English - Present perfect or past simple? (A2)</span><div class="how">Homework after the DONE sort: read the short explanation (a finished time like 'yesterday' vs no time given), then do Exercise 1.</div></a>
+<a class="linkcard" href="https://agendaweb.org/verbs/future-simple-exercises.html" target="_blank" rel="noopener"><span class="badge">GRAMMAR</span><span class="t">Agendaweb - Future simple: will - be going to exercises</span><div class="how">Homework: assign 2-3 exercises from the list, starting with 'Will or be going to? - quiz' and 'exercise - 1'.</div></a>
+<h3 class="lgroup">Information</h3>
+<a class="linkcard" href="https://curriculum.novascotia.ca/sites/default/files/documents/resource-files/NewcomerFamilyGuide_How_To_Communicate_withTeacher_School_EN.pdf" target="_blank" rel="noopener"><span class="badge">INFO</span><span class="t">Newcomer Family Guide: How to Communicate with Your Child's Teacher and School (Nova Scotia Education)</span><div class="how">Show on screen (5 pages) and find the email tips together: check your email for school messages; when you write, give your full name and your child's full name.</div></a>
+<a class="linkcard" href="https://settlement.org/ontario/education/elementary-and-secondary-school/get-involved-in-the-school-community/can-i-talk-to-my-child-s-teacher/" target="_blank" rel="noopener"><span class="badge">INFO</span><span class="t">Settlement.org - Can I talk to my child's teacher?</span><div class="how">After the culture note, read the short page together: in Ontario it is normal to contact the teacher or ask for an appointment, and a SWIS worker can help with language.</div></a>
 <h2>On this page</h2>
 <a class="linkcard" href="#" data-go="who"><span class="badge here">GAME</span><span class="t">Who Can Help?</span><div class="how">Picture quiz on the 8 people at school.</div></a>
 <a class="linkcard" href="#" data-go="polite"><span class="badge here">GAME</span><span class="t">Polite or Too Strong?</span><div class="how">I'd like to vs I want to - instant check.</div></a>
@@ -251,9 +414,14 @@ audio{width:100%;margin-top:8px;}
 <a class="linkcard" href="#" data-go="feelings"><span class="badge here">GAME</span><span class="t">How Is the Child Feeling?</span><div class="how">Day 5 - the seven feeling words with pictures.</div></a>
 <a class="linkcard" href="#" data-go="parts"><span class="badge here">GAME</span><span class="t">Which Part of the Description?</span><div class="how">Day 5 - label a sentence 1 to 5.</div></a>
 <a class="linkcard" href="#" data-go="solutions"><span class="badge here">GAME</span><span class="t">Suggestions and Agreeing</span><div class="how">Day 6 - Let's / How about / Why don't we, and echoing the teacher.</div></a>
+<a class="linkcard" href="#" data-go="ewords"><span class="badge here">GAME</span><span class="t">Email Words</span><div class="how">Day 7 - the 14 follow-up email words with pictures.</div></a>
+<a class="linkcard" href="#" data-go="eparts"><span class="badge here">GAME</span><span class="t">The 9 Parts of an Email</span><div class="how">Day 7 - click each part of a teacher's email.</div></a>
+<a class="linkcard" href="#" data-go="dnf"><span class="badge here">GAME</span><span class="t">Done, Now or Future?</span><div class="how">Day 8 - the page can say each sentence, so it works as a dictation too.</div></a>
+<a class="linkcard" href="#" data-go="signal"><span class="badge here">GAME</span><span class="t">Signal Words</span><div class="how">Day 8 - first of all, also, as a result, so, for now.</div></a>
+<a class="linkcard" href="#" data-go="reply"><span class="badge here">GAME</span><span class="t">Best Reply</span><div class="how">Day 8 - the request for action, then put a reply in order.</div></a>
 </section>
 
-<footer>Talking to Your Child's School | CLB 4 | Days 1-6 | merceditas-prof.github.io</footer>
+<footer>Talking to Your Child's School | CLB 4 | Days 1-8 | merceditas-prof.github.io</footer>
 </div>
 
 <script>
@@ -593,6 +761,303 @@ function slShow(){
 document.getElementById('sl-again').addEventListener('click',slStart);
 
 tnStart();flStart();ptStart();slStart();
+
+/* ============ Days 7-8 games ============ */
+(function(){
+"use strict";
+var D={"vocab":[{"w":"update","m":"give someone new information","pic":"v_update"},{"w":"arrange","m":"plan or organize something","pic":"v_arrange"},{"w":"session","m":"a meeting for one activity, like a tutoring session","pic":"v_session"},{"w":"encourage","m":"help someone feel they can do something","pic":"v_encourage"},{"w":"struggle with","m":"have a problem doing something","pic":"v_struggle"},{"w":"get stuck","m":"not be able to continue","pic":"v_stuck"},{"w":"focus","m":"pay attention to one thing","pic":"v_focus"},{"w":"workload","m":"all the work a person has to do","pic":"v_workload"},{"w":"separately","m":"one at a time, not together","pic":"v_separately"},{"w":"privately","m":"alone with one person, not in front of others","pic":"v_privately"},{"w":"keep an eye on","m":"watch carefully","pic":"v_keepeye"},{"w":"strategy","m":"a plan or a way to do something","pic":"v_strategy"},{"w":"opinion","m":"what you think about something","pic":"v_opinion"},{"w":"as a result","m":"because of this","pic":"v_result"}],"parts":["Recipient (To)","Sender (From)","Subject","Greeting","Purpose statement","Body","Request for action","Closing","Signature"],"help":{"Recipient (To)":"the person who gets the email","Sender (From)":"the person who writes the email","Subject":"the main idea, in 2-4 words","Greeting":"Dear ... / Hi ... / Hello ...","Purpose statement":"the reason for the email, at the start","Body":"the details: what was done, what is happening, what will happen","Request for action":"what the writer wants you to do","Closing":"Regards, / Sincerely, / Best regards,","Signature":"the writer's name (and job)"},"emails":{"chen":{"to":"anita.sharma@mailbox.ca","from":"l.chen@maplecreekps.ca","sent":"Thursday, 3:45 PM","subject":"Help for Priya","greeting":"Dear Mrs. Sharma,","purpose":"Thanks for coming in on Tuesday. I'd like to tell you about our plan for Priya's science tests.","body":"To begin with, I have talked to Priya privately about her stress. I have also spoken to our principal. As a result, Priya can now write her tests in a quiet room, and she gets extra time. For now, I'm giving her a short review sheet before each test. Our next science test is on Friday, and Priya is going to try the new plan.","request":"Please look at the review sheet with Priya at home. If you have any questions, please let me know.","closing":"Sincerely,","signature":"Lisa Chen","sigline":"Science Teacher"},"roy":{"to":"olena.novak@mailbox.ca","from":"m.roy@maplecreekps.ca","sent":"Monday, 5:05 PM","subject":"A French Buddy for Leo","greeting":"Hello Ms. Novak,","purpose":"Thank you for meeting with me this morning. I'm writing to tell you about Leo's new French buddy.","body":"I have asked a student named Sam to be Leo's buddy. Sam speaks French and English. He is sitting next to Leo in French class, so he can help Leo when he doesn't understand. We are also going to listen to a short French song every Friday.","request":"Please tell me if Leo can come to French club on Tuesdays at lunch.","closing":"Best regards,","signature":"Michel Roy","sigline":"French Teacher"}},"dnf":[["I have called Kevin's grandmother.","DONE"],["Priya is writing her tests in a quiet room.","NOW"],["Mr. Singh will send Stevie a list of notes on Friday.","FUTURE"],["I talked to Luke after class.","DONE"],["We are going to change Mei's seat next week.","FUTURE"],["For now, Leo is sitting next to his buddy.","NOW"],["I've arranged a meeting with the school counsellor.","DONE"],["Ms. Park is going to call you tomorrow.","FUTURE"],["Juanita is sitting with two new friends at lunch.","NOW"],["I met with Hazeem and his math tutor on Tuesday.","DONE"],["I have talked to Stevie's father.","DONE"],["Juanita is sitting at a new table.","NOW"],["Hazeem will get extra help on Tuesdays.","FUTURE"],["Mei sang with the choir on Monday.","DONE"],["We are going to test Hazeem again next month.","FUTURE"],["For now, Leo is working with a buddy.","NOW"]],"choose":[["________, I spoke to Mei privately.",["For now","First of all","Too"],"First of all"],["Mei is very shy. ________, she does not answer questions in class.",["Too","First","As a result"],"As a result"],["I talked to Mei. I ________ talked to the music teacher.",["so","also","for now"],"also"],["________, Mei is working in a small group with two friends.",["Last week","Too","For now"],"For now"],["Leo cannot understand the French lesson, ________ Sam is helping him.",["so","also","first"],"so"],["I talked to Stevie. I talked to his father ________.",["so","too","next week"],"too"],["________, Hazeem is going to write a new test.",["Last week","Yesterday","Next month"],"Next month"],["Hazeem got stuck on the word problems. ________, I have arranged extra help.",["Too","As a result","Last year"],"As a result"]],"shows":[["First of all, I have looked at Hazeem's tests with him.","First of all","a"],["As a result, Priya can now write her tests in a quiet room.","As a result","c"],["For now, Juanita is sitting at a new table.","For now","d"],["I have also spoken to our principal.","also","b"],["Next Wednesday, she is going to go to her first club meeting.","Next Wednesday","e"],["Leo has a buddy now, so he understands more.","so","c"],["First, I have talked to our education assistant, Mr. Singh.","First","a"],["I talked to the principal too.","too","b"]],"showsLabels":["the first action","one more action","a result","happening now","the future"],"respond":[{"req":"Please let me know if Tuesday or Thursday after school works for you.","note":"","opts":["OK.","I will call the principal.","Thursday after school works for me."],"key":"Thursday after school works for me."},{"req":"Please look at the review sheet with Priya and tell me if it helps.","note":"","opts":["I don't have time.","Thank you. We looked at it last night, and it helped Priya.","What is a sheet?"],"key":"Thank you. We looked at it last night, and it helped Priya."},{"req":"If you have any questions, please let me know.","note":"You have no questions.","opts":["You must call the teacher.","You must go to the school.","You don't need to reply, or you can say thank you."],"key":"You don't need to reply, or you can say thank you."},{"req":"Please sign the choir form and send it back by Friday.","note":"","opts":["Reply: What form?","Sign the form and send it back before Friday.","Do nothing."],"key":"Sign the form and send it back before Friday."},{"req":"If anything changes at home, please let me know.","note":"","opts":["Email the teacher when something changes.","Reply every day.","Change schools."],"key":"Email the teacher when something changes."},{"req":"Could you come in on Friday at 3:15 to meet Ms. Park?","note":"You work until 5:00 on Friday.","opts":["No.","I'm sorry, I work until 5:00 on Friday. Could we meet on Monday at 3:15?","Friday is bad."],"key":"I'm sorry, I work until 5:00 on Friday. Could we meet on Monday at 3:15?"}],"match":[["Please let me know if Tuesday or Thursday after school works for you.","a"],["Please sign the choir form and send it back by Friday.","b"],["If you have any questions, please let me know.","d"],["Please make sure Hazeem eats breakfast every morning.","c"],["If anything changes at home, please let me know.","e"],["Could you come in on Friday at 3:15 to meet Ms. Park?","a"]],"types":[["come to a meeting","Reply with the day and the time you can come."],["sign or look at something","Do it before the date. You do not need to reply."],["do something at home","Do it. You can reply to say you will."],["ask questions if you have them","Reply only if you have a question, or say thank you."],["tell the teacher if something changes","Write to the teacher later, if something changes."]],"order":[["Could you tell me the date of the new test?",5],["Tariq Karimi",7],["Thank you for your email and for the extra help at lunchtime.",2],["Dear Mr. Lee,",1],["He is also going to bed earlier this week, so he feels better.",4],["Thank you again,",6],["Hazeem is going to eat breakfast every morning before school.",3]]};
+function el(id){return document.getElementById(id);}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function pause(msg){return Math.max(1200,Math.min(4000,String(msg).length*45));}
+function bar(p,s){
+  el(p+"-score").textContent="Score "+s.score+" / "+s.n;
+  el(p+"-streak").textContent="Streak "+s.streak;
+  el(p+"-round").textContent="Round "+Math.min(s.i+1,s.q.length)+" / "+s.q.length;
+}
+function lockAll(box){var all=box.querySelectorAll("button");for(var x=0;x<all.length;x++){all[x].disabled=true;}}
+
+/* ---- text-button quiz used by Done/Now/Future, Signal Words, Best Reply ---- */
+function makeQuiz(p,cfg){
+  var s={q:[],i:0,score:0,streak:0,n:0,timer:null,cur:null,answered:false};
+  function start(){
+    clearTimeout(s.timer);
+    s.q=shuffle(cfg.pool.slice()).slice(0,cfg.rounds);
+    s.i=0;s.score=0;s.streak=0;s.n=0;
+    if(cfg.onStart){cfg.onStart();}
+    render();
+  }
+  function render(){
+    var box=el(p+"-opts"),fb=el(p+"-fb"),hint=el(p+"-hint");
+    box.innerHTML="";fb.textContent="";fb.className="feedback";
+    s.answered=false;
+    bar(p,s);
+    if(s.i>=s.q.length){
+      s.cur=null;
+      if(hint){hint.textContent="";}
+      el(p+"-q").textContent="Finished! Score "+s.score+" / "+s.n+".";
+      fb.className="feedback ok";fb.textContent="Click Play again.";
+      if(cfg.onShow){cfg.onShow(null);}
+      return;
+    }
+    var item=s.q[s.i],v=cfg.view(item),rightBtn=null;
+    s.cur=item;
+    if(hint){hint.textContent=v.hint||"";}
+    el(p+"-q").innerHTML=v.q;
+    if(cfg.onShow){cfg.onShow(item);}
+    var idx=v.opts.map(function(t,k){return k;});
+    if(!v.fixed){shuffle(idx);}
+    idx.forEach(function(k){
+      var b=document.createElement("button");b.type="button";b.textContent=v.opts[k];
+      if(k===v.right){rightBtn=b;}
+      b.addEventListener("click",function(){
+        if(s.answered||b.disabled){return;}
+        s.answered=true;lockAll(box);s.n++;
+        var ok=(k===v.right);
+        if(ok){s.score++;s.streak++;b.className="right";}
+        else{s.streak=0;b.className="wrong";if(rightBtn){rightBtn.className="right";}}
+        var msg=cfg.feedback(item,ok);
+        fb.className="feedback "+(ok?"ok":"no");fb.textContent=msg;
+        if(cfg.onAnswer){cfg.onAnswer(item,ok);}
+        bar(p,s);s.i++;
+        s.timer=setTimeout(render,pause(msg));
+      });
+      box.appendChild(b);
+    });
+  }
+  el(p+"-again").addEventListener("click",start);
+  return {start:start,s:s};
+}
+
+/* ---- Email Words (Day 7) ---- */
+var ew={q:[],i:0,score:0,streak:0,n:0,timer:null};
+function ewStart(){
+  clearTimeout(ew.timer);
+  ew.q=shuffle(D.vocab.slice()).slice(0,10);ew.i=0;ew.score=0;ew.streak=0;ew.n=0;
+  ewShow();
+}
+function ewShow(){
+  var box=el("ew-opts"),fb=el("ew-fb");
+  box.innerHTML="";fb.textContent="";fb.className="feedback";
+  bar("ew",ew);
+  if(ew.i>=ew.q.length){
+    el("ew-q").textContent="Finished! Score "+ew.score+" / "+ew.n+".";
+    fb.className="feedback ok";fb.textContent="Click Play again.";return;
+  }
+  var item=ew.q[ew.i],rightBtn=null;
+  el("ew-q").textContent=item.m;
+  var others=shuffle(D.vocab.filter(function(v){return v.w!==item.w;})).slice(0,3);
+  shuffle(others.concat([item])).forEach(function(v){
+    var b=document.createElement("button");b.type="button";
+    var im=document.createElement("img");im.src="icons/school3/"+v.pic+".png";im.alt="";im.loading="lazy";
+    var lb=document.createElement("div");lb.className="lbl";lb.textContent=v.w;
+    b.appendChild(im);b.appendChild(lb);
+    if(v===item){rightBtn=b;}
+    b.addEventListener("click",function(){
+      if(b.disabled){return;}
+      lockAll(box);ew.n++;
+      var msg;
+      if(v===item){ew.score++;ew.streak++;b.className="right";fb.className="feedback ok";msg="Yes! "+item.w;}
+      else{ew.streak=0;b.className="wrong";rightBtn.className="right";fb.className="feedback no";msg="The word is \""+item.w+"\".";}
+      fb.textContent=msg;bar("ew",ew);ew.i++;
+      ew.timer=setTimeout(ewShow,pause(msg));
+    });
+    box.appendChild(b);
+  });
+}
+el("ew-again").addEventListener("click",ewStart);
+
+/* ---- Email Parts (Day 7) ---- */
+var P=D.parts;
+var ep={q:[],i:0,score:0,streak:0,n:0,timer:null,lock:true,miss:false};
+function epMail(m){
+  var box=el("ep-mail");box.innerHTML="";
+  var head=document.createElement("div");head.className="ehead";
+  var body=document.createElement("div");body.className="ebody";
+  var date=document.createElement("div");date.className="edate";date.textContent=m.sent;
+  head.appendChild(date);
+  function add(parent,part,lines){
+    var b=document.createElement("button");b.type="button";b.className="eblk";
+    lines.forEach(function(t,k){if(k){b.appendChild(document.createElement("br"));}b.appendChild(document.createTextNode(t));});
+    b.addEventListener("click",function(){epClick(part,b);});
+    parent.appendChild(b);
+  }
+  add(head,P[0],["To: "+m.to]);
+  add(head,P[1],["From: "+m.from]);
+  add(head,P[2],["Subject: "+m.subject]);
+  add(body,P[3],[m.greeting]);
+  add(body,P[4],[m.purpose]);
+  add(body,P[5],[m.body]);
+  add(body,P[6],[m.request]);
+  add(body,P[7],[m.closing]);
+  add(body,P[8],m.sigline?[m.signature,m.sigline]:[m.signature]);
+  box.appendChild(head);box.appendChild(body);
+}
+function epStart(){
+  clearTimeout(ep.timer);
+  var keys=Object.keys(D.emails);
+  epMail(D.emails[keys[Math.floor(Math.random()*keys.length)]]);
+  ep.q=shuffle(P.slice());ep.i=0;ep.score=0;ep.streak=0;ep.n=0;
+  epShow();
+}
+function epShow(){
+  var fb=el("ep-fb");fb.textContent="";fb.className="feedback";
+  bar("ep",ep);
+  if(ep.i>=ep.q.length){
+    ep.lock=true;
+    el("ep-q").textContent="Finished! Score "+ep.score+" / "+ep.n+".";
+    fb.className="feedback ok";fb.textContent="Click Play again.";return;
+  }
+  ep.lock=false;ep.miss=false;
+  el("ep-q").innerHTML="Click the <b>"+esc(ep.q[ep.i])+"</b>";
+}
+function epClick(part,b){
+  if(ep.lock){return;}
+  var want=ep.q[ep.i],fb=el("ep-fb");
+  if(part===want){
+    ep.lock=true;ep.n++;
+    if(!ep.miss){ep.score++;ep.streak++;}
+    b.classList.add("found");
+    fb.className="feedback ok";fb.textContent="Yes! That is the "+want+".";
+    bar("ep",ep);ep.i++;
+    ep.timer=setTimeout(epShow,1200);
+  }else{
+    ep.miss=true;ep.streak=0;bar("ep",ep);
+    b.classList.add("err");
+    setTimeout(function(){b.classList.remove("err");},600);
+    fb.className="feedback no";
+    fb.textContent="That is the "+part+". Find the "+want+" - "+D.help[want];
+  }
+}
+el("ep-again").addEventListener("click",epStart);
+
+/* ---- Done, Now, Future (Day 8) ---- */
+var synth=window.speechSynthesis||null,voice=null;
+var GOODV=/samantha|alex|allison|ava|susan|tom|google us english|aria|jenny|zira|guy|clara|liam|linda/i;
+var BADV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|fred|kathy|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley/i;
+function pickVoice(){
+  if(!synth){return;}
+  try{
+    var vs=synth.getVoices()||[],best=null,bs=-99;
+    for(var k=0;k<vs.length;k++){
+      var lang=String(vs[k].lang||"").replace("_","-").toLowerCase();
+      if(lang!=="en-us"&&lang!=="en-ca"){continue;}
+      var sc=(lang==="en-us"?1:0)+(GOODV.test(vs[k].name)?4:0)+(vs[k]["default"]?2:0)-(BADV.test(vs[k].name)?20:0);
+      if(sc>bs){bs=sc;best=vs[k];}
+    }
+    voice=(best&&bs>-10)?best:null;
+  }catch(e){voice=null;}
+}
+if(synth){pickVoice();try{synth.addEventListener("voiceschanged",pickVoice);}catch(e){}}
+function say(txt){
+  if(!synth){return;}
+  try{
+    if(!voice){pickVoice();}
+    var u=new SpeechSynthesisUtterance(txt);
+    if(voice){u.voice=voice;u.lang=voice.lang;}else{u.lang="en-US";}
+    u.rate=0.9;synth.cancel();synth.speak(u);
+  }catch(e){}
+}
+var DNF=["DONE","NOW","FUTURE"],DNF_PIC={DONE:"p8_done",NOW:"p8_now",FUTURE:"p8_future"};
+var dnHide=el("dn-hide");
+function dnQ(it){return dnHide.checked?"<span class=\"qhint\">Listen and write the sentence. Click Say it.</span>":"\""+esc(it[0])+"\"";}
+var dn=makeQuiz("dn",{
+  pool:D.dnf,rounds:10,
+  view:function(it){return {q:dnQ(it),opts:DNF,right:DNF.indexOf(it[1]),fixed:true};},
+  feedback:function(it,ok){return ok?"Yes! It is "+it[1]+".":"No - it is "+it[1]+".";},
+  onStart:function(){if(synth){try{synth.cancel();}catch(e){}}},
+  onShow:function(){var im=el("dn-img");im.style.display="none";im.removeAttribute("src");},
+  onAnswer:function(it){
+    el("dn-q").innerHTML="\""+esc(it[0])+"\"";
+    var im=el("dn-img");im.src="icons/school3/"+DNF_PIC[it[1]]+".png";im.style.display="";
+  }
+});
+dnHide.addEventListener("change",function(){if(dn.s.cur&&!dn.s.answered){el("dn-q").innerHTML=dnQ(dn.s.cur);}});
+el("dn-say").addEventListener("click",function(){if(dn.s.cur){say(dn.s.cur[0]);}});
+if(!synth){el("dn-nosound").style.display="block";el("dn-say").disabled=true;}
+
+/* ---- Signal Words (Day 8) ---- */
+function bold(s,w){
+  var m=new RegExp("(^|[^A-Za-z])("+w+")(?![A-Za-z])").exec(s);
+  if(!m){return "<span class=\"plain\">"+esc(s)+"</span>";}
+  var k=m.index+m[1].length;
+  return "<span class=\"plain\">"+esc(s.slice(0,k))+"<b>"+esc(w)+"</b>"+esc(s.slice(k+w.length))+"</span>";
+}
+var SG=D.choose.map(function(x){return {t:"c",s:x[0],o:x[1],a:x[2]};})
+  .concat(D.shows.map(function(x){return {t:"s",s:x[0],w:x[1],a:"abcde".indexOf(x[2])};}));
+var sg=makeQuiz("sg",{
+  pool:SG,rounds:10,
+  view:function(it){
+    if(it.t==="c"){return {hint:"Choose the best word.",q:"<span class=\"plain\">"+esc(it.s)+"</span>",opts:it.o,right:it.o.indexOf(it.a),fixed:false};}
+    return {hint:"What does the word in bold show?",q:bold(it.s,it.w),opts:D.showsLabels,right:it.a,fixed:true};
+  },
+  feedback:function(it,ok){
+    if(it.t==="c"){return ok?"Yes!":"The answer is: "+it.a;}
+    return (ok?"Yes! ":"")+it.w+" = "+D.showsLabels[it.a];
+  },
+  onAnswer:function(it){if(it.t==="c"){el("sg-q").innerHTML="<span class=\"plain\">"+esc(it.s).replace("________","<b>"+esc(it.a)+"</b>")+"</span>";}}
+});
+
+/* ---- Best Reply, Part 1 (Day 8) ---- */
+var TYPE_NAMES=D.types.map(function(t){return t[0];});
+var BR=D.respond.map(function(r){return {t:"r",req:r.req,note:r.note,o:r.opts,a:r.key};})
+  .concat(D.match.map(function(x){return {t:"m",req:x[0],a:"abcde".indexOf(x[1])};}));
+var br=makeQuiz("br",{
+  pool:BR,rounds:10,
+  view:function(it){
+    var q="\""+esc(it.req)+"\"";
+    if(it.t==="r"){return {hint:"The teacher writes this. Choose the best response.",q:q,opts:it.o,right:it.o.indexOf(it.a),fixed:false};}
+    return {hint:"The teacher writes this. What kind of request is it?",q:q,opts:TYPE_NAMES,right:it.a,fixed:true};
+  },
+  feedback:function(it,ok){
+    if(it.t==="r"){return ok?"Yes!":"The best response: "+it.a;}
+    var ty=D.types[it.a];
+    return ok?"Yes! "+ty[1]:"It is \""+ty[0]+"\". "+ty[1];
+  },
+  onShow:function(it){el("br-note").textContent=(it&&it.t==="r"&&it.note)?it.note:"";}
+});
+
+/* ---- Best Reply, Part 2: put the reply in order (Day 8) ---- */
+var RO=D.order.slice().sort(function(a,b){return a[1]-b[1];}).map(function(x){return x[0];});
+var ro={next:0,miss:0};
+function roStart(){
+  ro.next=0;ro.miss=0;
+  el("ro-miss").textContent="0";
+  var fb=el("ro-fb");fb.textContent="";fb.className="feedback";
+  var built=el("ro-built");built.innerHTML="";built.style.display="";
+  var done=el("ro-done");done.innerHTML="";done.style.display="none";
+  var pool=el("ro-pool");pool.innerHTML="";
+  var items=RO.map(function(t,i){return {t:t,i:i};});
+  do{shuffle(items);}while(items.every(function(o,k){return o.i===k;}));
+  items.forEach(function(o){
+    var b=document.createElement("button");b.type="button";b.className="dlgline";b.textContent=o.t;
+    b.addEventListener("click",function(){
+      if(o.i===ro.next){
+        pool.removeChild(b);
+        var li=document.createElement("li");li.textContent=o.t;built.appendChild(li);
+        ro.next++;
+        if(ro.next===RO.length){roDone();}
+      }else{
+        ro.miss++;el("ro-miss").textContent=String(ro.miss);
+        b.classList.add("err");setTimeout(function(){b.classList.remove("err");},500);
+      }
+    });
+    pool.appendChild(b);
+  });
+}
+function roDone(){
+  var fb=el("ro-fb");fb.className="feedback ok";fb.textContent="Complete! Mistakes: "+ro.miss+". Here is the finished reply.";
+  el("ro-built").style.display="none";
+  var done=el("ro-done"),body=document.createElement("div");body.className="ebody";
+  [RO[0],RO.slice(1,RO.length-2).join(" "),RO[RO.length-2],RO[RO.length-1]].forEach(function(t){
+    var p=document.createElement("p");p.textContent=t;body.appendChild(p);
+  });
+  done.innerHTML="";done.appendChild(body);done.style.display="";
+}
+el("ro-again").addEventListener("click",roStart);
+
+ewStart();epStart();dn.start();sg.start();br.start();roStart();
+})();
 
 </script>
 </body>
