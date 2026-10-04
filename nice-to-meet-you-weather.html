@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nice to Meet You + How&#x27;s the Weather? (CLB 4)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%3C/text%3E%3C/svg%3E">
+<style>
+/* CLB 4 palette (navy / red / gold); --teal is the main colour and --coral the accent, names kept from the shared builder */
+:root{--teal:#1f3252;--coral:#b03a2e;--gold:#b7950b;--navy:#1a1a2e;--tealbg:#e8ebf2;--goldbg:#f6eedd;--grey:#f2f3f4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--navy);background:#fafbfb;line-height:1.5;}
+.wrap{max-width:980px;margin:0 auto;padding:14px;}
+header{background:var(--teal);color:#fff;padding:18px 16px;border-radius:0 0 14px 14px;}
+header h1{font-size:1.5rem;}
+header p{opacity:.92;font-size:.95rem;margin-top:4px;}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;}
+.tabs button{flex:1 1 auto;min-width:110px;padding:10px 8px;border:2px solid var(--teal);background:#fff;color:var(--teal);font-weight:bold;font-size:.95rem;border-radius:10px;cursor:pointer;}
+.tabs button.active{background:var(--teal);color:#fff;}
+.panel{display:none;background:#fff;border:1px solid #dce3e3;border-radius:12px;padding:16px;}
+.panel.show{display:block;}
+h2{color:var(--teal);font-size:1.2rem;margin:14px 0 8px;}
+h2:first-child{margin-top:0;}
+h3{color:var(--teal);font-size:1.02rem;margin:12px 0 4px;}
+.stage{border-left:5px solid var(--coral);background:var(--grey);border-radius:0 10px 10px 0;padding:10px 12px;margin:10px 0;}
+.stage b{color:var(--teal);}
+.linkcard{display:block;border:1px solid #cdd8d8;border-radius:10px;padding:10px 12px;margin:8px 0;background:#fff;text-decoration:none;color:var(--navy);}
+.linkcard:hover{background:var(--tealbg);}
+.linkcard .t{font-weight:bold;color:var(--teal);}
+.linkcard .how{font-size:.9rem;color:#4a5a5a;margin-top:2px;}
+.badge{display:inline-block;background:var(--coral);color:#fff;border-radius:6px;font-size:.75rem;padding:2px 7px;margin-right:6px;vertical-align:middle;}
+.badge.listen{background:#1e6bb8;}.badge.video{background:#c0392b;}.badge.game{background:#1e7a46;}.badge.used{background:var(--gold);color:#fff;}
+.sub{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px;}
+.sub button{padding:8px 12px;border:2px solid var(--coral);background:#fff;color:#b03a2e;font-weight:bold;border-radius:999px;cursor:pointer;font-size:.92rem;}
+.sub button.active{background:var(--coral);color:#fff;}
+.game{display:none;}.game.show{display:block;}
+.scorebar{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap;}
+.scorebar .pill{background:var(--tealbg);border-radius:999px;padding:6px 14px;font-weight:bold;color:var(--teal);}
+.qbox{background:var(--grey);border-radius:12px;padding:14px;margin:12px 0;text-align:center;}
+.prompt{font-size:1.25rem;font-weight:bold;min-height:44px;}
+.prompt small{display:block;font-size:.95rem;font-weight:normal;color:#4a5a5a;}
+.coinrow{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;min-height:110px;}
+.coinrow img{width:92px;height:92px;object-fit:contain;mix-blend-mode:multiply;}
+.coinrow img.bill{width:150px;height:76px;}
+.qimg{max-width:100%;max-height:230px;border-radius:10px;background:#fff;}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px;}
+.opts button{padding:12px;border:2px solid var(--teal);border-radius:10px;background:#fff;color:var(--navy);font-size:1.1rem;font-weight:bold;cursor:pointer;}
+.opts button:hover{background:var(--tealbg);}
+.opts button.right{background:#d9efe2;border-color:#1e7a46;color:#1e7a46;}
+.opts button.wrong{background:#fce7e2;border-color:#c0392b;color:#c0392b;}
+.feedback{min-height:28px;font-weight:bold;margin-top:8px;}
+.feedback.ok{color:#1e7a46;}.feedback.no{color:#c0392b;}
+.bigbtn{padding:12px 22px;background:var(--coral);border:none;border-radius:10px;color:#fff;font-size:1.05rem;font-weight:bold;cursor:pointer;margin:6px 4px;}
+.bigbtn.teal{background:var(--teal);}
+.bigbtn:disabled{opacity:.5;cursor:default;}
+.note{background:var(--goldbg);border:1px solid var(--gold);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:.95rem;}
+.track{border:1px solid #cdd8d8;border-radius:10px;padding:10px 12px;margin:8px 0;}
+.track .t{font-weight:bold;color:var(--teal);}
+.track .how{font-size:.9rem;color:#4a5a5a;margin:2px 0 6px;}
+.track audio{width:100%;}
+footer{text-align:center;color:#7a8a8a;font-size:.85rem;padding:18px 0;}
+img.scene{display:block;width:100%;max-width:760px;margin:8px auto;border-radius:12px;}
+@media(max-width:560px){.coinrow img{width:70px;height:70px;}.coinrow img.bill{width:118px;height:60px;}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>Nice to Meet You + How&#x27;s the Weather?</h1><p>CLB 4 | first class: getting to know each other, weather and temperature words, small talk | class page + practice games</p></div></header>
+<div class="wrap">
+<div class="tabs"><button class="active" data-p="lesson">Lesson</button><button data-p="games1">Games</button><button data-p="audio">Audio</button><button data-p="links">All Links</button></div>
+<section id="p-lesson" class="panel show">
+<h2>First Class: Nice to Meet You + How&#x27;s the Weather? (2 h 30, in person)</h2>
+<img class="scene" src="icons/weather/opener_class.jpg" alt="An adult English class on the first day: two students shake hands, the teacher smiles, it is raining outside">
+<div class="stage"><b>1. Welcome (10 min).</b> Name cards. Two truths and a lie: the teacher first, then the students.</div>
+<div class="stage"><b>2. Before you start (10 min).</b> Look at the classroom picture. Then match the questions and the answers.</div>
+<div class="stage"><b>3. Interview your partner (25 min).</b> PAIRS. Put the questions in order, for or since, then the interview. Introduce your partner to the class (Audio tab, Track 1 is the model).</div>
+<div class="stage"><b>4. Find someone who (15 min).</b> WHOLE CLASS. Make the questions, then stand up, walk around and ask. A different name in each box.</div>
+<div class="stage"><b>5. Our class (10 min).</b> Class days and times, the class rules, and PBLA in simple words. Then a 10-minute break.</div>
+<div class="note"><b>Break (10 min).</b> Part 2 is about the weather.</div>
+<div class="stage"><b>6. Weather words (15 min).</b> Words with pictures and sound on Learning Chocolate, then the unit document. Games: What&#x27;s the weather? and sun or sunny?<a class="linkcard" href="https://www.learningchocolate.com/word-set/weather" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="badge used">TEACHER'S PICK</span><span class="t">Learning Chocolate - Weather (words with pictures and sound)</span><div class="how">Section 6. Play the words, the class repeats. Then Match-up 1 together; the Dictation tab works as a spelling check.</div></a></div>
+<div class="stage"><b>7. The temperature (15 min).</b> Watch the video and fill in the thermometer. Then listen and write the temperature (Audio tab, Track 3). Games: Hot or cold? and Listen: the temperature.<a class="linkcard" href="https://www.youtube.com/watch?v=yorrn2cfIGc" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="badge used">TEACHER'S PICK</span><span class="t">Woodward English - The Temperature (video)</span><div class="how">Section 7. Once without stopping, then pause at each word: What temperature is hot? Students fill in the thermometer (7A).</div></a><a class="linkcard" href="https://www.vocabulary.cl/english/temperature.htm" target="_blank" rel="noopener"><span class="badge ">SITE</span><span class="t">Woodward English - The Temperature (the chart from the video)</span><div class="how">Section 7. The same words and temperatures on one page - show it to check 7A.</div></a></div>
+<div class="stage"><b>8. Small talk (15 min).</b> Four short conversations (Audio tab, Tracks 4 to 7). Then practise small talk standing up, changing partners.</div>
+<div class="stage"><b>9. Communicate: Weather across Canada (20 min).</b> GROUPS of four. Ask about the eight cities and complete the table. Then talk about the weather in your country.<a class="linkcard" href="https://weather.gc.ca/canada_e.html" target="_blank" rel="noopener"><span class="badge ">SITE</span><span class="t">Environment Canada - weather in Canadian cities right now</span><div class="how">Section 9, after the cards. Real weather: What&#x27;s the weather like in Toronto today? What&#x27;s the temperature?</div></a><a class="linkcard" href="https://learnenglishteens.britishcouncil.org/skills/listening/a2-listening/weather-forecast" target="_blank" rel="noopener"><span class="badge listen">LISTENING</span><span class="t">British Council - Weather forecast (A2 listening with exercises)</span><div class="how">Extra or homework. Play the forecast; students do the matching and the gap-fill on the page.</div></a></div>
+<div class="note"><b>Homework:</b> the practice form (30 questions, you see your score at the end) - <a href="https://docs.google.com/forms/d/e/1FAIpQLSdRQTJAEYCO-m_IOiABJiAoQBPf2I4tpGtQ49w619lCTOvrgg/viewform" target="_blank" rel="noopener">open the form</a> - plus any game on this page.</div>
+</section>
+<section id="p-games1" class="panel"><h2>Games</h2><div class="sub" data-day="1"><button class="active" data-g="d1-pic">What&#x27;s the weather?</button><button data-g="d1-nounadj">sun or sunny?</button><button data-g="d1-temp">Hot or cold?</button><button data-g="d1-ltemp">Listen: the temperature</button><button data-g="d1-lweather">Listen: the weather</button><button data-g="d1-smalltalk">Small talk</button><button data-g="d1-questions">What&#x27;s the question?</button><button data-g="d1-forsince">for or since?</button></div>
+<div class="game" id="g-d1-pic"><h2>What&#x27;s the weather?</h2><p>Look at the picture. Click the word.</p><div class="scorebar"><span class="pill">Score: <span id="d1-pic-score">0</span>/<span id="d1-pic-done">0</span></span><span class="pill">Streak: <span id="d1-pic-streak">0</span></span><span class="pill">Round: <span id="d1-pic-round">1</span>/<span id="d1-pic-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-pic-q"></div><div class="opts" id="d1-pic-opts"></div><div class="feedback" id="d1-pic-fb"></div></div><button class="bigbtn teal" id="d1-pic-again">Play Again</button></div>
+<div class="game" id="g-d1-nounadj"><h2>sun or sunny?</h2><p>Noun or adjective? Choose the correct word.</p><div class="scorebar"><span class="pill">Score: <span id="d1-nounadj-score">0</span>/<span id="d1-nounadj-done">0</span></span><span class="pill">Streak: <span id="d1-nounadj-streak">0</span></span><span class="pill">Round: <span id="d1-nounadj-round">1</span>/<span id="d1-nounadj-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-nounadj-q"></div><div class="opts" id="d1-nounadj-opts"></div><div class="feedback" id="d1-nounadj-fb"></div></div><button class="bigbtn teal" id="d1-nounadj-again">Play Again</button></div>
+<div class="game" id="g-d1-temp"><h2>Hot or cold?</h2><p>Read the temperature. What is it like? Click the word.</p><div class="scorebar"><span class="pill">Score: <span id="d1-temp-score">0</span>/<span id="d1-temp-done">0</span></span><span class="pill">Streak: <span id="d1-temp-streak">0</span></span><span class="pill">Round: <span id="d1-temp-round">1</span>/<span id="d1-temp-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-temp-q"></div><div class="opts" id="d1-temp-opts"></div><div class="feedback" id="d1-temp-fb"></div></div><button class="bigbtn teal" id="d1-temp-again">Play Again</button></div>
+<div class="game" id="g-d1-ltemp"><h2>Listen: the temperature</h2><p>Press Listen. What temperature do you hear? Click it.</p><div class="scorebar"><span class="pill">Score: <span id="d1-ltemp-score">0</span>/<span id="d1-ltemp-done">0</span></span><span class="pill">Streak: <span id="d1-ltemp-streak">0</span></span><span class="pill">Round: <span id="d1-ltemp-round">1</span>/<span id="d1-ltemp-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-ltemp-q"></div><div class="opts" id="d1-ltemp-opts"></div><div class="feedback" id="d1-ltemp-fb"></div></div><button class="bigbtn teal" id="d1-ltemp-again">Play Again</button></div>
+<div class="game" id="g-d1-lweather"><h2>Listen: the weather</h2><p>Press Listen. What is the weather like? Click the word.</p><div class="scorebar"><span class="pill">Score: <span id="d1-lweather-score">0</span>/<span id="d1-lweather-done">0</span></span><span class="pill">Streak: <span id="d1-lweather-streak">0</span></span><span class="pill">Round: <span id="d1-lweather-round">1</span>/<span id="d1-lweather-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-lweather-q"></div><div class="opts" id="d1-lweather-opts"></div><div class="feedback" id="d1-lweather-fb"></div></div><button class="bigbtn teal" id="d1-lweather-again">Play Again</button></div>
+<div class="game" id="g-d1-smalltalk"><h2>Small talk</h2><p>Someone talks to you about the weather. Choose the best answer.</p><div class="scorebar"><span class="pill">Score: <span id="d1-smalltalk-score">0</span>/<span id="d1-smalltalk-done">0</span></span><span class="pill">Streak: <span id="d1-smalltalk-streak">0</span></span><span class="pill">Round: <span id="d1-smalltalk-round">1</span>/<span id="d1-smalltalk-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-smalltalk-q"></div><div class="opts" id="d1-smalltalk-opts"></div><div class="feedback" id="d1-smalltalk-fb"></div></div><button class="bigbtn teal" id="d1-smalltalk-again">Play Again</button></div>
+<div class="game" id="g-d1-questions"><h2>What&#x27;s the question?</h2><p>Read the answer. Choose the question.</p><div class="scorebar"><span class="pill">Score: <span id="d1-questions-score">0</span>/<span id="d1-questions-done">0</span></span><span class="pill">Streak: <span id="d1-questions-streak">0</span></span><span class="pill">Round: <span id="d1-questions-round">1</span>/<span id="d1-questions-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-questions-q"></div><div class="opts" id="d1-questions-opts"></div><div class="feedback" id="d1-questions-fb"></div></div><button class="bigbtn teal" id="d1-questions-again">Play Again</button></div>
+<div class="game" id="g-d1-forsince"><h2>for or since?</h2><p>Choose for or since.</p><div class="scorebar"><span class="pill">Score: <span id="d1-forsince-score">0</span>/<span id="d1-forsince-done">0</span></span><span class="pill">Streak: <span id="d1-forsince-streak">0</span></span><span class="pill">Round: <span id="d1-forsince-round">1</span>/<span id="d1-forsince-total">10</span></span></div><div class="qbox"><div class="prompt" id="d1-forsince-q"></div><div class="opts" id="d1-forsince-opts"></div><div class="feedback" id="d1-forsince-fb"></div></div><button class="bigbtn teal" id="d1-forsince-again">Play Again</button></div>
+</section>
+<section id="p-audio" class="panel"><h2>Audio</h2><p>Recorded for this unit. The track numbers are the same as in the unit document.</p>
+<div class="track"><div class="t">Track 1 - Model: introduce your partner</div><div class="how">Exercise 3E. Listen to the model. Then introduce your partner.</div><audio controls preload="none" src="audio/weather/d1_t01.m4a"></audio></div>
+<div class="track"><div class="t">Track 2 - Dictation: weather sentences</div><div class="how">Exercise 6D. Write the sentence. Each sentence is said two times.</div><audio controls preload="none" src="audio/weather/d1_t02.m4a"></audio></div>
+<div class="track"><div class="t">Track 3 - Listen and write the temperature</div><div class="how">Exercise 7C. Write the number. Each temperature is said two times.</div><audio controls preload="none" src="audio/weather/d1_t03.m4a"></audio></div>
+<div class="track"><div class="t">Track 4 - Conversation 1: at the bus stop</div><div class="how">Exercise 8A, questions 1 and 2. Also exercise 8B.</div><audio controls preload="none" src="audio/weather/d1_t04.m4a"></audio></div>
+<div class="track"><div class="t">Track 5 - Conversation 2: at work</div><div class="how">Exercise 8A, questions 3 and 4.</div><audio controls preload="none" src="audio/weather/d1_t05.m4a"></audio></div>
+<div class="track"><div class="t">Track 6 - Conversation 3: two neighbours</div><div class="how">Exercise 8A, questions 5 and 6.</div><audio controls preload="none" src="audio/weather/d1_t06.m4a"></audio></div>
+<div class="track"><div class="t">Track 7 - Conversation 4: on the phone</div><div class="how">Exercise 8A, questions 7 and 8.</div><audio controls preload="none" src="audio/weather/d1_t07.m4a"></audio></div>
+<div class="track"><div class="t">Track 8 - Model: Weather across Canada</div><div class="how">Exercise 9A. Listen to the model. Then ask your group.</div><audio controls preload="none" src="audio/weather/d1_t08.m4a"></audio></div>
+</section>
+<section id="p-links" class="panel"><h2>All Links</h2><p>Every link was opened and checked before this page went up.</p>
+<a class="linkcard" href="https://www.learningchocolate.com/word-set/weather" target="_blank" rel="noopener"><span class="badge game">GAME</span><span class="badge used">TEACHER'S PICK</span><span class="t">Learning Chocolate - Weather (words with pictures and sound)</span><div class="how">Section 6. Play the words, the class repeats. Then Match-up 1 together; the Dictation tab works as a spelling check.</div></a>
+<a class="linkcard" href="https://www.youtube.com/watch?v=yorrn2cfIGc" target="_blank" rel="noopener"><span class="badge video">VIDEO</span><span class="badge used">TEACHER'S PICK</span><span class="t">Woodward English - The Temperature (video)</span><div class="how">Section 7. Once without stopping, then pause at each word: What temperature is hot? Students fill in the thermometer (7A).</div></a>
+<a class="linkcard" href="https://www.vocabulary.cl/english/temperature.htm" target="_blank" rel="noopener"><span class="badge ">SITE</span><span class="t">Woodward English - The Temperature (the chart from the video)</span><div class="how">Section 7. The same words and temperatures on one page - show it to check 7A.</div></a>
+<a class="linkcard" href="https://weather.gc.ca/canada_e.html" target="_blank" rel="noopener"><span class="badge ">SITE</span><span class="t">Environment Canada - weather in Canadian cities right now</span><div class="how">Section 9, after the cards. Real weather: What&#x27;s the weather like in Toronto today? What&#x27;s the temperature?</div></a>
+<a class="linkcard" href="https://learnenglishteens.britishcouncil.org/skills/listening/a2-listening/weather-forecast" target="_blank" rel="noopener"><span class="badge listen">LISTENING</span><span class="t">British Council - Weather forecast (A2 listening with exercises)</span><div class="how">Extra or homework. Play the forecast; students do the matching and the gap-fill on the page.</div></a>
+</section>
+<footer>CLB 4 - YMCA LINC - Nice to Meet You + How&#x27;s the Weather?</footer>
+</div>
+<script>
+(function(){
+"use strict";
+var DATA={"games": {"1": {"pic": {"title": "What's the weather?", "intro": "Look at the picture. Click the word.", "mc": [{"img": "w_sunny.png", "alt": "weather picture", "q": "", "o": ["sunny", "cloudy", "foggy", "windy"], "a": "sunny"}, {"img": "w_cloudy.png", "alt": "weather picture", "q": "", "o": ["cloudy", "sunny", "snowy", "stormy"], "a": "cloudy"}, {"img": "w_rainy.png", "alt": "weather picture", "q": "", "o": ["rainy", "snowy", "windy", "sunny"], "a": "rainy"}, {"img": "w_snowy.png", "alt": "weather picture", "q": "", "o": ["snowy", "rainy", "foggy", "sunny"], "a": "snowy"}, {"img": "w_windy.png", "alt": "weather picture", "q": "", "o": ["windy", "sunny", "snowy", "rainy"], "a": "windy"}, {"img": "w_foggy.png", "alt": "weather picture", "q": "", "o": ["foggy", "rainy", "windy", "snowy"], "a": "foggy"}, {"img": "w_stormy.png", "alt": "weather picture", "q": "", "o": ["stormy", "sunny", "foggy", "snowy"], "a": "stormy"}, {"img": "w_rainbow.png", "alt": "weather picture", "q": "", "o": ["a rainbow", "lightning", "a snowflake", "a raindrop"], "a": "a rainbow"}, {"img": "w_lightning.png", "alt": "weather picture", "q": "", "o": ["lightning", "a rainbow", "a snowflake", "fog"], "a": "lightning"}, {"img": "w_snowflake.png", "alt": "weather picture", "q": "", "o": ["a snowflake", "a raindrop", "a rainbow", "lightning"], "a": "a snowflake"}, {"img": "w_raindrop.png", "alt": "weather picture", "q": "", "o": ["a raindrop", "a snowflake", "a rainbow", "a cloud"], "a": "a raindrop"}, {"img": "w_thermometer.png", "alt": "weather picture", "q": "", "o": ["a thermometer", "a snowflake", "a raindrop", "lightning"], "a": "a thermometer"}]}, "nounadj": {"title": "sun or sunny?", "intro": "Noun or adjective? Choose the correct word.", "mc": [{"q": "It's very ______ today. I can't see the sun.", "o": ["cloud", "cloudy"], "a": "cloudy", "keep": true}, {"q": "There are dark ______ in the sky.", "o": ["clouds", "cloudy"], "a": "clouds", "keep": true}, {"q": "We had ten centimetres of ______ last night.", "o": ["snow", "snowy"], "a": "snow", "keep": true}, {"q": "It was a cold, ______ morning.", "o": ["snow", "snowy"], "a": "snowy", "keep": true}, {"q": "The ______ is very strong today. My umbrella broke.", "o": ["wind", "windy"], "a": "wind", "keep": true}, {"q": "It's too ______ to ride a bike.", "o": ["wind", "windy"], "a": "windy", "keep": true}, {"q": "I love ______ days. I go to the beach.", "o": ["sun", "sunny"], "a": "sunny", "keep": true}, {"q": "The ______ comes up at six o'clock.", "o": ["sun", "sunny"], "a": "sun", "keep": true}, {"q": "Drive slowly. There is thick ______ on the highway.", "o": ["fog", "foggy"], "a": "fog", "keep": true}, {"q": "It's ______ this morning. Turn on your car lights.", "o": ["fog", "foggy"], "a": "foggy", "keep": true}, {"q": "The ______ last night broke two trees.", "o": ["storm", "stormy"], "a": "storm", "keep": true}, {"q": "The weather is ______. Stay home.", "o": ["storm", "stormy"], "a": "stormy", "keep": true}]}, "temp": {"title": "Hot or cold?", "intro": "Read the temperature. What is it like? Click the word.", "mc": [{"q": "31 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "hot", "keep": true, "say": "31 C = hot"}, {"q": "35 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "hot", "keep": true, "say": "35 C = hot"}, {"q": "24 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "warm", "keep": true, "say": "24 C = warm"}, {"q": "19 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "warm", "keep": true, "say": "19 C = warm"}, {"q": "12 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "cool", "keep": true, "say": "12 C = cool"}, {"q": "13 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "cool", "keep": true, "say": "13 C = cool"}, {"q": "8 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "chilly", "keep": true, "say": "8 C = chilly"}, {"q": "7 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "chilly", "keep": true, "say": "7 C = chilly"}, {"q": "3 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "cold", "keep": true, "say": "3 C = cold"}, {"q": "2 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "cold", "keep": true, "say": "2 C = cold"}, {"q": "minus 6 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "freezing", "keep": true, "say": "minus 6 C = freezing"}, {"q": "minus 20 C", "small": "hot, warm, cool, chilly, cold or freezing?", "o": ["hot", "warm", "cool", "chilly", "cold", "freezing"], "a": "freezing", "keep": true, "say": "minus 20 C = freezing"}]}, "ltemp": {"title": "Listen: the temperature", "intro": "Press Listen. What temperature do you hear? Click it.", "mc": [{"clip": "t22", "q": "", "o": ["22 C", "32 C", "12 C", "20 C"], "a": "22 C"}, {"clip": "tm12", "q": "", "o": ["minus 12 C", "12 C", "minus 20 C", "minus 2 C"], "a": "minus 12 C"}, {"clip": "t13", "q": "", "o": ["13 C", "30 C", "3 C", "33 C"], "a": "13 C"}, {"clip": "t30", "q": "", "o": ["30 C", "13 C", "33 C", "3 C"], "a": "30 C"}, {"clip": "tm5", "q": "", "o": ["minus 5 C", "5 C", "minus 15 C", "minus 9 C"], "a": "minus 5 C"}, {"clip": "t15", "q": "", "o": ["15 C", "50 C", "5 C", "25 C"], "a": "15 C"}, {"clip": "tm18", "q": "", "o": ["minus 18 C", "18 C", "minus 80 C", "minus 8 C"], "a": "minus 18 C"}, {"clip": "t4", "q": "", "o": ["4 C", "14 C", "40 C", "minus 4 C"], "a": "4 C"}, {"clip": "tm25", "q": "", "o": ["minus 25 C", "25 C", "minus 5 C", "minus 20 C"], "a": "minus 25 C"}, {"clip": "t17", "q": "", "o": ["17 C", "70 C", "7 C", "27 C"], "a": "17 C"}, {"clip": "t0", "q": "", "o": ["0 C", "10 C", "minus 10 C", "1 C"], "a": "0 C"}, {"clip": "tm30", "q": "", "o": ["minus 30 C", "minus 13 C", "30 C", "13 C"], "a": "minus 30 C"}]}, "lweather": {"title": "Listen: the weather", "intro": "Press Listen. What is the weather like? Click the word.", "mc": [{"clip": "w1", "q": "", "o": ["rainy", "snowy", "sunny", "foggy"], "a": "rainy"}, {"clip": "w2", "q": "", "o": ["snowy", "rainy", "windy", "sunny"], "a": "snowy"}, {"clip": "w3", "q": "", "o": ["sunny", "cloudy", "stormy", "foggy"], "a": "sunny"}, {"clip": "w4", "q": "", "o": ["windy", "foggy", "snowy", "sunny"], "a": "windy"}, {"clip": "w5", "q": "", "o": ["foggy", "sunny", "windy", "rainy"], "a": "foggy"}, {"clip": "w6", "q": "", "o": ["cloudy", "rainy", "sunny", "snowy"], "a": "cloudy"}, {"clip": "w7", "q": "", "o": ["stormy", "sunny", "foggy", "snowy"], "a": "stormy"}, {"clip": "w8", "q": "", "o": ["hot", "cold", "chilly", "freezing"], "a": "hot"}]}, "smalltalk": {"title": "Small talk", "intro": "Someone talks to you about the weather. Choose the best answer.", "mc": [{"q": "Nice day, isn't it?", "o": ["Yes, it's lovely.", "No, thanks.", "I'm fine."], "a": "Yes, it's lovely."}, {"q": "It's cold today, isn't it?", "o": ["It sure is. I need my gloves.", "Yes, I'm sweating.", "At six o'clock."], "a": "It sure is. I need my gloves."}, {"q": "Is it still snowing?", "o": ["Yes, it is. The roads are icy.", "Yes, it's sunny.", "For two years."], "a": "Yes, it is. The roads are icy."}, {"q": "What's the weather like today?", "o": ["It's cloudy and cool.", "I like summer.", "It's Monday."], "a": "It's cloudy and cool."}, {"q": "What's the forecast for the weekend?", "o": ["Sunny and warm, I think.", "It rained yesterday.", "I'm from Peru."], "a": "Sunny and warm, I think."}, {"q": "I forgot my umbrella!", "o": ["Oh no. You can share mine.", "Nice to meet you.", "It's twenty degrees."], "a": "Oh no. You can share mine."}, {"q": "What's the temperature today?", "o": ["It's about five degrees.", "It's five o'clock.", "It's on King Street."], "a": "It's about five degrees."}, {"q": "It's so hot today!", "o": ["I know. Let's sit in the shade.", "Yes, wear a warm coat.", "Yes, it's freezing."], "a": "I know. Let's sit in the shade."}, {"q": "Did you hear the thunder last night?", "o": ["Yes! It woke me up.", "Yes, it's sunny.", "No, I'm a cashier."], "a": "Yes! It woke me up."}, {"q": "Winter is coming.", "o": ["I know. I need to buy boots.", "By bus.", "Yes, I do. Two sons."], "a": "I know. I need to buy boots."}]}, "questions": {"title": "What's the question?", "intro": "Read the answer. Choose the question.", "mc": [{"q": "For two years.", "small": "What is the question?", "o": ["How long have you lived in Canada?", "Where do you live?", "How old are you?"], "a": "How long have you lived in Canada?"}, {"q": "I'm from Syria.", "small": "What is the question?", "o": ["Where are you from?", "Where do you live?", "What do you do?"], "a": "Where are you from?"}, {"q": "I'm a cashier.", "small": "What is the question?", "o": ["What do you do?", "How are you?", "Where do you work?"], "a": "What do you do?"}, {"q": "Arabic and English.", "small": "What is the question?", "o": ["What languages do you speak?", "Where are you from?", "What do you do?"], "a": "What languages do you speak?"}, {"q": "I like cooking and walking.", "small": "What is the question?", "o": ["What do you like to do in your free time?", "What do you do?", "What languages do you speak?"], "a": "What do you like to do in your free time?"}, {"q": "Because I want a better job.", "small": "What is the question?", "o": ["Why are you taking English classes?", "What do you do?", "When is your class?"], "a": "Why are you taking English classes?"}, {"q": "By bus.", "small": "What is the question?", "o": ["How do you come to class?", "How long is the class?", "Where is the class?"], "a": "How do you come to class?"}, {"q": "Yes, I do. I have two daughters.", "small": "What is the question?", "o": ["Do you have any children?", "Are you married?", "How many languages do you speak?"], "a": "Do you have any children?"}, {"q": "On King Street.", "small": "What is the question?", "o": ["Where do you live?", "Where are you from?", "How do you come to class?"], "a": "Where do you live?"}, {"q": "Summer, because I love hot weather.", "small": "What is the question?", "o": ["What's your favourite season?", "What's the weather like today?", "What's the temperature?"], "a": "What's your favourite season?"}]}, "forsince": {"title": "for or since?", "intro": "Choose for or since.", "mc": [{"q": "I have lived here ______ 2021.", "o": ["for", "since"], "a": "since", "keep": true, "say": "I have lived here since 2021."}, {"q": "She has been a cook ______ ten years.", "o": ["for", "since"], "a": "for", "keep": true, "say": "She has been a cook for ten years."}, {"q": "We have been friends ______ last year.", "o": ["for", "since"], "a": "since", "keep": true, "say": "We have been friends since last year."}, {"q": "He has had a car ______ two months.", "o": ["for", "since"], "a": "for", "keep": true, "say": "He has had a car for two months."}, {"q": "They have lived in Canada ______ a long time.", "o": ["for", "since"], "a": "for", "keep": true, "say": "They have lived in Canada for a long time."}, {"q": "I have known my teacher ______ September.", "o": ["for", "since"], "a": "since", "keep": true, "say": "I have known my teacher since September."}, {"q": "She has worked here ______ Monday.", "o": ["for", "since"], "a": "since", "keep": true, "say": "She has worked here since Monday."}, {"q": "We have studied English ______ six months.", "o": ["for", "since"], "a": "for", "keep": true, "say": "We have studied English for six months."}, {"q": "He has been sick ______ three days.", "o": ["for", "since"], "a": "for", "keep": true, "say": "He has been sick for three days."}, {"q": "I have had this phone ______ my birthday.", "o": ["for", "since"], "a": "since", "keep": true, "say": "I have had this phone since my birthday."}]}}}, "icons": "icons/weather/", "audio": "audio/weather/"};
+var tabs=document.querySelectorAll(".tabs button");
+function show(p){
+  tabs.forEach(function(b){b.classList.toggle("active",b.dataset.p===p);});
+  document.querySelectorAll(".panel").forEach(function(s){s.classList.remove("show");});
+  document.getElementById("p-"+p).classList.add("show");
+  stopAudio();
+}
+tabs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.p);});});
+document.querySelectorAll(".sub").forEach(function(sub){
+  var bs=sub.querySelectorAll("button");
+  function pick(g){
+    bs.forEach(function(b){b.classList.toggle("active",b.dataset.g===g);});
+    sub.parentNode.querySelectorAll(".game").forEach(function(x){x.classList.toggle("show",x.id==="g-"+g);});
+    stopAudio();
+  }
+  bs.forEach(function(b){b.addEventListener("click",function(){pick(b.dataset.g);});});
+  pick(bs[0].dataset.g);
+});
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function el(tag,cls,txt){var x=document.createElement(tag);if(cls){x.className=cls;}if(txt!==undefined){x.textContent=txt;}return x;}
+var player=new Audio();
+function stopAudio(){try{player.pause();}catch(e){}}
+function play(id){try{player.pause();player.src=DATA.audio+id+".m4a";player.currentTime=0;var p=player.play();if(p&&p.catch){p.catch(function(){});}}catch(e){}}
+
+// One engine for every game: rounds() returns 10 round objects
+// {build:function(promptEl){...}, options:[text...], answer:text, say:optional feedback text}
+function Quiz(gid,rounds){
+  var st={score:0,streak:0,done:0,i:0,list:[],lock:false};
+  var $=function(s){return document.getElementById(gid+"-"+s);};
+  function paint(){ $("score").textContent=String(st.score); $("done").textContent=String(st.done); $("streak").textContent=String(st.streak); }
+  function next(){
+    var q=$("q"),box=$("opts"),fb=$("fb");
+    box.innerHTML="";q.innerHTML="";
+    if(st.i>=st.list.length){ fb.textContent="Finished! Score: "+st.score+"/"+st.list.length+" - press Play Again."; fb.className="feedback ok"; return; }
+    fb.textContent="";fb.className="feedback";st.lock=false;
+    $("round").textContent=String(st.i+1);
+    var r=st.list[st.i];
+    r.build(q);
+    r.options.forEach(function(o){
+      var b=el("button","",o);
+      b.addEventListener("click",function(){
+        if(st.lock){return;}st.lock=true;st.done++;
+        if(o===r.answer){b.classList.add("right");st.score++;st.streak++;fb.textContent="Correct! "+(r.say||r.answer);fb.className="feedback ok";}
+        else{b.classList.add("wrong");st.streak=0;fb.textContent="Not quite - it is "+(r.say||r.answer);fb.className="feedback no";
+          Array.prototype.forEach.call(box.children,function(x){if(x.textContent===r.answer){x.classList.add("right");}});}
+        paint();st.i++;setTimeout(next,1400);
+      });
+      box.appendChild(b);
+    });
+  }
+  function start(){st.score=0;st.streak=0;st.done=0;st.i=0;st.list=rounds();$("total").textContent=String(st.list.length);paint();next();}
+  $("again").addEventListener("click",start);
+  start();
+  return {start:start};
+}
+function textRound(prompt,small,options,answer,say){
+  return {build:function(q){q.appendChild(document.createTextNode(prompt));if(small){q.appendChild(el("small","",small));}},options:options,answer:answer,say:say};
+}
+function pick10(a){return shuffle(a.slice()).slice(0,10);}
+
+Object.keys(DATA.games).forEach(function(day){
+  var G=DATA.games[day],p="d"+day+"-";
+  Object.keys(G).forEach(function(k){
+    var g=G[k]; if(!g.mc){return;}
+    Quiz(p+k,function(){
+      return pick10(g.mc).map(function(it){
+        return {build:function(qq){ if(it.clip){var lb=el("button","bigbtn","Listen");lb.addEventListener("click",function(){play(it.clip);});qq.appendChild(lb);qq.appendChild(el("small","","Press Listen. You can listen again."));if(document.getElementById("g-"+p+k).classList.contains("show")&&document.getElementById("p-games1").classList.contains("show")){play(it.clip);}}
+            if(it.img){var im=document.createElement("img");im.className="qimg";im.src=DATA.icons+it.img;im.alt=it.alt||"picture";qq.appendChild(im);qq.appendChild(document.createElement("br"));}
+            qq.appendChild(document.createTextNode(it.q)); if(it.small){qq.appendChild(el("small","",it.small));} },
+          options:(it.keep?it.o.slice():shuffle(it.o.slice())),answer:it.a,say:it.say};
+      });
+    });
+  });
+});
+})();
+</script>
+</body>
+</html>
