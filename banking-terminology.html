@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Banking Terminology (CLB 3)</title>
+<link rel='icon' href='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231f3252%27/%3E%3C/svg%3E'>
+<style>
+:root{--main:#1f3252;--red:#b03a2e;--gold:#b7950b;--ink:#1a1a2e;--mainbg:#e8ebf2;--goldbg:#f6eedd;--grey:#f2f3f4;--line:#c9d2de;--ok:#1e7a46;--no:#c0392b;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fafbfb;line-height:1.5;}
+header{background:var(--main);color:#fff;padding:18px 16px;border-radius:0 0 14px 14px;}
+header .in{max-width:1100px;margin:0 auto;}
+header h1{margin:0;font-size:1.7rem;}
+header p{margin:4px 0 0;opacity:.92;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px 24px;}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;}
+.tabs button{flex:1 1 auto;min-width:110px;padding:10px 8px;border:2px solid var(--main);background:#fff;color:var(--main);font-weight:bold;font-size:.95rem;border-radius:10px;cursor:pointer;}
+.tabs button.active{background:var(--main);color:#fff;}
+.panel{display:none;background:#fff;border:1px solid #dce3e3;border-radius:12px;padding:16px;}
+.panel.active{display:block;}
+h2{margin:0 0 10px;color:var(--main);}
+h3{margin:4px 0 6px;color:var(--main);}
+.sub{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;}
+.sub button{padding:8px 12px;border:2px solid var(--red);background:#fff;color:var(--red);font-weight:bold;border-radius:999px;cursor:pointer;font-size:.92rem;}
+.sub button.active{background:var(--red);color:#fff;}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+.card{border:2px solid var(--line);border-radius:12px;padding:10px;text-align:center;background:#fff;cursor:pointer;}
+.card img{width:100%;height:170px;object-fit:contain;}
+.card .w{font-size:1.45rem;font-weight:bold;color:var(--main);margin:6px 0 2px;}
+.card .m{font-size:.95rem;color:#3a4a4a;}
+.card .s{font-size:.9rem;color:#4a5a5a;font-style:italic;margin-top:4px;}
+.card .pg{font-size:.8rem;color:#6a7a7a;margin-top:4px;}
+.card .btns{display:flex;gap:6px;justify-content:center;margin-top:8px;}
+.small{padding:6px 12px;border:2px solid var(--main);border-radius:8px;background:#fff;color:var(--main);font-weight:bold;cursor:pointer;font-size:.9rem;}
+.small:hover{background:var(--mainbg);}
+.quiz .card .w,.quiz .card .m,.quiz .card .s{visibility:hidden;}
+.quiz .card.show .w,.quiz .card.show .m,.quiz .card.show .s{visibility:visible;}
+.stage{border-left:5px solid var(--red);background:var(--grey);border-radius:8px;padding:10px 12px;margin:10px 0;}
+.stage .t{font-weight:bold;color:var(--main);}
+.linkcard{display:block;border:1px solid #cdd8d8;border-radius:10px;padding:10px 12px;margin:8px 0;background:#fff;text-decoration:none;color:var(--ink);}
+.linkcard:hover{border-color:var(--main);}
+.linkcard .lt{font-weight:bold;color:var(--main);}
+.linkcard .how{font-size:.9rem;color:#4a5a5a;margin-top:2px;}
+.badge{display:inline-block;background:#c0392b;color:#fff;border-radius:6px;font-size:.75rem;padding:2px 7px;margin-right:6px;vertical-align:middle;}
+.badge.used{background:var(--gold);color:#3a2e00;}
+.track{border:1px solid #cdd8d8;border-radius:10px;padding:10px 12px;margin:8px 0;background:#fff;}
+.track .t{font-weight:bold;color:var(--main);}
+.track .how{font-size:.9rem;color:#4a5a5a;margin:2px 0 6px;}
+.track audio{width:100%;}
+.game{border:1px solid var(--line);border-radius:12px;padding:14px;}
+.intro{color:#4a5a5a;margin:0 0 6px;}
+.score{font-weight:bold;color:var(--main);margin:6px 0 10px;white-space:pre-wrap;}
+.prompt{text-align:center;margin:8px 0 12px;}
+.qimg{max-width:100%;max-height:330px;border-radius:10px;background:#fff;}
+.qtext{font-size:1.35rem;font-weight:bold;margin-top:8px;}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.opts button{padding:14px;border:2px solid var(--main);border-radius:10px;background:#fff;color:var(--ink);font-size:1.15rem;font-weight:bold;cursor:pointer;}
+.opts button.right{background:#d9efe2;border-color:var(--ok);color:var(--ok);}
+.opts button.wrong{background:#fce7e2;border-color:var(--no);color:var(--no);}
+.feedback{font-weight:bold;margin:10px 0;min-height:1.4em;text-align:center;}
+.feedback.ok{color:var(--ok);}
+.feedback.no{color:var(--no);}
+.bigbtn{padding:12px 22px;background:var(--red);border:none;border-radius:10px;color:#fff;font-size:1.05rem;font-weight:bold;cursor:pointer;margin:6px 4px;}
+.center{text-align:center;}
+.done{font-size:1.4rem;font-weight:bold;color:var(--main);text-align:center;margin:20px 0 6px;}
+footer{text-align:center;color:#7a8a8a;font-size:.85rem;padding:18px 0;}
+@media (max-width:600px){.card img{height:140px;}.qtext{font-size:1.15rem;}.opts{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header><div class='in'><h1>Banking Terminology</h1><p>CLB 3 - co-teaching class - 24 banking words from the Newcomer Finances Toolkit - November 2026</p></div></header>
+<div class='wrap'>
+<div class='tabs'>
+<button class='active' data-p='lesson'>Lesson</button>
+<button data-p='words'>Words</button>
+<button data-p='games'>Games</button>
+<button data-p='media'>Videos and Audio</button>
+</div>
+<section id='p-lesson' class='panel active'><h2>Today's lesson (1 hour 25 minutes)</h2><div id='stages'></div></section>
+<section id='p-words' class='panel'><h2>24 banking words</h2><p class='intro'>Click Word or Sentence to hear it. The handout page is under each word.</p>
+<div class='sub' id='setbtns'></div>
+<div class='tool'><button class='small' id='hidebtn'>Hide the words</button><span id='hidehint' class='intro'></span></div>
+<div class='cards' id='cards'></div></section>
+<section id='p-games' class='panel'><h2>Games</h2><div class='sub' id='gamebtns'></div><div id='gamebox'></div></section>
+<section id='p-media' class='panel'><h2>Videos and audio</h2><div id='media'></div></section>
+<footer>CLB 3 - Banking Terminology. The words follow the Newcomer Finances Toolkit - Banking Worksheets (Ottawa Community Loan Fund). Pictures, texts and audio made for this class.</footer>
+</div>
+<script>
+var DATA = {"title": "Banking Terminology", "sub": "CLB 3 - co-teaching class - 24 banking words from the Newcomer Finances Toolkit - November 2026", "icons": "icons/bankterm/", "audio": "audio/bankterm/", "sets": [[1, "Opening an account"], [2, "Kinds of accounts"], [3, "Money in and out"], [4, "Your bank card"]], "words": [{"n": 1, "set": 1, "word": "branch", "img": "ic_branch.png", "meaning": "one office of a bank in your town", "page": "p. 2", "sentence": "There is a bank branch near my home.", "w": "w01", "s": "s01"}, {"n": 2, "set": 1, "word": "teller", "img": "ic_teller.png", "meaning": "a person who helps you at the bank counter", "page": "p. 7", "sentence": "The teller counts my money.", "w": "w02", "s": "s02"}, {"n": 3, "set": 1, "word": "ID", "img": "ic_id.png", "meaning": "a card or paper with your name, like a passport", "page": "pp. 3, 7", "sentence": "You need two pieces of ID to open an account.", "w": "w03", "s": "s03"}, {"n": 4, "set": 1, "word": "bank account", "img": "ic_inperson.png", "meaning": "your place for money at a bank", "page": "p. 2", "sentence": "I opened a bank account last week.", "w": "w04", "s": "s04"}, {"n": 5, "set": 1, "word": "account number", "img": "w_accountno.png", "meaning": "the number of your bank account", "page": "p. 7", "sentence": "Please write your account number on the form.", "w": "w05", "s": "s05"}, {"n": 6, "set": 1, "word": "statement", "img": "d3_statement.png", "meaning": "a paper or page that shows the money in and out of your account for one month", "page": "p. 7", "sentence": "I read my bank statement every month.", "w": "w06", "s": "s06"}, {"n": 7, "set": 2, "word": "chequing account", "img": "ic_chequing.png", "meaning": "an account for everyday money: bills, shopping and cheques", "page": "p. 4", "sentence": "I pay my bills from my chequing account.", "w": "w07", "s": "s07"}, {"n": 8, "set": 2, "word": "savings account", "img": "ic_savings.png", "meaning": "an account for money you want to keep for later", "page": "p. 4", "sentence": "I keep money for a trip in my savings account.", "w": "w08", "s": "s08"}, {"n": 9, "set": 2, "word": "balance", "img": "w_balance.png", "meaning": "how much money is in your account now", "page": "p. 4", "sentence": "My balance is $320.", "w": "w09", "s": "s09"}, {"n": 10, "set": 2, "word": "interest", "img": "d2_interest.png", "meaning": "a little money the bank pays you for keeping your money there", "page": "p. 4", "sentence": "My savings account pays me interest.", "w": "w10", "s": "s10"}, {"n": 11, "set": 2, "word": "fee", "img": "w_fee.png", "meaning": "money you pay the bank for a service", "page": "p. 4", "sentence": "My account has a monthly fee of $4.", "w": "w11", "s": "s11"}, {"n": 12, "set": 2, "word": "transaction", "img": "w_transaction.png", "meaning": "one action with your money: a deposit, a withdrawal, a transfer, a cheque or a bill payment", "page": "p. 4", "sentence": "Every payment with my card is a transaction.", "w": "w12", "s": "s12"}, {"n": 13, "set": 3, "word": "deposit", "img": "tx_deposit.png", "meaning": "putting money into your account", "page": "pp. 4, 9", "sentence": "I make a deposit at the bank.", "w": "w13", "s": "s13"}, {"n": 14, "set": 3, "word": "withdrawal", "img": "tx_withdraw.png", "meaning": "taking money out of your account", "page": "pp. 4, 10", "sentence": "I make a withdrawal of $60.", "w": "w14", "s": "s14"}, {"n": 15, "set": 3, "word": "transfer", "img": "tx_transfer.png", "meaning": "moving money from one of your accounts to another one", "page": "pp. 4, 18", "sentence": "I make a transfer from savings to chequing.", "w": "w15", "s": "s15"}, {"n": 16, "set": 3, "word": "cheque", "img": "ic_cheque.png", "meaning": "a paper that tells your bank to pay money to someone", "page": "pp. 4, 16", "sentence": "I pay my rent with a cheque.", "w": "w16", "s": "s16"}, {"n": 17, "set": 3, "word": "bill payment", "img": "tx_paybill.png", "meaning": "paying a bill, like hydro or phone, from your account", "page": "p. 4", "sentence": "I make a bill payment for my phone bill.", "w": "w17", "s": "s17"}, {"n": 18, "set": 3, "word": "direct deposit", "img": "tx_directdeposit.png", "meaning": "money that goes straight into your account, like your pay", "page": "p. 10", "sentence": "My pay comes by direct deposit.", "w": "w18", "s": "s18"}, {"n": 19, "set": 4, "word": "bank card", "img": "ic_bankcard.png", "meaning": "the card from your bank (a debit card) for paying and for the bank machine", "page": "p. 8", "sentence": "I pay for groceries with my bank card.", "w": "w19", "s": "s19"}, {"n": 20, "set": 4, "word": "PIN", "img": "ic_pin.png", "meaning": "your secret number for your bank card", "page": "p. 8", "sentence": "Never tell anyone your PIN.", "w": "w20", "s": "s20"}, {"n": 21, "set": 4, "word": "bank machine (ATM)", "img": "ic_atm.png", "meaning": "a machine where you take out cash or make a deposit", "page": "p. 20", "sentence": "I take out cash at the bank machine.", "w": "w21", "s": "s21"}, {"n": 22, "set": 4, "word": "direct payment", "img": "w_directpay.png", "meaning": "paying in a store with your bank card and PIN", "page": "p. 14", "sentence": "I pay by direct payment at the grocery store.", "w": "w22", "s": "s22"}, {"n": 23, "set": 4, "word": "cash back", "img": "w_cashback.png", "meaning": "extra cash from the store when you pay with your bank card", "page": "p. 14", "sentence": "I get $20 cash back at the store.", "w": "w23", "s": "s23"}, {"n": 24, "set": 4, "word": "receipt", "img": "w_receipt.png", "meaning": "a small paper that shows what you paid", "page": "pp. 9, 21", "sentence": "Keep your receipt and check it with your statement.", "w": "w24", "s": "s24"}], "games": [{"id": "g1", "title": "Game 1: Which word is it?", "intro": "Look at the picture or read the meaning. Choose the word.", "items": [{"q": "What is it?", "img": "ic_branch.png", "o": ["branch", "chequing account", "deposit", "bank card"], "a": "branch"}, {"q": "What is it?", "img": "ic_teller.png", "o": ["teller", "savings account", "withdrawal", "PIN"], "a": "teller"}, {"q": "What is it?", "img": "ic_id.png", "o": ["ID", "balance", "transfer", "bank machine (ATM)"], "a": "ID"}, {"q": "What is it?", "img": "ic_inperson.png", "o": ["bank account", "interest", "cheque", "direct payment"], "a": "bank account"}, {"q": "Which word means: the number of your bank account?", "o": ["account number", "fee", "bill payment", "cash back"], "a": "account number"}, {"q": "Which word means: a paper or page that shows the money in and out of your account for one month?", "o": ["statement", "transaction", "direct deposit", "transfer"], "a": "statement"}, {"q": "What is it?", "img": "ic_chequing.png", "o": ["chequing account", "deposit", "branch", "interest"], "a": "chequing account"}, {"q": "What is it?", "img": "ic_savings.png", "o": ["savings account", "withdrawal", "PIN", "teller"], "a": "savings account"}, {"q": "Which word means: how much money is in your account now?", "o": ["balance", "transfer", "bank machine (ATM)", "ID"], "a": "balance"}, {"q": "Which word means: a little money the bank pays you for keeping your money there?", "o": ["interest", "cheque", "direct payment", "bank account"], "a": "interest"}, {"q": "Which word means: money you pay the bank for a service?", "o": ["fee", "bill payment", "cash back", "account number"], "a": "fee"}, {"q": "What is it?", "img": "w_transaction.png", "o": ["transaction", "direct deposit", "receipt", "statement"], "a": "transaction"}, {"q": "What is it?", "img": "tx_deposit.png", "o": ["deposit", "bank card", "branch", "chequing account"], "a": "deposit"}, {"q": "What is it?", "img": "tx_withdraw.png", "o": ["withdrawal", "teller", "savings account", "bill payment"], "a": "withdrawal"}, {"q": "What is it?", "img": "tx_transfer.png", "o": ["transfer", "bank machine (ATM)", "ID", "balance"], "a": "transfer"}, {"q": "What is it?", "img": "ic_cheque.png", "o": ["cheque", "direct payment", "bank account", "interest"], "a": "cheque"}, {"q": "What is it?", "img": "tx_paybill.png", "o": ["bill payment", "cash back", "account number", "fee"], "a": "bill payment"}, {"q": "What is it?", "img": "tx_directdeposit.png", "o": ["direct deposit", "receipt", "statement", "transaction"], "a": "direct deposit"}, {"q": "What is it?", "img": "ic_bankcard.png", "o": ["bank card", "branch", "deposit", "bank account"], "a": "bank card"}, {"q": "What is it?", "img": "ic_pin.png", "o": ["PIN", "teller", "savings account", "cash back"], "a": "PIN"}, {"q": "What is it?", "img": "ic_atm.png", "o": ["bank machine (ATM)", "ID", "balance", "transfer"], "a": "bank machine (ATM)"}, {"q": "What is it?", "img": "w_directpay.png", "o": ["direct payment", "bank account", "interest", "cheque"], "a": "direct payment"}, {"q": "Which word means: extra cash from the store when you pay with your bank card?", "o": ["cash back", "account number", "fee", "bill payment"], "a": "cash back"}, {"q": "What is it?", "img": "w_receipt.png", "o": ["receipt", "transaction", "direct deposit", "ID"], "a": "receipt"}]}, {"id": "g2", "title": "Game 2: Listen and choose", "intro": "Press Listen. Choose the word you hear.", "items": [{"q": "Listen. Which word do you hear?", "clip": "w02", "o": ["teller", "savings account", "withdrawal", "PIN"], "a": "teller"}, {"q": "Listen. Which word do you hear?", "clip": "w05", "o": ["account number", "fee", "bill payment", "cash back"], "a": "account number"}, {"q": "Listen. Which word do you hear?", "clip": "w06", "o": ["statement", "transaction", "direct deposit", "transfer"], "a": "statement"}, {"q": "Listen. Which word do you hear?", "clip": "w08", "o": ["savings account", "withdrawal", "PIN", "teller"], "a": "savings account"}, {"q": "Listen. Which word do you hear?", "clip": "w09", "o": ["balance", "transfer", "bank machine (ATM)", "ID"], "a": "balance"}, {"q": "Listen. Which word do you hear?", "clip": "w11", "o": ["fee", "bill payment", "cash back", "account number"], "a": "fee"}, {"q": "Listen. Which word do you hear?", "clip": "w14", "o": ["withdrawal", "teller", "savings account", "bill payment"], "a": "withdrawal"}, {"q": "Listen. Which word do you hear?", "clip": "w16", "o": ["cheque", "direct payment", "bank account", "interest"], "a": "cheque"}, {"q": "Listen. Which word do you hear?", "clip": "w18", "o": ["direct deposit", "receipt", "statement", "transaction"], "a": "direct deposit"}, {"q": "Listen. Which word do you hear?", "clip": "w20", "o": ["PIN", "teller", "savings account", "cash back"], "a": "PIN"}, {"q": "Listen. Which word do you hear?", "clip": "w22", "o": ["direct payment", "bank account", "interest", "cheque"], "a": "direct payment"}, {"q": "Listen. Which word do you hear?", "clip": "w24", "o": ["receipt", "transaction", "direct deposit", "ID"], "a": "receipt"}]}, {"id": "g3", "title": "Game 3: Money in or money out?", "intro": "Read. Does the money go into your account or out of your account?", "items": [{"q": "Your pay comes by direct deposit.", "o": ["Money IN", "Money OUT"], "a": "Money IN"}, {"q": "You take out $40 at the bank machine.", "o": ["Money IN", "Money OUT"], "a": "Money OUT"}, {"q": "You pay your phone bill online.", "o": ["Money IN", "Money OUT"], "a": "Money OUT"}, {"q": "You put $200 in cash into your account at the teller.", "o": ["Money IN", "Money OUT"], "a": "Money IN"}, {"q": "The bank pays you interest on your savings.", "o": ["Money IN", "Money OUT"], "a": "Money IN"}, {"q": "You pay for groceries with your bank card.", "o": ["Money IN", "Money OUT"], "a": "Money OUT"}, {"q": "The bank takes a monthly fee of $4.", "o": ["Money IN", "Money OUT"], "a": "Money OUT"}, {"q": "You deposit a cheque from a friend.", "o": ["Money IN", "Money OUT"], "a": "Money IN"}, {"q": "You write a cheque for your rent.", "o": ["Money IN", "Money OUT"], "a": "Money OUT"}, {"q": "You get a tax refund by direct deposit.", "o": ["Money IN", "Money OUT"], "a": "Money IN"}, {"q": "You ask for $20 cash back at the store.", "o": ["Money IN", "Money OUT"], "a": "Money OUT"}, {"q": "You sell your bike and deposit the $80.", "o": ["Money IN", "Money OUT"], "a": "Money IN"}]}], "stages": [[1, "Warm-up (10 min)", "Look at the bank picture and talk with a partner (1A and 1B)."], [2, "Opening an account (12 min)", "Words tab, Set 1: branch, teller, ID, bank account, account number, statement. Then 2B and 2C."], [3, "Kinds of accounts (13 min)", "Words tab, Set 2: chequing account, savings account, balance, interest, fee, transaction. Then 3B and 3C."], [4, "Money in and out (15 min)", "Words tab, Set 3: deposit, withdrawal, transfer, cheque, bill payment, direct deposit. The video for 4B, then 4C and 4D."], [5, "Your bank card (17 min)", "Words tab, Set 4: bank card, PIN, bank machine (ATM), direct payment, cash back, receipt. Then 5B, 5C and 5D."], [6, "Wrap-up (18 min)", "Read about Lina (6A), the role play at the teller with Track 1 (6B), then a team game (Games tab)."]], "links": [{"day": 1, "stage": 4, "kind": "VIDEO", "title": "Banking vocabulary (ESL Directions, 1 min 41 s)", "url": "https://www.youtube.com/watch?v=0QZCuNmKKxo", "how": "Section 4B. Play it once; students write three banking words they hear, then share. Play it again if they ask.", "used": false}, {"day": 1, "stage": 2, "kind": "VIDEO", "title": "Opening a bank account (ESL Directions, 1 min 24 s)", "url": "https://www.youtube.com/watch?v=HYZ6upAkXLA", "how": "Section 2, extra if there is time: a short dialogue between a teller and a customer. Ask: What does the customer want?", "used": false}, {"day": 1, "stage": 6, "kind": "VIDEO", "title": "Going to the Bank - Everyday English Dialogues (Ellii, 2 min)", "url": "https://www.youtube.com/watch?v=778AsSm9Cek", "how": "Section 6B, extra: watch before the role play. Ask: What does the customer want to do?", "used": true}, {"day": 1, "stage": 6, "kind": "VIDEO", "title": "At a bank - Financial English Lesson (Twominute English, 2 min 52 s)", "url": "https://www.youtube.com/watch?v=s6Ris80-QdY", "how": "Extra listening if there is time: short conversations at a bank.", "used": false}], "tracks": [{"id": "bt_t01", "title": "Track 1 - At the teller", "task": "Exercise 6B. Listen to Nadia and Ben, then practise with a partner."}], "scene": "scene_bank.png"};
+function el(tag, cls, text) { var e = document.createElement(tag); if (cls) { e.className = cls; } if (text !== undefined && text !== null) { e.textContent = text; } return e; }
+var player = new Audio();
+function play(id) { try { player.pause(); player.src = DATA.audio + id + '.m4a'; player.currentTime = 0; var p = player.play(); if (p && p.catch) { p.catch(function () {}); } } catch (e) {} }
+var tabs = document.querySelectorAll('.tabs button');
+function show(p) {
+  tabs.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-p') === p); });
+  document.querySelectorAll('.panel').forEach(function (s) { s.classList.toggle('active', s.id === 'p-' + p); });
+  try { player.pause(); } catch (e) {}
+}
+tabs.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-p')); }); });
+function linkCard(l) {
+  var a = el('a', 'linkcard'); a.href = l.url; a.target = '_blank'; a.rel = 'noopener';
+  var t = el('div', 'lt'); t.appendChild(el('span', 'badge', l.kind)); if (l.used) { t.appendChild(el('span', 'badge used', 'USED BEFORE')); }
+  t.appendChild(document.createTextNode(l.title)); a.appendChild(t); a.appendChild(el('div', 'how', l.how)); return a;
+}
+function trackBox(t) {
+  var d = el('div', 'track'); d.appendChild(el('div', 't', t.title)); d.appendChild(el('div', 'how', t.task));
+  var au = document.createElement('audio'); au.controls = true; au.preload = 'none'; au.src = DATA.audio + t.id + '.m4a'; d.appendChild(au); return d;
+}
+var st = document.getElementById('stages');
+DATA.stages.forEach(function (s) {
+  var d = el('div', 'stage'); d.appendChild(el('div', 't', s[0] + '  ' + s[1])); d.appendChild(el('div', '', s[2]));
+  if (s[0] === 1 && DATA.scene) { var si = document.createElement('img'); si.src = DATA.icons + DATA.scene; si.alt = 'people at a bank'; si.className = 'qimg'; d.appendChild(si); }
+  DATA.links.forEach(function (l) { if (l.stage === s[0]) { d.appendChild(linkCard(l)); } });
+  if (s[0] === 6) { DATA.tracks.forEach(function (t) { d.appendChild(trackBox(t)); }); }
+  st.appendChild(d);
+});
+if (DATA.hw_url) { var hw = el('div', 'stage'); hw.appendChild(el('div', 't', 'Homework')); var ha = el('a', '', 'Open the homework sheet'); ha.href = DATA.hw_url; ha.target = '_blank'; ha.rel = 'noopener'; hw.appendChild(ha); st.appendChild(hw); }
+var curSet = 1, quiz = false;
+var cardsBox = document.getElementById('cards'), setBtns = document.getElementById('setbtns');
+function drawCards() {
+  cardsBox.innerHTML = '';
+  DATA.words.forEach(function (w) {
+    if (curSet && w.set !== curSet) { return; }
+    var c = el('div', 'card'); c.setAttribute('data-n', w.n);
+    var im = document.createElement('img'); im.src = DATA.icons + w.img; im.alt = w.word; c.appendChild(im);
+    c.appendChild(el('div', 'w', w.word)); c.appendChild(el('div', 'm', w.meaning)); c.appendChild(el('div', 's', w.sentence));
+    c.appendChild(el('div', 'pg', 'Handout ' + w.page));
+    var bt = el('div', 'btns');
+    var b1 = el('button', 'small', 'Word'); b1.setAttribute('data-clip', w.w); b1.addEventListener('click', function (ev) { ev.stopPropagation(); play(w.w); });
+    var b2 = el('button', 'small', 'Sentence'); b2.setAttribute('data-clip', w.s); b2.addEventListener('click', function (ev) { ev.stopPropagation(); play(w.s); });
+    bt.appendChild(b1); bt.appendChild(b2); c.appendChild(bt);
+    c.addEventListener('click', function () { c.classList.toggle('show'); });
+    cardsBox.appendChild(c);
+  });
+}
+function drawSetBtns() {
+  setBtns.innerHTML = '';
+  DATA.sets.concat([[0, 'All 24 words']]).forEach(function (s) {
+    var b = el('button', s[0] === curSet ? 'active' : '', s[0] ? 'Set ' + s[0] + ': ' + s[1] : s[1]);
+    b.addEventListener('click', function () { curSet = s[0]; drawSetBtns(); drawCards(); });
+    setBtns.appendChild(b);
+  });
+}
+var hideBtn = document.getElementById('hidebtn');
+hideBtn.addEventListener('click', function () {
+  quiz = !quiz; cardsBox.classList.toggle('quiz', quiz);
+  hideBtn.textContent = quiz ? 'Show the words' : 'Hide the words';
+  document.getElementById('hidehint').textContent = quiz ? 'Click a card to show its word.' : '';
+  cardsBox.querySelectorAll('.card').forEach(function (c) { c.classList.remove('show'); });
+});
+drawSetBtns(); drawCards();
+function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+var gameBox = document.getElementById('gamebox'), gameBtns = document.getElementById('gamebtns');
+function runGame(g) {
+  gameBox.innerHTML = '';
+  var root = el('div', 'game'); root.id = 'game-' + g.id; gameBox.appendChild(root);
+  root.appendChild(el('h3', '', g.title)); root.appendChild(el('p', 'intro', g.intro));
+  var sc = el('div', 'score'); root.appendChild(sc);
+  var body = el('div', ''); root.appendChild(body);
+  var order = [], idx = 0, score = 0, streak = 0, done = false;
+  function upd() { sc.textContent = 'Score: ' + score + ' / ' + idx + '     Streak: ' + streak + '     Question ' + Math.min(idx + 1, order.length) + ' of ' + order.length; }
+  function start() { order = shuffle(g.items.slice()); idx = 0; score = 0; streak = 0; next(); }
+  function next() {
+    body.innerHTML = ''; done = false;
+    if (idx >= order.length) {
+      sc.textContent = 'Score: ' + score + ' / ' + order.length;
+      body.appendChild(el('div', 'done', 'Finished! Your score: ' + score + ' / ' + order.length));
+      var c = el('div', 'center'); var again = el('button', 'bigbtn again', 'Play Again'); again.addEventListener('click', start); c.appendChild(again); body.appendChild(c);
+      return;
+    }
+    upd();
+    var it = order[idx]; var q = el('div', 'prompt');
+    if (it.img) { var im = document.createElement('img'); im.className = 'qimg'; im.src = DATA.icons + it.img; im.alt = 'a picture'; q.appendChild(im); }
+    if (it.clip) { var lb = el('button', 'bigbtn listen', 'Listen'); lb.setAttribute('data-clip', it.clip); lb.addEventListener('click', function () { play(it.clip); }); q.appendChild(lb); }
+    q.appendChild(el('div', 'qtext', it.q)); body.appendChild(q);
+    var opts = el('div', 'opts'), fb = el('div', 'feedback');
+    shuffle(it.o.slice()).forEach(function (o) {
+      var b = el('button', '', o);
+      b.addEventListener('click', function () {
+        if (done) { return; }
+        done = true;
+        if (o === it.a) { score++; streak++; b.classList.add('right'); fb.textContent = 'Right!'; fb.className = 'feedback ok'; }
+        else {
+          streak = 0; b.classList.add('wrong'); fb.textContent = 'The answer is: ' + it.a; fb.className = 'feedback no';
+          opts.querySelectorAll('button').forEach(function (x) { if (x.textContent === it.a) { x.classList.add('right'); } });
+        }
+        idx++; sc.textContent = 'Score: ' + score + ' / ' + idx + '     Streak: ' + streak;
+        var c = el('div', 'center'); var nb = el('button', 'bigbtn next', idx >= order.length ? 'See my score' : 'Next'); nb.addEventListener('click', next); c.appendChild(nb); body.appendChild(c);
+      });
+      opts.appendChild(b);
+    });
+    body.appendChild(opts); body.appendChild(fb);
+  }
+  start();
+}
+var curGame = DATA.games[0].id;
+function drawGameBtns() {
+  gameBtns.innerHTML = '';
+  DATA.games.forEach(function (g) {
+    var b = el('button', g.id === curGame ? 'active' : '', g.title); b.setAttribute('data-g', g.id);
+    b.addEventListener('click', function () { curGame = g.id; drawGameBtns(); runGame(g); });
+    gameBtns.appendChild(b);
+  });
+}
+drawGameBtns(); runGame(DATA.games[0]);
+var md = document.getElementById('media');
+md.appendChild(el('h3', '', 'Videos'));
+DATA.links.forEach(function (l) { md.appendChild(linkCard(l)); });
+md.appendChild(el('h3', '', 'Audio'));
+DATA.tracks.forEach(function (t) { md.appendChild(trackBox(t)); });
+md.appendChild(el('p', 'intro', 'The sound of each word and each sentence is on the picture cards in the Words tab.'));
+</script>
+</body>
+</html>
